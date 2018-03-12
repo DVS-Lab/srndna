@@ -37,6 +37,9 @@ run_data = {
 #window setup
 win = visual.Window([800,600], monitor="testMonitor", units="deg", fullscr=useFullScreen, allowGUI=False)
 
+#checkpoint
+print "got to check 1"
+
 #define stimulus
 fixation = visual.TextStim(win, text="+", height=2)
 ready_screen = visual.TextStim(win, text="Ready...", height=1.5)
@@ -52,7 +55,7 @@ outcome_text = visual.TextStim(win=win, name='text',text='',font='Arial',pos=(0,
 outcome_money = visual.TextStim(win=win, name='text',text='',font='Wingdings 3',pos=(0, 2.0), height=0.1, wrapWidth=None, ori=0, colorSpace='rgb', opacity=1,depth=-1.0);
 
 #instructions
-instruct_screen = visual.TextStim(win, text='Welcome to the experiment. In this task you will be guessing the numerical value of a card.  Press Button 1 to guess low and press Button 2 to guess high.  Correct responses will result in a monetary gain of $4, and incorrect responses will result in a monetary loss of $2.00. ', pos = (0,1), wrapWidth=20, height = 1.2)
+#instruct_screen = visual.TextStim(win, text='Welcome to the experiment. In this task you will be guessing the numerical value of a card.  Press Button 1 to guess low and press Button 2 to guess high.  Correct responses will result in a monetary gain of $4, and incorrect responses will result in a monetary loss of $2.00. ', pos = (0,1), wrapWidth=20, height = 1.2)
 
 #logging
 log_file = 'logs/{}_run_{}.csv'
@@ -71,7 +74,7 @@ stim_map = {
   '2': 'stranger',
   '1': 'computer',
   }
-  
+
 '''
 #parsing out file data
 blocks=[]
@@ -87,7 +90,21 @@ for run in range(2):
             blocks.append(block_data)
          
 '''
+#checkpoint
+print "got to check 2"
+runs=[]
+for run in range(2):
+    run_data = []
+    for t in range(8):
+        sample = random.sample(range(len(trial_data)),1)[0]
+        run_data.append(trial_data.pop(sample))
+    runs.append(run_data)
+
 # main task loop
+# Instructions
+# instruct_screen.draw()
+
+
 def do_run(trial_data, run_num):
     resp=[]
     for trial in trials:
@@ -184,3 +201,4 @@ def do_run(trial_data, run_num):
             outcome_money.setText = '#'
     
     trials.saveAsText(fileName=log_file.format(subj_id, run_num)) #, dataOut='all_raw', encoding='utf-8')
+do_run(trial_data,1)
