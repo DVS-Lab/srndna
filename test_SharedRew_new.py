@@ -67,7 +67,7 @@ timer = core.Clock()
 
 #trial handler
 trial_data = [r for r in csv.DictReader(open('SharedReward_design_test.csv','rU'))]
-trials = data.TrialHandler(trial_data[:8], 1, method="sequential") #change to [] for full run
+trials = data.TrialHandler(trial_data[:96], 2, method="sequential") #change to [] for full run
 
 stim_map = {
   '3': 'friend',
