@@ -1,7 +1,7 @@
 from neurodesign import geneticalgorithm,generate,msequence,report
 
 EXP = geneticalgorithm.experiment(
-    TR=2,
+    TR=1,
     duration=360,
     P = [0.1667,0.1667,0.1667,0.1667,0.1667,0.1667],
     C = [[1,0,0,0,0,0],[0,1,0,0,0,0],[0,0,1,0,0,0],[0,0,0,1,0,0],[0,0,0,0,1,0],[0,0,0,0,0,1],
@@ -30,7 +30,7 @@ POP = geneticalgorithm.population(
     cycles = 20,
     seed=1,
     outdes=5,
-    folder='/Users/DVS/GitProjects/srndna/nd-out'
+    folder='/Users/DVS/GitProjects/srndna/nd-out2'
     )
 
 #########################
@@ -53,4 +53,4 @@ POP.to_next_generation(seed=1001)
 # export report #
 #################
 
-report.make_report(POP,"/Users/DVS/GitProjects/srndna/nd-out/test.pdf")
+report.make_report(POP,"/Users/DVS/GitProjects/srndna/nd-out/test2.pdf")
