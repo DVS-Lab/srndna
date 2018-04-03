@@ -26,24 +26,15 @@ feedback_dur = 1;
 
 %}
 
-<<<<<<< Updated upstream
 
-pre_block_ITI = [12 12 12 12 16 16 16 20 20 20 24 24]; % some IBI jitter to estimate reward/punishment separately (HCP is fixed at 15 s)
-=======
+
 % 18 blocks
 pre_block_ITI = [repmat(8,1,9) repmat(10,1,6) repmat(12,1,3)]; % some IBI jitter to estimate reward/punishment separately (HCP is fixed at 15 s)
->>>>>>> Stashed changes
 pre_block_ITI = pre_block_ITI(randperm(length(pre_block_ITI)));
 % this occurrs every 8 trials, starting with trial 1. it should come first
 % need to add at least 12 s at the end of the experiment to catch last HRF
 
-<<<<<<< Updated upstream
-block_types = [1:6 1:6]; %will name these below. 3 partners * 2 outcomes
-block_types = block_types(randperm(length(block_types)));
 
-
-fid = fopen('SharedReward_design_test.csv','w');
-=======
 block_types = [1:6 1:6 1:6]; %will name these below. 3 partners * 2 outcomes
 block_types = block_types(randperm(length(block_types)));
 keep_checking = 1;
@@ -63,7 +54,6 @@ end
 
 
 fid = fopen('SharedReward_design_test_new.csv','w');
->>>>>>> Stashed changes
 fprintf(fid,'Trialn,Blockn,Partner,Feedback,ITI\n');
 
 nblocks = length(block_types);
@@ -101,12 +91,7 @@ for i = 1:nblocks
     
     for f = 1:length(feedback_mat)
         t = t + 1;
-        %fprintf(fid,'Trialn,Blockn,Partner,Feedback,ITI\n');
-<<<<<<< Updated upstream
-        if f == 1
-=======
         if f == length(feedback_mat)
->>>>>>> Stashed changes
             fprintf(fid,'%d,%d,%d,%d,%d\n',t,i,partner,feedback_mat(f),pre_block_ITI(i));
         else
             fprintf(fid,'%d,%d,%d,%d,%d\n',t,i,partner,feedback_mat(f),1);
