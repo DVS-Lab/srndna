@@ -12,9 +12,9 @@ useFullScreen = True
 DEBUG = False
 
 frame_rate=1
-decision_dur=1.5
+decision_dur=2
 #instruct_dur=8
-outcome_dur=2
+outcome_dur=1
 
 responseKeys=('1','2')
 
@@ -57,6 +57,9 @@ outcome_money = visual.TextStim(win=win, name='text',text='',font='Wingdings 3',
 #instructions
 instruct_screen = visual.TextStim(win, text='Welcome to the experiment.\n\nIn this task you will be guessing the numerical value of a card.\n\nPress Button 1 to guess low and press Button 2 to guess high.\n\nCorrect responses will result in a monetary gain of $4, and incorrect responses will result in a monetary loss of $2.00.\n\nRemember, you will be sharing monetary outcomes on each trial with the partner displayed at the top of the screen.', pos = (0,1), wrapWidth=20, height = 1.2)
 
+#instructions
+exit_screen = visual.TextStim(win, text='Thanks for playing! Please wait for instructions from the experimenter.', pos = (0,1), wrapWidth=20, height = 1.2)
+
 #logging
 log_file = 'logs/{}_run_{}.csv'
 
@@ -66,8 +69,8 @@ logging.setDefaultClock(globalClock)
 timer = core.Clock()
 
 #trial handler
-trial_data = [r for r in csv.DictReader(open('SharedReward_design_test.csv','rU'))]
-trials = data.TrialHandler(trial_data[:96], 2, method="sequential") #change to [] for full run
+trial_data = [r for r in csv.DictReader(open('SharedReward_design_test_new.csv','rU'))]
+trials = data.TrialHandler(trial_data[:8], 1, method="sequential") #change to [] for full run
 
 stim_map = {
   '3': 'friend',
@@ -100,7 +103,7 @@ for run in range(2):
 print "got to check 2"
 
 runs=[]
-for run in range(2):
+for run in range(1):
     run_data = []
     for t in range(8):
         sample = random.sample(range(len(trial_data)),1)[0]
@@ -133,6 +136,7 @@ def do_run(trial_data, run_num):
         #decision phase   
         timer.reset()
         event.clearEvents()
+        decision_onset = globalClock.getTime()
 
         resp_val=None
         resp_onset=None
@@ -144,9 +148,9 @@ def do_run(trial_data, run_num):
             pictureStim.draw()
             win.flip()
 
-        if ifresp:
-            core.wait(.5)
-            break
+        #if ifresp:
+        #    core.wait(.5)
+        #    break
            
         resp = event.getKeys(keyList = responseKeys)
            
@@ -155,17 +159,29 @@ def do_run(trial_data, run_num):
             resp_onset = globalClock.getTime()
             if resp_val == 1:
                 ifresp=1
+                #print ifresp
             if resp_val == 2:
                 ifresp=1
+                #print ifresp
         else:
             resp_val = 0
 
         trials.addData('resp', resp_val)
         trials.addData('rt', resp_onset)
+        trials.addData('decision', decision_onset)
+        
+#ISI
+        if resp_val > 0 and timer.getTime() < decision_dur:
+            logging.log(level=logging.DATA, msg='ISI') #send ISI log event
+            isi_for_trial = float(trial['ISI'])
+            while timer.getTime() < decision_dur:
+               fixation.draw()
+               win.flip()
 
-    #outcome phase
+#outcome phase
         timer.reset()
-        win.flip()
+        #win.flip()
+        outcome_onset = globalClock.getTime()
         
         while timer.getTime() < outcome_dur:
             outcome_cardStim.draw()
@@ -182,11 +198,11 @@ def do_run(trial_data, run_num):
                 outcome_color='green'
             elif trial['Feedback'] == '2' and resp_val == 1:
                 outcome_txt = '5'
-                outcome_moneyTxt= '---'
+                outcome_moneyTxt= 'n'
                 outcome_color='white'
             elif trial['Feedback'] == '2' and resp_val == 2:
                 outcome_txt = '5'
-                outcome_moneyTxt= '---'
+                outcome_moneyTxt= 'n'
                 outcome_color='white'
             elif trial['Feedback'] == '1' and resp_val == 1:
                 outcome_txt = random.randint(6,9)
@@ -210,9 +226,15 @@ def do_run(trial_data, run_num):
             win.flip()
             core.wait(2)
             trials.addData('outcome_txt', outcome_txt)
+            trials.addData('outcome', outcome_onset)
             
             event.clearEvents()
         print "got to check 3"
 
     trials.saveAsText(fileName=log_file.format(subj_id, run_num)) #, dataOut='all_raw', encoding='utf-8')
 do_run(trial_data,1)
+
+# Exit
+exit_screen.draw()
+win.flip()
+event.waitKeys()
