@@ -1,6 +1,6 @@
 
 % 18 blocks
-pre_block_ITI = [repmat(8,1,9) repmat(10,1,6) repmat(12,1,3)]; % some IBI jitter to estimate reward/punishment separately (HCP is fixed at 15 s)
+pre_block_ITI = [repmat(8,1,9) repmat(10,1,6) repmat(12,1,3)]; % some IBI jitter to estimate Fair/Unfair separately (HCP is fixed at 15 s)
 pre_block_ITI = pre_block_ITI(randperm(length(pre_block_ITI)));
 % this occurrs every 8 trials, starting with trial 1. it should come first
 % need to add at least 12 s at the end of the experiment to catch last HRF
@@ -31,44 +31,52 @@ rand_trials = randperm(nblocks);
 t = 0;
 for i = 1:nblocks
     % Partner is Friend=3, Stranger=2, Computer=1
-    % Feedback is Reward=3, Neutral=2, Punishment=1
+    % "Feedback" is the offer value (out of $20)
     
-    fair = [16 17 18 19 20];
-    unfair = [4 5 6 7 8];
-
+    % start with 20
+    fair = [10 9 8 7];
+    unfair = [1 2 3 4];
+    neutral = [5 6];
     
-    punishment = [1 1 1 1 1 1 randsample([2 3],1) randsample([2 3],1)];
-    punishment = punishment(randperm(length(punishment)));
-    reward = [3 3 3 3 3 3 randsample([2 1],1) randsample([2 1],1)];
-    reward = reward(randperm(length(reward)));
+    unfair_block = [randsample(unfair,1) randsample(unfair,1) randsample(unfair,1) randsample(unfair,1) randsample(unfair,1) randsample(unfair,1) randsample(fair,1) randsample(neutral,1)];
+    unfair_block = unfair_block(randperm(length(unfair_block)));
+    fair_block = [randsample(fair,1) randsample(fair,1) randsample(fair,1) randsample(fair,1) randsample(fair,1) randsample(fair,1) randsample(unfair,1) randsample(neutral,1)];
+    fair_block = fair_block(randperm(length(fair_block)));
     
     switch block_types(i)
-        case 1 %Computer Punishment
+        case 1 %Computer Unfair
             partner = 1;
-            feedback_mat = punishment;
-        case 2 %Computer Reward
+            feedback_mat = unfair_block;
+            isfair = 0;
+        case 2 %Computer Fair
             partner = 1;
-            feedback_mat = reward;
-        case 3 %Stranger Punishment
+            feedback_mat = fair_block;
+            isfair = 1;
+        case 3 %Stranger Unfair
             partner = 2;
-            feedback_mat = punishment;
-        case 4 %Stranger Reward
+            feedback_mat = unfair_block;
+            isfair = 0;
+        case 4 %Stranger Fair
             partner = 2;
-            feedback_mat = reward;
-        case 5 %Friend Punishment
+            feedback_mat = fair_block;
+            isfair = 1;
+        case 5 %Friend Unfair
             partner = 3;
-            feedback_mat = punishment;
-        case 6 %Friend Reward
+            feedback_mat = unfair_block;
+            isfair = 0;
+        case 6 %Friend Fair
             partner = 3;
-            feedback_mat = reward;
+            feedback_mat = fair_block;
+            isfair = 1;
     end
     
+    %fprintf(fid,'Trialn,Blockn,Partner,IsFairBlock,Offer,ITI\n');
     for f = 1:length(feedback_mat)
         t = t + 1;
         if f == length(feedback_mat)
-            fprintf(fid,'%d,%d,%d,%d,%d\n',t,i,partner,feedback_mat(f),pre_block_ITI(i));
+            fprintf(fid,'%d,%d,%d,%d,%d,%d\n',t,i,partner,isfair,feedback_mat(f),pre_block_ITI(i));
         else
-            fprintf(fid,'%d,%d,%d,%d,%d\n',t,i,partner,feedback_mat(f),1);
+            fprintf(fid,'%d,%d,%d,%d,%d,%d\n',t,i,partner,isfair,feedback_mat(f),1);
         end
     end
 end
