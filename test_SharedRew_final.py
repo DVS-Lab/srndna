@@ -13,7 +13,6 @@ DEBUG = False
 
 frame_rate=1
 decision_dur=2
-#instruct_dur=8
 outcome_dur=1
 
 responseKeys=('1','2')
@@ -42,7 +41,9 @@ print "got to check 1"
 
 #define stimulus
 fixation = visual.TextStim(win, text="+", height=2)
-ready_screen = visual.TextStim(win, text="Ready...", height=1.5)
+
+#waiting for trigger
+ready_screen = visual.TextStim(win, text="Ready? \n\nPlease remember to keep your head still!", height=1.5)
 
 #decision screen
 pictureStim =  visual.ImageStim(win, pos=(0,8.0))
@@ -57,7 +58,7 @@ outcome_money = visual.TextStim(win=win, name='text',text='',font='Wingdings 3',
 #instructions
 instruct_screen = visual.TextStim(win, text='Welcome to the experiment.\n\nIn this task you will be guessing the numerical value of a card.\n\nPress Button 1 to guess low and press Button 2 to guess high.\n\nCorrect responses will result in a monetary gain of $4, and incorrect responses will result in a monetary loss of $2.00.\n\nRemember, you will be sharing monetary outcomes on each trial with the partner displayed at the top of the screen.', pos = (0,1), wrapWidth=20, height = 1.2)
 
-#instructions
+#exit
 exit_screen = visual.TextStim(win, text='Thanks for playing! Please wait for instructions from the experimenter.', pos = (0,1), wrapWidth=20, height = 1.2)
 
 #logging
@@ -69,7 +70,7 @@ logging.setDefaultClock(globalClock)
 timer = core.Clock()
 
 #trial handler
-trial_data = [r for r in csv.DictReader(open('SharedReward_design_test_new.csv','rU'))]
+trial_data = [r for r in csv.DictReader(open('SharedReward_design_test_newDF.csv','rU'))]
 trials = data.TrialHandler(trial_data[:144], 1, method="sequential") #change to [] for full run
 
 stim_map = {
@@ -99,6 +100,7 @@ for run in range(2):
             blocks.append(block_data)
          
 '''
+
 #checkpoint
 print "got to check 2"
 
@@ -119,6 +121,14 @@ event.waitKeys()
 
 def do_run(trial_data, run_num):
     resp=[]
+    
+    #wait for trigger
+    ready_screen.draw()
+    win.flip()
+    event.waitKeys(keyList=('equal'))
+    globalClock.reset()
+    
+    
     for trial in trials:
         condition_label = stim_map[trial['Partner']]
         image = "Images/%s.png" % condition_label
@@ -141,43 +151,20 @@ def do_run(trial_data, run_num):
 
         resp_val=None
         resp_onset=None
-        ifresp = 0
         
         while timer.getTime() < decision_dur:
             cardStim.draw()
             question.draw()
             pictureStim.draw()
             win.flip()
-
-        #if ifresp:
-        #    core.wait(.5)
-        #    break
            
         resp = event.getKeys(keyList = responseKeys)
         resp_onset = globalClock.getTime()
 
         if len(resp)>0:
             resp_val = int(resp[0])
-            if resp_val == 1:
-                ifresp=1
-                #print ifresp
-            if resp_val == 2:
-                ifresp=1
-                #print ifresp
         else:
             resp_val = 0
-        
-        decision_onset = int(decision_onset)
-        resp_onset = int(resp_onset)
-        
-        print decision_onset
-        print resp_onset
-        x = resp_onset - decision_onset
-        print x
-        
-        if resp_val>0 and (resp_onset - decision_onset) < decision_dur:
-            fixation.draw()
-            win.flip()
             
         trials.addData('resp', resp_val)
         trials.addData('resp_onset', resp_onset)
@@ -185,6 +172,7 @@ def do_run(trial_data, run_num):
         trials.addData('ITIonset', ITI_onset)
         
 #ISI
+#this section of code was intended to move to a fixation if subjects respond before 2 seconds is up, but currently is not functional
         #if resp_val > 0 and timer.getTime() < decision_dur:
         #    logging.log(level=logging.DATA, msg='ISI') #send ISI log event
         #    isi_for_trial = float(trial['ISI'])
@@ -247,6 +235,11 @@ def do_run(trial_data, run_num):
 
     trials.saveAsText(fileName=log_file.format(subj_id, run_num)) #, dataOut='all_raw', encoding='utf-8')
 do_run(trial_data,1)
+
+#final ITI
+fixation.draw()
+win.flip()
+core.wait(12)
 
 # Exit
 exit_screen.draw()
