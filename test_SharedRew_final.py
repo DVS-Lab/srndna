@@ -70,7 +70,7 @@ logging.setDefaultClock(globalClock)
 timer = core.Clock()
 
 #trial handler
-trial_data = [r for r in csv.DictReader(open('SharedReward_design_test_newDF.csv','rU'))]
+trial_data = [r for r in csv.DictReader(open('SharedReward_design_test.csv','rU'))]
 trials = data.TrialHandler(trial_data[:144], 1, method="sequential") #change to [] for full run
 
 stim_map = {
@@ -166,7 +166,7 @@ def do_run(trial_data, run_num):
         else:
             resp_val = 0
             
-        trials.addData('resp', resp_val)
+        trials.addData('resp', int(resp_val))
         trials.addData('resp_onset', resp_onset)
         trials.addData('decision', decision_onset)
         trials.addData('ITIonset', ITI_onset)
@@ -191,33 +191,40 @@ def do_run(trial_data, run_num):
             #win.flip()
     
             if trial['Feedback'] == '3' and resp_val == 1:
-                outcome_txt = random.randint(1,4)
+                outcome_txt = int(random.randint(1,4))
                 outcome_moneyTxt= 'h'
                 outcome_color='green'
+                trials.addData('outcome_val', int(outcome_txt))
             elif trial['Feedback'] == '3' and resp_val == 2:
-                outcome_txt = random.randint(6,9)
+                outcome_txt = int(random.randint(6,9))
                 outcome_moneyTxt= 'h'
                 outcome_color='green'
+                trials.addData('outcome_val', int(outcome_txt))
             elif trial['Feedback'] == '2' and resp_val == 1:
-                outcome_txt = '5'
+                outcome_txt = int(5)
                 outcome_moneyTxt= 'n'
                 outcome_color='white'
+                trials.addData('outcome_val', int(outcome_txt))
             elif trial['Feedback'] == '2' and resp_val == 2:
-                outcome_txt = '5'
+                outcome_txt = int(5)
                 outcome_moneyTxt= 'n'
                 outcome_color='white'
+                trials.addData('outcome_val', int(outcome_txt))
             elif trial['Feedback'] == '1' and resp_val == 1:
-                outcome_txt = random.randint(6,9)
+                outcome_txt = int(random.randint(6,9))
                 outcome_moneyTxt= 'i'
                 outcome_color='red'
+                trials.addData('outcome_val', int(outcome_txt))
             elif trial['Feedback'] == '1' and resp_val == 2:
-                outcome_txt = random.randint(1,4)
+                outcome_txt = int (random.randint(1,4))
                 outcome_moneyTxt= 'i'
                 outcome_color='red'
+                trials.addData('outcome_val', int(outcome_txt))
             elif resp_val == 0: 
                 outcome_txt='#'
                 outcome_moneyTxt = ''
                 outcome_color='white'
+                
             
             print outcome_txt
             outcome_text.setText(outcome_txt)
@@ -227,13 +234,18 @@ def do_run(trial_data, run_num):
             outcome_money.draw()
             win.flip()
             core.wait(1)
-            trials.addData('outcome_txt', outcome_txt)
-            trials.addData('outcome', outcome_onset)
+            #trials.addData('outcome_val', outcome_txt)
+            trials.addData('outcome_onset', outcome_onset)
             
+            outcome_offset = globalClock.getTime()
+            trials.addData('outcome_offset', outcome_offset)
+
+            duration = outcome_offset - decision_onset
+            trials.addData('trialDuration', duration)
             event.clearEvents()
         print "got to check 3"
 
-    trials.saveAsText(fileName=log_file.format(subj_id, run_num)) #, dataOut='all_raw', encoding='utf-8')
+    trials.saveAsText(fileName=log_file.format('SR_'+ subj_id, run_num),delim = ',',dataOut='all_raw')
 do_run(trial_data,1)
 
 #final ITI
