@@ -14,6 +14,7 @@ DEBUG = False
 frame_rate=1
 decision_dur=2
 outcome_dur=1
+fileSuffix = 'UG'
 
 responseKeys=('1','2')
 
@@ -53,7 +54,7 @@ resp_text_accept = visual.TextStim(win,text="Accept Offer", pos =(7,-4.8), heigh
 offer_text = visual.TextStim(win,pos = (0,-1.5),alignHoriz="center", text='')
 
 #outcome screen
-outcome_stim = visual.TextStim(win, pos = (0,-1.5),text='')
+outcome_stim = visual.TextStim(win, pos = (0,-2.5),text='')
 
 #instructions
 instruct_screen = visual.TextStim(win, text='Welcome to the bargaining game.\n\nIn this task you will interacting with a few different partners.\n\nOn every trial, your partner will have $20, which s/he can propose to divide in any way between the two of you.\n\nYour task is to choose to either accept or reject the proposed split of money.\n\nPress spacebar to continue', pos = (0,1), wrapWidth=20, height = 1.2)
@@ -155,19 +156,19 @@ def do_run(trial_data, run_num):
             win.flip()
            
             resp = event.getKeys(keyList = responseKeys)
-        
-
+    
             if len(resp)>0:
-                resp_val = int(resp[0])
+                resp_val = float(resp[0])
                 resp_onset = globalClock.getTime()
                 if resp_val == 1:
                     resp_text_reject.setColor('red')
                 if resp_val == 2:
                     resp_text_accept.setColor('red')
-                    
-        trials.addData('resp', resp_val)
-        trials.addData('resp_onset', resp_onset)
-        trials.addData('decision', decision_onset)
+                trials.addData('resp', resp_val)
+                trials.addData('resp_onset', resp_onset)
+
+
+        trials.addData('decision_onset', decision_onset)
         trials.addData('ITIonset', ITI_onset)
         
         #reset rating number color
@@ -202,17 +203,20 @@ def do_run(trial_data, run_num):
             
             outcome_stim.setText(outcome_txt)
             outcome_stim.draw()
-            trials.addData('outcome_txt', outcome_txt)
+            #trials.addData('outcome_txt', outcome_txt)
             trials.addData('outcome_onset', outcome_onset)
             win.flip()
             core.wait(1)
             outcome_offset = globalClock.getTime()
             trials.addData('outcome_offset', outcome_offset)
             
+            
+            duration = outcome_offset - decision_onset
+            trials.addData('trialDuration', duration)
             event.clearEvents()
         print "got to check 3"
 
-    trials.saveAsText(fileName=log_file.format(subj_id, run_num,'UG')) #, dataOut='all_raw', encoding='utf-8')
+    trials.saveAsText(fileName=log_file.format('UG_'+ subj_id, run_num),delim = ',', dataOut='all_raw')
 do_run(trial_data,1)
 
 #final ITI
