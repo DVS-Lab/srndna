@@ -53,8 +53,8 @@ end
 
 
 
-fid = fopen('SharedReward_design_test_new.csv','w');
-fprintf(fid,'Trialn,Blockn,Partner,Feedback,ITI\n');
+fid = fopen('SharedReward_design.csv','w');
+fprintf(fid,'Trialn,Blockn,BlockType,Partner,Feedback,ITI\n');
 
 nblocks = length(block_types);
 rand_trials = randperm(nblocks);
@@ -92,9 +92,9 @@ for i = 1:nblocks
     for f = 1:length(feedback_mat)
         t = t + 1;
         if f == length(feedback_mat)
-            fprintf(fid,'%d,%d,%d,%d,%d\n',t,i,partner,feedback_mat(f),pre_block_ITI(i));
+            fprintf(fid,'%d,%d,%d,%d,%d,%d\n',t,i,block_types(i),partner,feedback_mat(f),pre_block_ITI(i));
         else
-            fprintf(fid,'%d,%d,%d,%d,%d\n',t,i,partner,feedback_mat(f),1);
+            fprintf(fid,'%d,%d,%d,%d,%d,%d\n',t,i,block_types(i),partner,feedback_mat(f),1);
         end
     end
 end
