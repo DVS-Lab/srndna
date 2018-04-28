@@ -1,4 +1,4 @@
-onset	duration	trial_type	response_time	PartnerKeeps	Offer	Response
+onset	duration	trial_type	response_time	PartnerKeeps	Offer
 8.068101	3.047615	event_accept_computer_unfair	0.551660	18	2
 8.068101	31.000000	block_computer_unfair	999.000000	999	999
 12.135295	3.032569	event_accept_computer_unfair	0.703871	16	4
