@@ -25,7 +25,7 @@ task = 'UG';
 
 fname = sprintf('sub-%03d_task-%s_events.tsv',subnum,task);
 fid = fopen(fullfile(maindir,fname),'w');
-fprintf(fid,'onset\tduration\ttrial_type\tresponse_time\tPartnerKeeps\tOffer\tResponse\n');
+fprintf(fid,'onset\tduration\ttrial_type\tresponse_time\tPartnerKeeps\tOffer\n');
 for t = 1:length(onset);
     
     %fprintf(fid,'onset\tduration\ttrial_type\tresponse_time\tPartnerKeeps\tOffer\tResponse\n');
