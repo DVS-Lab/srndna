@@ -43,13 +43,20 @@ for t = 1:length(onset);
         trial_type = 'friend_unfair';
     end
     
+    % 1 is reject
+    % 2 is accept
+    
     if ~isnan(response(t))
-        fprintf(fid,'%f\t%f\t%s\t%f\t%d\t%d\t%d\n',onset(t),duration(t),['event_' trial_type],RT(t),PartnerKeeps(t),Offer(t),response(t));
+        if response(t) == 1
+            fprintf(fid,'%f\t%f\t%s\t%f\t%d\t%d\n',onset(t),duration(t),['event_accept_' trial_type],RT(t),PartnerKeeps(t),Offer(t));
+        elseif response(t) == 2
+            fprintf(fid,'%f\t%f\t%s\t%f\t%d\t%d\n',onset(t),duration(t),['event_reject_' trial_type],RT(t),PartnerKeeps(t),Offer(t));
+        end
     else
-        fprintf(fid,'%f\t%f\t%s\t%f\t%d\t%d\t%d\n',onset(t),duration(t),'missed_trial',3.5,PartnerKeeps(t),999,999);
+        fprintf(fid,'%f\t%f\t%s\t%f\t%d\t%d\n',onset(t),duration(t),'missed_trial',3.5,PartnerKeeps(t),999);
     end
     if iti(t) > 1
-        fprintf(fid,'%f\t%f\t%s\t%f\t%d\t%d\t%d\n',onset(t),31,['block_' trial_type],999,999,999,999);
+        fprintf(fid,'%f\t%f\t%s\t%f\t%d\t%d\n',onset(t),31,['block_' trial_type],999,999,999);
     end
     
 end
