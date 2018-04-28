@@ -43,7 +43,7 @@ for t = 1:length(onset);
         trial_type = 'friend_unfair';
     end
     
-    if ~isnan(Offer(t))
+    if ~isnan(response(t))
         fprintf(fid,'%f\t%f\t%s\t%f\t%d\t%d\t%d\n',onset(t),duration(t),['event_' trial_type],RT(t),PartnerKeeps(t),Offer(t),response(t));
     else
         fprintf(fid,'%f\t%f\t%s\t%f\t%d\t%d\t%d\n',onset(t),duration(t),'missed_trial',3.5,PartnerKeeps(t),999,999);
