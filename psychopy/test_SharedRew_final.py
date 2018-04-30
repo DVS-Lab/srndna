@@ -12,7 +12,7 @@ useFullScreen = True
 DEBUG = False
 
 frame_rate=1
-decision_dur=2
+decision_dur=2.5
 outcome_dur=1
 
 responseKeys=('1','2')
@@ -233,7 +233,7 @@ def do_run(trial_data, run_num):
             outcome_text.draw()
             outcome_money.draw()
             win.flip()
-            core.wait(1)
+            core.wait(.75)
             #trials.addData('outcome_val', outcome_txt)
             trials.addData('outcome_onset', outcome_onset)
             

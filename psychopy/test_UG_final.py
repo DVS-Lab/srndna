@@ -12,7 +12,7 @@ useFullScreen = True
 DEBUG = False
 
 frame_rate=1
-decision_dur=2
+decision_dur=2.5
 outcome_dur=1
 fileSuffix = 'UG'
 
@@ -206,7 +206,7 @@ def do_run(trial_data, run_num):
             #trials.addData('outcome_txt', outcome_txt)
             trials.addData('outcome_onset', outcome_onset)
             win.flip()
-            core.wait(1)
+            core.wait(.75)
             outcome_offset = globalClock.getTime()
             trials.addData('outcome_offset', outcome_offset)
             
