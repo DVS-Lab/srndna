@@ -1,4 +1,16 @@
 
+%{
+
+simulatePayments([0 2 4 8],1000)
+
+ans =
+
+      mean: 25.5760
+    twostd: 14.9474
+       max: 48
+
+%}
+
 maindir = pwd;
 outfiles = fullfile(maindir,'out');
 mkdir(outfiles);
@@ -15,7 +27,7 @@ for s = 1:100
         ITI_list = [repmat(2,1,18) repmat(4,1,10) repmat(6,1,5) repmat(8,1,2) 10];
         ITI_list = ITI_list(randperm(length(ITI_list)));
         
-        choice_pairs = combnk([0 1 2 4],2);
+        choice_pairs = combnk([0 2 4 8],2);
         trial_mat = [choice_pairs ones(6,1)*3 ones(6,1);
             choice_pairs ones(6,1)*3 zeros(6,1);
             choice_pairs ones(6,1)*2 ones(6,1);
@@ -26,15 +38,20 @@ for s = 1:100
         fname = fullfile(subout,sprintf('sub-%03d_run-%02d_design.csv',s,r));
         
         fid = fopen(fname,'w');
-        fprintf(fid,'Trial,cLow,cHigh,Partner,Reciprocate,ISI,ITI\n');
+        fprintf(fid,'Trial,cLeft,cRight,Partner,Reciprocate,ISI,ITI\n');
         % Partner is Friend=3, Stranger=2, Computer=1
         % Reciprocate is Yes=1, No=0
-        % cLow is the low-value option
-        % cHigh is the high-value option
+        % cLeft is the left option
+        % cRight is the right option
+        % high/low value option will randomly flip between left/right
         
         rand_trials = randperm(ntrials);
         for i = 1:ntrials
-            fprintf(fid,'%d,%d,%d,%d,%d,%d,%d\n',i,trial_mat(rand_trials(i),:),ISI_list(rand_trials(i)),ITI_list(rand_trials(i)));
+            if rand < .5
+                fprintf(fid,'%d,%d,%d,%d,%d,%d,%d\n',i,trial_mat(rand_trials(i),1),trial_mat(rand_trials(i),2),trial_mat(rand_trials(i),3:4),ISI_list(rand_trials(i)),ITI_list(rand_trials(i)));
+            else
+                fprintf(fid,'%d,%d,%d,%d,%d,%d,%d\n',i,trial_mat(rand_trials(i),2),trial_mat(rand_trials(i),1),trial_mat(rand_trials(i),3:4),ISI_list(rand_trials(i)),ITI_list(rand_trials(i)));
+            end
         end
         fclose(fid);
         
