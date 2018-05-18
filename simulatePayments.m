@@ -71,5 +71,6 @@ end
 output.mean = mean(trust_payments);
 output.twostd = std(trust_payments) * 2;
 output.max = max(trust_payments);
+output.min = min(trust_payments);
 
 
