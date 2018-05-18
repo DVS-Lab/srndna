@@ -1,5 +1,5 @@
 ###SRNDNA
-###shared reward, block design
+###UG, block design
 
 from psychopy import visual, core, event, gui, data, sound, logging
 import csv
@@ -16,13 +16,13 @@ DEBUG = False
 
 frame_rate=1
 decision_dur=2.5
-outcome_dur=.75
-fileSuffix = 'UG'
+outcome_dur=0.75
+fileSuffix = 'UG_practice'
 
 responseKeys=('1','2')
 
 #get subjID
-subjDlg=gui.Dlg(title="Bargaining Task")
+subjDlg=gui.Dlg(title="Bargaining Task_practice")
 subjDlg.addField('Enter Subject ID: ')
 subjDlg.show()
 
@@ -38,7 +38,7 @@ run_data = {
     }
 
 #window setup
-win = visual.Window([800,600], monitor="testMonitor", units="deg", fullscr=useFullScreen, allowGUI=False, screen=useDualScreen)
+win = visual.Window([800,600], monitor="testMonitor", units="deg", fullscr=useFullScreen, allowGUI=False,screen=useDualScreen)
 
 #checkpoint
 print "got to check 1"
@@ -75,8 +75,8 @@ logging.setDefaultClock(globalClock)
 timer = core.Clock()
 
 #trial handler
-trial_data = [r for r in csv.DictReader(open('UG_design_test2DF.csv','rU'))]
-trials = data.TrialHandler(trial_data[:8], 1, method="sequential") #change to [] for full run
+trial_data = [r for r in csv.DictReader(open('UG_practice_DF.csv','rU'))]
+trials = data.TrialHandler(trial_data[:6], 1, method="sequential") #change to [] for full run
 
 stim_map = {
   '3': 'olderadult',
@@ -219,7 +219,7 @@ def do_run(trial_data, run_num):
             event.clearEvents()
         print "got to check 3"
 
-    trials.saveAsText(fileName=log_file.format('UG_'+ subj_id, run_num),delim = ',', dataOut='all_raw')
+    trials.saveAsText(fileName=log_file.format('UG_practice'+ subj_id, run_num),delim = ',', dataOut='all_raw')
 do_run(trial_data,1)
 
 #final ITI

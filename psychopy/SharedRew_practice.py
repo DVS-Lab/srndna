@@ -34,7 +34,7 @@ else:
 run_data = {
     'Participant ID': subj_id,
     'Date': str(datetime.datetime.now()),
-    'Description': 'SRNDNA Pilot - SharedReward Task'
+    'Description': 'SharedReward Practice'
     }
 
 #window setup
@@ -75,8 +75,8 @@ logging.setDefaultClock(globalClock)
 timer = core.Clock()
 
 #trial handler
-trial_data = [r for r in csv.DictReader(open('SharedReward_design.csv','rU'))]
-trials = data.TrialHandler(trial_data[:4], 1, method="sequential") #change to [] for full run
+trial_data = [r for r in csv.DictReader(open('SharedReward_practice_DF.csv','rU'))]
+trials = data.TrialHandler(trial_data[:6], 1, method="sequential") #change to [] for full run
 
 stim_map = {
   '3': 'friend',
@@ -112,7 +112,7 @@ print "got to check 2"
 runs=[]
 for run in range(1):
     run_data = []
-    for t in range(8):
+    for t in range(6):
         sample = random.sample(range(len(trial_data)),1)[0]
         run_data.append(trial_data.pop(sample))
     runs.append(run_data)
@@ -138,10 +138,11 @@ def do_run(trial_data, run_num):
         condition_label = stim_map[trial['Partner']]
         #image = "Images/%s.png" % condition_label
         name = condition_label
-        nameStim.setText(name)
         #pictureStim.setImage(image)
+        nameStim.setText(name)
         #print 'image'
         
+       
         #ITI
         logging.log(level=logging.DATA, msg='ITI') #send fixation log event
         timer.reset()
@@ -254,7 +255,7 @@ def do_run(trial_data, run_num):
             event.clearEvents()
         print "got to check 3"
 
-    trials.saveAsText(fileName=log_file.format('SR_'+ subj_id, run_num),delim = ',',dataOut='all_raw')
+    trials.saveAsText(fileName=log_file.format('SR_practice'+ subj_id, run_num),delim = ',',dataOut='all_raw')
 do_run(trial_data,1)
 
 #final ITI

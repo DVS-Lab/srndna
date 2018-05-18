@@ -6,9 +6,6 @@ import csv
 import datetime
 import random
 import numpy
-import os
-
-maindir = os.getcwd()
 
 #parameters
 useFullScreen = True
@@ -16,7 +13,7 @@ DEBUG = False
 
 frame_rate=1
 decision_dur=2.5
-outcome_dur=.75
+outcome_dur=1
 fileSuffix = 'UG'
 
 responseKeys=('1','2')
@@ -38,7 +35,7 @@ run_data = {
     }
 
 #window setup
-win = visual.Window([800,600], monitor="testMonitor", units="deg", fullscr=useFullScreen, allowGUI=False, screen=useDualScreen)
+win = visual.Window([800,600], monitor="testMonitor", units="deg", fullscr=useFullScreen, allowGUI=False)
 
 #checkpoint
 print "got to check 1"
@@ -67,7 +64,7 @@ instruct_screen2 = visual.TextStim(win, text='Press Button 1 to accept the offer
 exit_screen = visual.TextStim(win, text='Thanks for playing! Please wait for instructions from the experimenter.', pos = (0,1), wrapWidth=20, height = 1.2)
 
 #logging
-log_file = os.path.join(maindir,'{}_run_{}.csv')
+log_file = 'logs/{}_run_{}.csv'
 
 globalClock = core.Clock()
 logging.setDefaultClock(globalClock)
@@ -76,7 +73,7 @@ timer = core.Clock()
 
 #trial handler
 trial_data = [r for r in csv.DictReader(open('UG_design_test2DF.csv','rU'))]
-trials = data.TrialHandler(trial_data[:8], 1, method="sequential") #change to [] for full run
+trials = data.TrialHandler(trial_data[:144], 1, method="sequential") #change to [] for full run
 
 stim_map = {
   '3': 'olderadult',
