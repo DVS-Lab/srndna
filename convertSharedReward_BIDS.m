@@ -39,11 +39,11 @@ for t = 1:length(onset);
         trial_type = 'stranger_neutral';
     elseif (feedback(t) == 2) && (Partner(t) == 3)
         trial_type = 'friend_neutral';
-    elseif (feedback(t) == 2) && (Partner(t) == 1)
+    elseif (feedback(t) == 3) && (Partner(t) == 1)
         trial_type = 'computer_reward';
-    elseif (feedback(t) == 2) && (Partner(t) == 2)
+    elseif (feedback(t) == 3) && (Partner(t) == 2)
         trial_type = 'stranger_reward';
-    elseif (feedback(t) == 2) && (Partner(t) == 3)
+    elseif (feedback(t) == 3) && (Partner(t) == 3)
         trial_type = 'friend_reward';
     end
     
