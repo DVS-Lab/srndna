@@ -19,7 +19,7 @@ frame_rate=1
 decision_dur=2.5
 outcome_dur=0.75
 
-responseKeys=('1','2')
+responseKeys=('2','3')
 
 #get subjID
 subjDlg=gui.Dlg(title="Shared Reward Task")
@@ -79,8 +79,8 @@ trial_data = [r for r in csv.DictReader(open('SharedReward_practice_DF.csv','rU'
 trials = data.TrialHandler(trial_data[:6], 1, method="sequential") #change to [] for full run
 
 stim_map = {
-  '3': 'friend',
-  '2': 'stranger',
+  '3': 'Joe',
+  '2': 'Jack',
   '1': 'computer',
   }
 

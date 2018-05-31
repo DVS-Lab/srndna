@@ -126,9 +126,9 @@ def do_run(trial_data, run_num):
     
     for trial in trials:
         condition_label = stim_map[trial['Partner']]
-        image = "Images/%s.png" % condition_label
+        imagepath = os.path.join(maindir,'Images')
+        image = os.path.join(imagepath, "%s.png") % condition_label
         pictureStim.setImage(image)
-        print 'image'
         
         #ITI
         logging.log(level=logging.DATA, msg='ITI') #send fixation log event
