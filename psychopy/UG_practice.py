@@ -19,7 +19,7 @@ decision_dur=2.5
 outcome_dur=0.75
 fileSuffix = 'UG_practice'
 
-responseKeys=('1','2')
+responseKeys=('2','3')
 
 #get subjID
 subjDlg=gui.Dlg(title="Bargaining Task_practice")
@@ -85,9 +85,9 @@ stim_map = {
   }
 
 outcome_map = {
-  2: 'You have chosen to accept the offer.\n\nYou: $%s.00\nPartner: $%s.00',
-  1: 'You have chosen to reject the offer.\n\nYou: $0.00\nPartner: $0.00',
-  None: 'You have two seconds to choose.'
+  3: 'You have accepted the offer.\n\nYou: $%s.00\nPartner: $%s.00',
+  2: 'You have rejected the offer.\n\nYou: $0.00\nPartner: $0.00',
+  None: 'You have 2.5 seconds to respond.'
   }
 
 #checkpoint
@@ -153,7 +153,7 @@ def do_run(trial_data, run_num):
             pictureStim.draw()
             
             partner_offer = trial['Offer']
-            partnerOffer = 'Your partner has offered you $%s.00 out of $20.00' % partner_offer
+            partnerOffer = 'Proposal: $%s.00 out of $20.00' % partner_offer
             offer_text.setText(partnerOffer)
             offer_text.draw()
             win.flip()
