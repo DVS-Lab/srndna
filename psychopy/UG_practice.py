@@ -12,6 +12,7 @@ maindir = os.getcwd()
 
 #parameters
 useFullScreen = True
+useDualScreen = 1
 DEBUG = False
 
 frame_rate=1
@@ -163,9 +164,9 @@ def do_run(trial_data, run_num):
             if len(resp)>0:
                 resp_val = float(resp[0])
                 resp_onset = globalClock.getTime()
-                if resp_val == 1:
-                    resp_text_reject.setColor('red')
                 if resp_val == 2:
+                    resp_text_reject.setColor('red')
+                if resp_val == 3:
                     resp_text_accept.setColor('red')
                 trials.addData('resp', resp_val)
                 trials.addData('resp_onset', resp_onset)
@@ -197,9 +198,9 @@ def do_run(trial_data, run_num):
             #win.flip()
             subjectReceives = trial['Offer']
             partnerKeeps = trial['PartnerKeeps']
-            if resp_val == 2:
+            if resp_val == 3:
                 outcome_txt = outcome_map[resp_val] % (subjectReceives, partnerKeeps)
-            elif resp_val==1:
+            elif resp_val==2:
                 outcome_txt = outcome_map[resp_val]
             else:
                 outcome_txt = outcome_map[resp_val]

@@ -77,7 +77,7 @@ timer = core.Clock()
 
 #trial handler
 trial_data = [r for r in csv.DictReader(open('UG_design_test2DF.csv','rU'))]
-trials = data.TrialHandler(trial_data[:2], 1, method="sequential") #change to [] for full run
+trials = data.TrialHandler(trial_data[:], 1, method="sequential") #change to [] for full run
 
 stim_map = {
   '3': 'olderadult',

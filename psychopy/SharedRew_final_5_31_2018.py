@@ -51,8 +51,8 @@ fixation = visual.TextStim(win, text="+", height=2)
 ready_screen = visual.TextStim(win, text="Ready? \n\nPlease remember to keep your head still!", height=1.5)
 
 #decision screen
-#pictureStim =  visual.ImageStim(win, pos=(0,8.0))
-nameStim = visual.TextStim(win=win, name='text',text='?',font='Arial',pos=(0, 8.0), height=1, wrapWidth=None, ori=0, color='white', colorSpace='rgb', opacity=1,depth=-1.0);
+pictureStim =  visual.ImageStim(win, pos=(0,8.0))
+#nameStim = visual.TextStim(win=win, name='text',text='?',font='Arial',pos=(0, 8.0), height=1, wrapWidth=None, ori=0, color='white', colorSpace='rgb', opacity=1,depth=-1.0);
 cardStim = visual.Rect(win=win, name='polygon', width=(8.0,8.0)[0], height=(10.0,10.0)[1], ori=0, pos=(0, 0),lineWidth=5, lineColor=[1,1,1], lineColorSpace='rgb',fillColor=[0,0,0], fillColorSpace='rgb',opacity=1, depth=0.0, interpolate=True)
 question = visual.TextStim(win=win, name='text',text='?',font='Arial',pos=(0, 0), height=1, wrapWidth=None, ori=0, color='white', colorSpace='rgb', opacity=1,depth=-1.0);
 
@@ -84,8 +84,8 @@ trials = data.TrialHandler(trial_data[:], 1, method="sequential") #change to [] 
 # change names accordingly here
 
 stim_map = {
-  '3': 'Joe',
-  '2': 'Jack',
+  '3': 'Friend',
+  '2': 'Stranger',
   '1': 'Computer',
   }
 
@@ -138,14 +138,15 @@ def do_run(trial_data, run_num):
     event.waitKeys(keyList=('equal'))
     globalClock.reset()
     
-    
+        
     for trial in trials:
         condition_label = stim_map[trial['Partner']]
-        #image = "Images/%s.png" % condition_label
-        name = condition_label
-        nameStim.setText(name)
-        #pictureStim.setImage(image)
-        #print 'image'
+        imagepath = os.path.join(maindir,'Images')
+        image = os.path.join(imagepath, "%s.png") % condition_label
+        #name = condition_label
+        #nameStim.setText(name)
+        pictureStim.setImage(image)
+        
         
         #ITI
         logging.log(level=logging.DATA, msg='ITI') #send fixation log event
@@ -167,8 +168,8 @@ def do_run(trial_data, run_num):
         while timer.getTime() < decision_dur:
             cardStim.draw()
             question.draw()
-            #pictureStim.draw()
-            nameStim.draw()
+            pictureStim.draw()
+            #nameStim.draw()
             win.flip()
            
         resp = event.getKeys(keyList = responseKeys)
@@ -200,8 +201,8 @@ def do_run(trial_data, run_num):
         
         while timer.getTime() < outcome_dur:
             outcome_cardStim.draw()
-            #pictureStim.draw()
-            nameStim.draw()
+            pictureStim.draw()
+            #nameStim.draw()
             #win.flip()
     
             if trial['Feedback'] == '3' and resp_val == 2:
