@@ -8,7 +8,7 @@ import random
 import numpy
 import os
 
-maindir = os.getcwd()
+#maindir = os.getcwd()
 
 
 #parameters
@@ -20,15 +20,20 @@ frame_rate=1
 decision_dur=2.5
 outcome_dur=0.75
 
-responseKeys=('2','3')
+responseKeys=('2','3','z')
 
 #get subjID
 subjDlg=gui.Dlg(title="Shared Reward Task")
 subjDlg.addField('Enter Subject ID: ')
+subjDlg.addField('Enter Friend Name: ') #1
+subjDlg.addField('Enter Partner Name: ') #NOTE: PARTNER IS THE CONFEDERATE/STRANGER #2
 subjDlg.show()
 
 if gui.OK:
     subj_id=subjDlg.data[0]
+    friend_id=subjDlg.data[1]
+    stranger_id=subjDlg.data[2]
+
 else:
     sys.exit()
 
@@ -48,13 +53,13 @@ print "got to check 1"
 fixation = visual.TextStim(win, text="+", height=2)
 
 #waiting for trigger
-ready_screen = visual.TextStim(win, text="Ready? \n\nPlease remember to keep your head still!", height=1.5)
+ready_screen = visual.TextStim(win, text="Please wait for the block of trials to begin. \n\nRemember to keep your head still!", height=1.5)
 
 #decision screen
-pictureStim =  visual.ImageStim(win, pos=(0,8.0))
-#nameStim = visual.TextStim(win=win, name='text',text='?',font='Arial',pos=(0, 8.0), height=1, wrapWidth=None, ori=0, color='white', colorSpace='rgb', opacity=1,depth=-1.0);
+nameStim = visual.TextStim(win=win,font='Arial',pos=(0, 6.0), height=1, color='white', colorSpace='rgb', opacity=1,depth=-1.0);
 cardStim = visual.Rect(win=win, name='polygon', width=(8.0,8.0)[0], height=(10.0,10.0)[1], ori=0, pos=(0, 0),lineWidth=5, lineColor=[1,1,1], lineColorSpace='rgb',fillColor=[0,0,0], fillColorSpace='rgb',opacity=1, depth=0.0, interpolate=True)
 question = visual.TextStim(win=win, name='text',text='?',font='Arial',pos=(0, 0), height=1, wrapWidth=None, ori=0, color='white', colorSpace='rgb', opacity=1,depth=-1.0);
+pictureStim =  visual.ImageStim(win, pos=(0,9.0))
 
 #outcome screen
 outcome_cardStim = visual.Rect(win=win, name='polygon', width=(8.0,8.0)[0], height=(10.0,10.0)[1], ori=0, pos=(0, 0),lineWidth=5, lineColor=[1,1,1], lineColorSpace='rgb',fillColor=[0,0,0], fillColorSpace='rgb',opacity=1, depth=0.0, interpolate=True)
@@ -68,7 +73,11 @@ instruct_screen = visual.TextStim(win, text='Welcome to the experiment.\n\nIn th
 exit_screen = visual.TextStim(win, text='Thanks for playing! Please wait for instructions from the experimenter.', pos = (0,1), wrapWidth=20, height = 1.2)
 
 #logging
-log_file = os.path.join(maindir,'{}_run_{}.csv')
+expdir = os.getcwd()
+subjdir = '%s/logs/%s' % (expdir, subj_id)
+if not os.path.exists(subjdir):
+    os.makedirs(subjdir)
+log_file = os.path.join(subjdir,'sub{}_task-sharedreward_raw.csv')
 
 globalClock = core.Clock()
 logging.setDefaultClock(globalClock)
@@ -84,10 +93,16 @@ trials = data.TrialHandler(trial_data[:], 1, method="sequential") #change to [] 
 # change names accordingly here
 
 stim_map = {
-  '3': 'Friend',
-  '2': 'Stranger',
+  '3': friend_id,
+  '2': stranger_id,
   '1': 'Computer',
   }
+
+image_map = {
+  '3': 'friend',
+  '2': 'stranger',
+  '1': 'computer',
+}
 
 outcome_map = {
   '3': 'reward',
@@ -138,13 +153,13 @@ def do_run(trial_data, run_num):
     event.waitKeys(keyList=('equal'))
     globalClock.reset()
     
-        
+    
     for trial in trials:
         condition_label = stim_map[trial['Partner']]
-        imagepath = os.path.join(maindir,'Images')
-        image = os.path.join(imagepath, "%s.png") % condition_label
-        #name = condition_label
-        #nameStim.setText(name)
+        image_label = image_map[trial['Partner']]
+        imagepath = os.path.join(expdir,'Images')
+        image = os.path.join(imagepath, "%s.png") % image_label
+        nameStim.setText(condition_label)
         pictureStim.setImage(image)
         
         
@@ -169,11 +184,15 @@ def do_run(trial_data, run_num):
             cardStim.draw()
             question.draw()
             pictureStim.draw()
-            #nameStim.draw()
+            nameStim.draw()
             win.flip()
            
         resp = event.getKeys(keyList = responseKeys)
         resp_onset = globalClock.getTime()
+        
+        if resp == ['z']:
+            trials.saveAsText(fileName=log_file.format(subj_id),delim=',',dataOut='all_raw')
+            core.quit()
 
         if len(resp)>0:
             resp_val = int(resp[0])
@@ -202,7 +221,7 @@ def do_run(trial_data, run_num):
         while timer.getTime() < outcome_dur:
             outcome_cardStim.draw()
             pictureStim.draw()
-            #nameStim.draw()
+            nameStim.draw()
             #win.flip()
     
             if trial['Feedback'] == '3' and resp_val == 2:
@@ -260,7 +279,7 @@ def do_run(trial_data, run_num):
             event.clearEvents()
         print "got to check 3"
 
-    trials.saveAsText(fileName=log_file.format('SR_'+ subj_id, run_num),delim = ',',dataOut='all_raw')
+    trials.saveAsText(fileName=log_file.format(subj_id),delim = ',',dataOut='all_raw')
 do_run(trial_data,1)
 
 #final ITI
