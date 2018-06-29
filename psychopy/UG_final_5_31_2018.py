@@ -8,8 +8,6 @@ import random
 import numpy
 import os
 
-maindir = os.getcwd()
-
 #parameters
 useFullScreen = True
 useDualScreen=1
@@ -20,7 +18,7 @@ decision_dur=2.5
 outcome_dur=.75
 fileSuffix = 'UG'
 
-responseKeys=('2','3')
+responseKeys=('2','3','z')
 
 #get subjID
 subjDlg=gui.Dlg(title="Bargaining Task")
@@ -48,7 +46,7 @@ print "got to check 1"
 fixation = visual.TextStim(win, text="+", height=2)
 
 #waiting for trigger
-ready_screen = visual.TextStim(win, text="Ready? \n\nPlease remember to keep your head still!", height=1.5)
+ready_screen = visual.TextStim(win, text="Please wait for the block of trials to begin. \n\nRemember to keep your head still!", height=1.5)
 
 
 #decision screen
@@ -68,7 +66,12 @@ instruct_screen2 = visual.TextStim(win, text='Press Button 2 to accept the offer
 exit_screen = visual.TextStim(win, text='Thanks for playing! Please wait for instructions from the experimenter.', pos = (0,1), wrapWidth=20, height = 1.2)
 
 #logging
-log_file = os.path.join(maindir,'{}_run_{}.csv')
+expdir = os.getcwd()
+subjdir = '%s/logs/%s' % (expdir, subj_id)
+if not os.path.exists(subjdir):
+    os.makedirs(subjdir)
+log_file = os.path.join(subjdir,'sub{}_task-ultimatum_raw.csv')
+
 
 globalClock = core.Clock()
 logging.setDefaultClock(globalClock)
@@ -77,7 +80,7 @@ timer = core.Clock()
 
 #trial handler
 trial_data = [r for r in csv.DictReader(open('UG_design_test2DF.csv','rU'))]
-trials = data.TrialHandler(trial_data[:], 1, method="sequential") #change to [] for full run
+trials = data.TrialHandler(trial_data, 1, method="sequential") #change to [] for full run
 
 stim_map = {
   '3': 'olderadult',
@@ -117,8 +120,7 @@ event.waitKeys(keyList=('space'))
 
 def do_run(trial_data, run_num):
     resp=[]
-    
-    
+
     #wait for trigger
     ready_screen.draw()
     win.flip()
@@ -127,9 +129,13 @@ def do_run(trial_data, run_num):
     
     for trial in trials:
         condition_label = stim_map[trial['Partner']]
-        imagepath = os.path.join(maindir,'Images')
+        imagepath = os.path.join(expdir,'Images')
         image = os.path.join(imagepath, "%s.png") % condition_label
         pictureStim.setImage(image)
+        
+        if resp == ['z']:
+            trials.saveAsText(fileName=log_file.format(subj_id),delim=',',dataOut='all_raw')
+            core.quit()
         
         #ITI
         logging.log(level=logging.DATA, msg='ITI') #send fixation log event
@@ -220,7 +226,7 @@ def do_run(trial_data, run_num):
             event.clearEvents()
         print "got to check 3"
 
-    trials.saveAsText(fileName=log_file.format('UG_'+ subj_id, run_num),delim = ',', dataOut='all_raw')
+    trials.saveAsText(fileName=log_file.format(subj_id),delim = ',', dataOut='all_raw')
 do_run(trial_data,1)
 
 #final ITI
