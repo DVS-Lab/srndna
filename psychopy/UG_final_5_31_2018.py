@@ -22,18 +22,25 @@ responseKeys=('2','3','z')
 
 #get subjID
 subjDlg=gui.Dlg(title="Bargaining Task")
-subjDlg.addField('Enter Subject ID: ')
+subjDlg.addField('Enter Subject ID: ') #0
+subjDlg.addField('Enter Gender (0 for male, 1 for female): ') #1
+subjDlg.addField('Enter Ethnicity (0 for Caucasian, 1 for Other): ') #2
+subjDlg.addField('Full Screen? (Enter lowercase: y or n):') #3
 subjDlg.show()
 
 if gui.OK:
     subj_id=subjDlg.data[0]
+    subj_gen=subjDlg.data[1]
+    subj_eth=subjDlg.data[2]
 else:
     sys.exit()
 
 run_data = {
     'Participant ID': subj_id,
     'Date': str(datetime.datetime.now()),
-    'Description': 'SRNDNA Pilot - UG Task'
+    'Description': 'SRNDNA Pilot - UG Task',
+    'Participant Gender': subj_gen,
+    'Participant Ethnicity': subj_eth
     }
 
 #window setup
@@ -82,11 +89,12 @@ timer = core.Clock()
 trial_data = [r for r in csv.DictReader(open('UG_design_test2DF.csv','rU'))]
 trials = data.TrialHandler(trial_data, 1, method="sequential") #change to [] for full run
 
+
 stim_map = {
-  '3': 'olderadult',
-  '2': 'youngeradult',
-  '1': 'computer',
-  }
+    '3': 'olderadultMale_C',
+    '2': 'youngadultMale_C',
+    '1': 'computer',
+    }
 
 outcome_map = {
   3: 'You have accepted the offer.\n\nYou: $%s.00\nPartner: $%s.00',
