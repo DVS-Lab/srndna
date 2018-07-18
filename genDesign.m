@@ -16,7 +16,8 @@ outfiles = fullfile(maindir,'out');
 mkdir(outfiles);
 
 for s = 1:100
-    subout = fullfile(outfiles,sprintf('sub-%03d',s));
+    ss = s + 100;
+    subout = fullfile(outfiles,sprintf('sub-%03d',ss));
     mkdir(subout);
     for r = 1:6
         
@@ -24,6 +25,7 @@ for s = 1:100
         choice_dur = 3;
         ISI_list = [repmat(2,1,18) repmat(4,1,10) repmat(6,1,6) repmat(8,1,2)];
         ISI_list = ISI_list(randperm(length(ISI_list)));
+        ISI_list = ISI_list - 1.5; %shaving 1.5 seconds to account for "WAITING" screen
         ITI_list = [repmat(2,1,18) repmat(4,1,10) repmat(6,1,5) repmat(8,1,2) 10];
         ITI_list = ITI_list(randperm(length(ITI_list)));
         
