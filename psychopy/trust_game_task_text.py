@@ -41,7 +41,7 @@ if DEBUG:
     specific_run='1'
     run = int(specific_run)
     screen='n'
-    
+
 else:
     subjDlg=gui.Dlg(title="Trust Game Task")
     subjDlg.addField('Enter Subject ID: ') #0
@@ -50,7 +50,7 @@ else:
     subjDlg.addField('Select Run (Leave empty if all!):') #3
     subjDlg.addField('Full Screen? (Enter lowercase: y or n):') #4
     subjDlg.show()
-    
+
     if gui.OK:
         subj_id=subjDlg.data[0]
         friend_id=subjDlg.data[1]
@@ -80,7 +80,7 @@ run_data = {
 #window setup
 if screen == 'y':
     useFullScreen=True
-    useDualScreen=0
+    useDualScreen=1
 if screen == 'n':
     useFullScreen=False
     useDualScreen=0
@@ -96,7 +96,7 @@ waiting = visual.TextStim(win, text="Waiting...", height=1.5)
 
 #decision screen
 shareStim =  visual.TextStim(win, pos=(0,1.5), height=1, alignHoriz='center')
-pictureStim =  visual.ImageStim(win, pos=(0,8.0))
+pictureStim =  visual.ImageStim(win, pos=(0,8.0), size=(6.65,6.65))
 resp_text_left = visual.TextStim(win, pos =(-7,-4.8), height=1, alignHoriz="center")
 resp_text_right = visual.TextStim(win, pos =(7,-4.8), height=1, alignHoriz="center")
 
@@ -110,7 +110,8 @@ outcome_map = {
     }
 
 # instruction screen #
-instruct_screen = visual.TextStim(win, text='Decide how much money to share \n- press 2 for left \n- press 3 for right', pos = (0,1), wrapWidth=20, height = 1.2)
+instruct_screen = visual.TextStim(win, text='Welcome to the Investment Game.\n\nIn this task you will interacting with a few different partners: your friend, the person you met today and the computer.\n\nOn every trial, you will play as the investor and you will begin with $8.\n\n You can choose to send a portion of that money to your partner on a trial by selecting one of the options on the screen.', pos = (0,1), wrapWidth=20, height = 1.2)
+instruct_screen2 = visual.TextStim(win, text='Press Button 2 to send the amount on the lower left of the screen and press Button 3 to send the amount on the lower right of the screen.\n\n Remember, whatever you send means your partner receives 3 times that amount; your partner will be notified of your decision.\n\n If you sent money s/he will choose to share it back evenly with you or keep it all for him/herself.', pos = (0,1), wrapWidth=20, height = 1.2)
 
 #logging
 expdir = os.getcwd()
@@ -168,29 +169,33 @@ globalClock.reset()
 curTime=globalClock.getTime()
 startTime=curTime
 if not DEBUG:
-    while timer.getTime()<instruct_dur:
-        instruct_screen.draw()
-        win.flip()
-        curTime=globalClock.getTime()
+    instruct_screen.draw()
+    win.flip()
+    event.waitKeys(keyList=('space'))
+
+    instruct_screen2.draw()
+    win.flip()
+    event.waitKeys(keyList=('space'))
 
 # main task loop
 def do_run(run, trials):
     resp = []
-    
+    fileName=log_file.format(subj_id, run)
     #wait for trigger from scanner (= key press)
-    
+
     ready_screen.draw()
     win.flip()
     event.waitKeys(keyList=('equal'))
     globalClock.reset()
-        
+    studyStart = globalClock.getTime()
+
     for trial in trials:
-        
+
         # add trial logic
         # i.e. show stimuli
         # get resp
         # add data to 'trial'
-        
+
         condition_label = stim_map[trial['Partner']]
         shareStim.setText(condition_label)
         image_label = image_map[trial['Partner']]
@@ -203,39 +208,41 @@ def do_run(run, trials):
         resp_right = trial['cRight']
         respcRight = 'Share $%s.00' % resp_right
         resp_text_right.setText(respcRight)
-        
-        if resp == ['z']:
-            trials.saveAsText(fileName=log_file.format(subj_id, run),delim=',',dataOut='all_raw')
-            core.quit()
-        
+
         #decision phase
         timer.reset()
-        
+
         event.clearEvents()
-        
+
         resp = []
         resp_val=None
         resp_onset=None
         #answer=0
         trial_onset=globalClock.getTime()
         ISI_pad = []
-        
+
         while timer.getTime() < .5:
             shareStim.draw()
             pictureStim.draw()
             win.flip()
-        
+
         while timer.getTime() < decision_dur:
             shareStim.draw()
             pictureStim.draw()
             resp_text_left.draw()
             resp_text_right.draw()
             win.flip()
-            
+
             #if answer == 0:
             resp = event.getKeys(keyList = responseKeys)
-                        
+
             if len(resp) > 0:
+                if resp[0] == 'z':
+                    os.chdir(subjdir)
+                    trials.saveAsWideText(fileName)
+                    os.chdir(expdir)
+                    win.close()
+                    core.quit()
                 resp_val = int(resp[0])
                 resp_onset = globalClock.getTime()
                 rt = resp_onset - trial_onset
@@ -259,7 +266,7 @@ def do_run(run, trials):
                 pictureStim.draw()
                 resp_text_left.draw()
                 resp_text_right.draw()
-                win.flip()  
+                win.flip()
                 core.wait(.5)
                 #win.flip()
                 break
@@ -268,8 +275,10 @@ def do_run(run, trials):
                 response = 'NA'
                 resp_onset = globalClock.getTime()
                 highlow = 'NA'
-                ISI_pad = decision_dur-0
-                
+                rt = 0
+                ISI_pad = 0
+
+
         trials.addData('onset', trial_onset)
         trials.addData('bpress', resp_val)
         trials.addData('resp', response)
@@ -277,34 +286,38 @@ def do_run(run, trials):
         trials.addData('highlow', highlow)
         trials.addData('rt', rt)
         trials.addData('ISIpad', ISI_pad)
-        
+
         #reset rating number and amount
         resp_text_left.setColor('#FFFFFF')
         resp_text_right.setColor('#FFFFFF')
         resp_text_left.setText()
         resp_text_right.setText()
-        
+
         #ISI
         #logging.log(level=logging.DATA, msg='ISI') #send fixation log event
         ISI_onset=globalClock.getTime()
         trials.addData('ISI_onset', ISI_onset)
         timer.reset()
         isi_for_trial = float(trial['ISI'])
-        
-        if timer.getTime() < (isi_for_trial+ISI_pad):
-            waiting.draw()
-            win.flip()
-        else:
-            fixation.draw()
-            core.wait(isi_for_trial)
-            win.flip()
-            
+
+        #Wait screen = (decision_dur - rt) + 1.75
+        wait_dur = (trial_onset + decision_dur + 1.75)
+
+        waiting.draw()
+        win.flip()
+        core.wait(wait_dur - globalClock.getTime())
+
+        #Fixation ISI
+        fixation.draw()
+        win.flip()
+        core.wait((isi_for_trial + wait_dur) - globalClock.getTime())
+
         #outcome phase
         partner_resp=float(trial['Reciprocate'])
-        
+
         if len(resp) > 0:
             if (int(trial['cLeft']) == 0 and resp_val == 2) or (int(trial['cRight']) == 0 and resp_val == 3):
-                core.wait(.5)
+                #core.wait(0.5)
                 outcome_onset = 'NA'
             else:
                 outcome_txt = outcome_map[2][partner_resp].format(condition_label)
@@ -320,21 +333,33 @@ def do_run(run, trials):
             win.flip()
             core.wait(2)
             outcome_onset='NA'
-        
+
         trials.addData('outcome_onset', outcome_onset)
         trial_duration=globalClock.getTime()
         trials.addData('duration', trial_duration-trial_onset)
-        
+
         #ITI
         #logging.log(level=logging.DATA, msg='ITI') #send fixation log event
         timer.reset()
         iti_for_trial = float(trial['ITI'])
+        iti_dur = (wait_dur + isi_for_trial + iti_for_trial + 2)
         ITI_onset = globalClock.getTime()
-        while timer.getTime() < iti_for_trial:
-            fixation.draw()
-            win.flip()
+
+        fixation.draw()
+        win.flip()
+        core.wait(iti_dur - globalClock.getTime())
         trials.addData('ITI_onset', ITI_onset)
-    trials.saveAsText(fileName=log_file.format(subj_id, run),delim=',',dataOut='all_raw',appendFile=True)
+#    if globalClock.getTime() < 450:
+#        endTime = (450 - globalClock.getTime())
+#    else:
+#        endTime = 10
+#    core.wait(endTime)
+
+    os.chdir(subjdir)
+    trials.saveAsWideText(fileName)
+    os.chdir(expdir)
+    print globalClock.getTime()
+    #trials.saveAsText(fileName=log_file.format(subj_id, run),delim=',',dataOut='all_raw',appendFile=True)
 #### just do specific run if needed
 
 if len (specific_run)==1:

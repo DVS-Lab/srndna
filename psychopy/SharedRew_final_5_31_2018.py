@@ -18,7 +18,7 @@ DEBUG = False
 
 frame_rate=1
 decision_dur=2.5
-outcome_dur=0.75
+outcome_dur=1
 
 responseKeys=('2','3','z')
 
@@ -59,7 +59,7 @@ ready_screen = visual.TextStim(win, text="Please wait for the block of trials to
 nameStim = visual.TextStim(win=win,font='Arial',pos=(0, 6.0), height=1, color='white', colorSpace='rgb', opacity=1,depth=-1.0);
 cardStim = visual.Rect(win=win, name='polygon', width=(8.0,8.0)[0], height=(10.0,10.0)[1], ori=0, pos=(0, 0),lineWidth=5, lineColor=[1,1,1], lineColorSpace='rgb',fillColor=[0,0,0], fillColorSpace='rgb',opacity=1, depth=0.0, interpolate=True)
 question = visual.TextStim(win=win, name='text',text='?',font='Arial',pos=(0, 0), height=1, wrapWidth=None, ori=0, color='white', colorSpace='rgb', opacity=1,depth=-1.0);
-pictureStim =  visual.ImageStim(win, pos=(0,9.0))
+pictureStim =  visual.ImageStim(win, pos=(0,9.0), size=(6.65,6.65))
 
 #outcome screen
 outcome_cardStim = visual.Rect(win=win, name='polygon', width=(8.0,8.0)[0], height=(10.0,10.0)[1], ori=0, pos=(0, 0),lineWidth=5, lineColor=[1,1,1], lineColorSpace='rgb',fillColor=[0,0,0], fillColorSpace='rgb',opacity=1, depth=0.0, interpolate=True)
@@ -110,22 +110,6 @@ outcome_map = {
   '1': 'punish',
   }
 
-'''
-#parsing out file data
-blocks=[]
-runs=[]
-for run in range(2):
-    run_data=[]
-    for block in range(12):==2=====
-        block_data = []
-        for t in range(8):
-            sample = random.sample(range(len(trial_data)),1)[0]
-            run_data.append(trial_data.pop(sample))
-            runs.append(run_data)
-            blocks.append(block_data)
-         
-'''
-
 #checkpoint
 print "got to check 2"
 
@@ -146,14 +130,15 @@ event.waitKeys(keyList=('space'))
 
 def do_run(trial_data, run_num):
     resp=[]
-    
+    fileName=log_file.format(subj_id)
+
     #wait for trigger
     ready_screen.draw()
     win.flip()
     event.waitKeys(keyList=('equal'))
     globalClock.reset()
-    
-    
+
+
     for trial in trials:
         condition_label = stim_map[trial['Partner']]
         image_label = image_map[trial['Partner']]
@@ -161,8 +146,8 @@ def do_run(trial_data, run_num):
         image = os.path.join(imagepath, "%s.png") % image_label
         nameStim.setText(condition_label)
         pictureStim.setImage(image)
-        
-        
+
+
         #ITI
         logging.log(level=logging.DATA, msg='ITI') #send fixation log event
         timer.reset()
@@ -171,59 +156,60 @@ def do_run(trial_data, run_num):
         while timer.getTime() < iti_for_trial:
             fixation.draw()
             win.flip()
-            
-        #decision phase   
+
+        #decision phase
         timer.reset()
         event.clearEvents()
-        decision_onset = globalClock.getTime()
 
+        resp=[]
         resp_val=None
         resp_onset=None
-        
+
+        trial_onset = globalClock.getTime()
+
         while timer.getTime() < decision_dur:
             cardStim.draw()
             question.draw()
             pictureStim.draw()
             nameStim.draw()
             win.flip()
-           
+
         resp = event.getKeys(keyList = responseKeys)
-        resp_onset = globalClock.getTime()
-        
-        if resp == ['z']:
-            trials.saveAsText(fileName=log_file.format(subj_id),delim=',',dataOut='all_raw')
-            core.quit()
 
         if len(resp)>0:
+            if resp[0] == 'z':
+                #trials.saveAsText(fileName=log_file.format(subj_id),delim=',',dataOut='all_raw')
+                os.chdir(subjdir)
+                trials.saveAsWideText(fileName)
+                os.chdir(expdir)
+                win.close()
+                core.quit()
             resp_val = int(resp[0])
+            resp_onset = globalClock.getTime()
+            rt = resp_onset - trial_onset
         else:
             resp_val = 0
-            
+            resp_onset = 'NA'
+            #rt = 'NA'
+
         trials.addData('resp', int(resp_val))
         trials.addData('resp_onset', resp_onset)
-        trials.addData('decision', decision_onset)
+        trials.addData('onset', trial_onset)
         trials.addData('ITIonset', ITI_onset)
-        
-#ISI
-#this section of code was intended to move to a fixation if subjects respond before 2 seconds is up, but currently is not functional
-        #if resp_val > 0 and timer.getTime() < decision_dur:
-        #    logging.log(level=logging.DATA, msg='ISI') #send ISI log event
-        #    isi_for_trial = float(trial['ISI'])
-        #    while timer.getTime() < decision_dur:
-        #       fixation.draw()
-        #       win.flip()
+        trials.addData('rt', rt)
+
 
 #outcome phase
         timer.reset()
         #win.flip()
         outcome_onset = globalClock.getTime()
-        
+
         while timer.getTime() < outcome_dur:
             outcome_cardStim.draw()
             pictureStim.draw()
             nameStim.draw()
             #win.flip()
-    
+
             if trial['Feedback'] == '3' and resp_val == 2:
                 outcome_txt = int(random.randint(1,4))
                 outcome_moneyTxt= 'h'
@@ -254,12 +240,12 @@ def do_run(trial_data, run_num):
                 outcome_moneyTxt= 'i'
                 outcome_color='red'
                 trials.addData('outcome_val', int(outcome_txt))
-            elif resp_val == 0: 
+            elif resp_val == 0:
                 outcome_txt='#'
                 outcome_moneyTxt = ''
                 outcome_color='white'
-                
-            
+
+
             #print outcome_txt
             outcome_text.setText(outcome_txt)
             outcome_money.setText(outcome_moneyTxt)
@@ -267,19 +253,28 @@ def do_run(trial_data, run_num):
             outcome_text.draw()
             outcome_money.draw()
             win.flip()
-            core.wait(.75)
+            core.wait(outcome_dur)
             #trials.addData('outcome_val', outcome_txt)
             trials.addData('outcome_onset', outcome_onset)
-            
+
             outcome_offset = globalClock.getTime()
             trials.addData('outcome_offset', outcome_offset)
 
-            duration = outcome_offset - decision_onset
+            duration = outcome_offset - trial_onset
             trials.addData('trialDuration', duration)
             event.clearEvents()
         print "got to check 3"
 
-    trials.saveAsText(fileName=log_file.format(subj_id),delim = ',',dataOut='all_raw')
+    os.chdir(subjdir)
+    trials.saveAsWideText(fileName)
+    os.chdir(expdir)
+    if globalClock.getTime() < 850:
+        endTime = (850 - globalClock.getTime())
+    else:
+        endTime = 10
+    core.wait(endTime)
+    print globalClock.getTime()
+    #trials.saveAsText(fileName=log_file.format(subj_id),delim = ',',dataOut='all_raw')
 do_run(trial_data,1)
 
 #final ITI
