@@ -189,23 +189,23 @@ def do_run(trial_data, run_num):
                 resp_onset = globalClock.getTime()
                 if resp_val == 2:
                     resp_text_reject.setColor('red')
+                    core.wait(.25)
                 if resp_val == 3:
                     resp_text_accept.setColor('red')
+                    core.wait(.25)
                 trials.addData('resp', resp_val)
                 trials.addData('resp_onset', resp_onset)
 
-            else:
-                resp_val='NA'
+                if resp == 0:
+                    resp_val='NA'
+                    print "got here"
+                    outcome_txt = outcome_map[resp_val]
+                    outcome_stim.setText(outcome_txt)
+                    #win.flip()
+                    outcome_stim.draw()
+                    core.wait(.25)
+                    trials.addData('resp', resp_val)
 
-            '''
-            if resp_val=='NA':
-                outcome_txt = outcome_map[resp_val]
-                outcome_stim.setText(outcome_txt)
-                win.flip()
-                outcome_stim.draw()
-                core.wait(.25)
-            trials.addData('resp', resp_val)
-            '''
 
         #reset rating number color
         resp_text_accept.setColor('#FFFFFF')
