@@ -17,6 +17,8 @@ useDualScreen=1
 DEBUG = False
 
 frame_rate=1
+initial_fixation_dur = 4 
+final_fixation_dur = 10
 decision_dur=2.5
 outcome_dur=1
 
@@ -137,6 +139,11 @@ def do_run(trial_data, run_num):
     win.flip()
     event.waitKeys(keyList=('equal'))
     globalClock.reset()
+    studyStart = globalClock.getTime()
+    #Initial Fixation screen
+    fixation.draw()
+    win.flip()
+    core.wait(initial_fixation_dur)
 
 
     for trial in trials:
@@ -264,7 +271,12 @@ def do_run(trial_data, run_num):
             trials.addData('trialDuration', duration)
             event.clearEvents()
         print "got to check 3"
-
+    
+    # Final Fixation screen after trials completed
+    fixation.draw()
+    win.flip()
+    core.wait(final_fixation_dur)
+    
     os.chdir(subjdir)
     trials.saveAsWideText(fileName)
     os.chdir(expdir)
