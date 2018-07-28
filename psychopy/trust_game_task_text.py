@@ -106,7 +106,7 @@ outcome_stim = visual.TextStim(win, text='')
 outcome_map = {
     1: 'You have chosen to keep the money',
     2: {0:'{} has chosen to share $0', 1:'{} has chosen to share money'},
-    'NA': 'You have three seconds to choose'
+    999: 'You have three seconds to choose'
     }
 
 # instruction screen #
