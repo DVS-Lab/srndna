@@ -130,13 +130,29 @@ if not os.path.isfile(imgdir):
 globalClock = core.Clock()
 timer = core.Clock()
 
+#Get proper sub-xxx id, note that subject folder is named ex: sub-101 but files in folder have sub-001 in .csv name
+if int(subj_id) < 110: 
+    temp_adjusted_subj_id = int(subj_id) - 100 # Apply offset ex: 101 to 1
+    adjusted_subj_id = '00' + str(temp_adjusted_subj_id) # add missing 0s ex: 001 instead of just 1
+elif int(subj_id) < 200:
+    temp_adjusted_subj_id = int(subj_id) - 100 # Apply offset ex: 110 to 10
+    adjusted_subj_id = '0' + str(temp_adjusted_subj_id) # add missing 0s ex: 010 insead of just 10
+else:
+    temp_adjusted_subj_id = int(subj_id) - 100
+    adjusted_subj_id = str(temp_adjusted_subj_id)
 #read in stimuli
-trial_data_1 = [r for r in csv.DictReader(open('params/run-01_design.csv','rU'))]
-trial_data_2 = [r for r in csv.DictReader(open('params/run-02_design.csv','rU'))]
-trial_data_3 = [r for r in csv.DictReader(open('params/run-03_design.csv','rU'))]
-trial_data_4 = [r for r in csv.DictReader(open('params/run-04_design.csv','rU'))]
-trial_data_5 = [r for r in csv.DictReader(open('params/run-05_design.csv','rU'))]
-trial_data_6 = [r for r in csv.DictReader(open('params/run-06_design.csv','rU'))]
+trial_data_1 = [r for r in csv.DictReader(open('params/TG_designs/sub-' + subj_id + '/sub-'
+    + adjusted_subj_id + '_run-01_design.csv','rU'))]
+trial_data_2  = [r for r in csv.DictReader(open('params/TG_designs/sub-' + subj_id + '/sub-'
+    + adjusted_subj_id + '_run-02_design.csv','rU'))]
+trial_data_3  = [r for r in csv.DictReader(open('params/TG_designs/sub-' + subj_id + '/sub-' 
+    + adjusted_subj_id + '_run-03_design.csv','rU'))]
+trial_data_4  = [r for r in csv.DictReader(open('params/TG_designs/sub-' + subj_id + '/sub-' 
+    + adjusted_subj_id + '_run-04_design.csv','rU'))]
+trial_data_5  = [r for r in csv.DictReader(open('params/TG_designs/sub-' + subj_id + '/sub-' 
+    + adjusted_subj_id + '_run-05_design.csv','rU'))]
+trial_data_6  = [r for r in csv.DictReader(open('params/TG_designs/sub-' + subj_id + '/sub-' 
+    + adjusted_subj_id + '_run-06_design.csv','rU'))]
 
 #set up trial handlers
 trials_run1 = data.TrialHandler(trial_data_1[:], 1, method="sequential") #change to [] for full run
