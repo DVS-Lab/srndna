@@ -152,7 +152,7 @@ elif subj_gen==1 & subj_eth==1 & subj_age <= 35:
 outcome_map = {
   #3: 'You have accepted the offer.\n\nYou: $%s.00\nPartner: $%s.00',
   #2: 'You have rejected the offer.\n\nYou: $0.00\nPartner: $0.00',
-  '999': 'You have 3 seconds to respond.'
+  999: 'You have 3 seconds to respond.'
   }
 
 #checkpoint
