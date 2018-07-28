@@ -12,10 +12,10 @@ ans =
 %}
 
 maindir = pwd;
-outfiles = fullfile(maindir,'out');
+outfiles = fullfile(maindir,'psychopy','params','TG_designs');
 mkdir(outfiles);
 
-for s = 1:100
+for s = 1:199
     ss = s + 100;
     subout = fullfile(outfiles,sprintf('sub-%03d',ss));
     mkdir(subout);
@@ -37,7 +37,7 @@ for s = 1:100
             choice_pairs ones(6,1)*1 ones(6,1);
             choice_pairs ones(6,1)*1 zeros(6,1)];
         
-        fname = fullfile(subout,sprintf('sub-%03d_run-%02d_design.csv',s,r));
+        fname = fullfile(subout,sprintf('sub-%03d_run-%02d_design.csv',ss,r));
         
         fid = fopen(fname,'w');
         fprintf(fid,'Trial,cLeft,cRight,Partner,Reciprocate,ISI,ITI\n');
