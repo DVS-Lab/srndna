@@ -27,7 +27,8 @@ import random
 DEBUG = False
 
 frame_rate=1
-decision_dur=3
+initial_fixation_dur = 4 
+final_fixation_dur = 10
 instruct_dur=3
 outcome_dur=1
 
@@ -202,8 +203,14 @@ def do_run(run, trials):
     ready_screen.draw()
     win.flip()
     event.waitKeys(keyList=('equal'))
+    
     globalClock.reset()
     studyStart = globalClock.getTime()
+    
+    # Initial Fixation screen
+    fixation.draw()
+    win.flip()
+    core.wait(initial_fixation_dur)
 
     for trial in trials:
 
@@ -287,10 +294,10 @@ def do_run(run, trials):
                 #win.flip()
                 break
             else:
-                resp_val = '999'
-                response = '999'
+                resp_val = 999
+                response = 999
                 resp_onset = globalClock.getTime()
-                highlow = '999'
+                highlow = 999
                 rt = 0
                 ISI_pad = 0
 
@@ -334,7 +341,7 @@ def do_run(run, trials):
         if len(resp) > 0:
             if (int(trial['cLeft']) == 0 and resp_val == 2) or (int(trial['cRight']) == 0 and resp_val == 3):
                 #core.wait(0.5)
-                outcome_onset = '999'
+                outcome_onset = 999
             else:
                 outcome_txt = outcome_map[2][partner_resp].format(condition_label)
                 outcome_stim.setText(outcome_txt)
@@ -348,7 +355,7 @@ def do_run(run, trials):
             outcome_stim.draw()
             win.flip()
             core.wait(2)
-            outcome_onset='999'
+            outcome_onset=999
 
         trials.addData('outcome_onset', outcome_onset)
         trial_duration=globalClock.getTime()
@@ -370,6 +377,11 @@ def do_run(run, trials):
 #    else:
 #        endTime = 10
 #    core.wait(endTime)
+    
+    # Final Fixation screen after trials completed
+    fixation.draw()
+    win.flip()
+    core.wait(final_fixation_dur)
 
     os.chdir(subjdir)
     trials.saveAsWideText(fileName)
