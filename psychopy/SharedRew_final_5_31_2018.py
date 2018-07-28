@@ -189,7 +189,7 @@ def do_run(trial_data, run_num):
             rt = resp_onset - trial_onset
         else:
             resp_val = 0
-            resp_onset = 'NA'
+            resp_onset = '999'
             #rt = 'NA'
 
         trials.addData('resp', int(resp_val))
