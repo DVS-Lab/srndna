@@ -271,10 +271,10 @@ def do_run(run, trials):
                 #win.flip()
                 break
             else:
-                resp_val = 'NA'
-                response = 'NA'
+                resp_val = '999'
+                response = '999'
                 resp_onset = globalClock.getTime()
-                highlow = 'NA'
+                highlow = '999'
                 rt = 0
                 ISI_pad = 0
 
@@ -318,7 +318,7 @@ def do_run(run, trials):
         if len(resp) > 0:
             if (int(trial['cLeft']) == 0 and resp_val == 2) or (int(trial['cRight']) == 0 and resp_val == 3):
                 #core.wait(0.5)
-                outcome_onset = 'NA'
+                outcome_onset = '999'
             else:
                 outcome_txt = outcome_map[2][partner_resp].format(condition_label)
                 outcome_stim.setText(outcome_txt)
@@ -332,7 +332,7 @@ def do_run(run, trials):
             outcome_stim.draw()
             win.flip()
             core.wait(2)
-            outcome_onset='NA'
+            outcome_onset='999'
 
         trials.addData('outcome_onset', outcome_onset)
         trial_duration=globalClock.getTime()
