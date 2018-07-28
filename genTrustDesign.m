@@ -15,7 +15,7 @@ maindir = pwd;
 outfiles = fullfile(maindir,'psychopy','params','TG_designs');
 mkdir(outfiles);
 
-for s = 1:199
+for s = 899
     ss = s + 100;
     subout = fullfile(outfiles,sprintf('sub-%03d',ss));
     mkdir(subout);
