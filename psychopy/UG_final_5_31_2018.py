@@ -14,6 +14,8 @@ useDualScreen=1
 DEBUG = False
 
 frame_rate=1
+initial_fixation_dur = 4 
+final_fixation_dur = 10
 decision_dur=3
 outcome_dur=0.25
 fileSuffix = 'UG'
@@ -178,7 +180,12 @@ def do_run(trial_data, run_num):
     win.flip()
     event.waitKeys(keyList=('equal'))
     globalClock.reset()
-
+    studyStart = globalClock.getTime()
+    #Initial Fixation screen
+    fixation.draw()
+    win.flip()
+    core.wait(initial_fixation_dur)
+    
     for trial in trials:
         condition_label = stim_map[trial['Partner']]
         imagepath = os.path.join(expdir,'Images')
@@ -298,7 +305,11 @@ def do_run(trial_data, run_num):
         event.clearEvents()
         print "got to check 3"
 
-
+    # Final Fixation screen after trials completed
+    fixation.draw()
+    win.flip()
+    core.wait(final_fixation_dur)
+    
     #trials.saveAsText(fileName=log_file.format(subj_id),delim=',',dataOut='all_raw')
     os.chdir(subjdir)
     trials.saveAsWideText(fileName)
