@@ -260,9 +260,9 @@ def do_run(run, trials):
 
 
         if resp_val==999:
-            outcome_txt = outcome_map[resp_val]
-            outcome_stim.setText(outcome_txt)
-            outcome_stim.draw()
+            #outcome_txt = outcome_map[resp_val]
+            #outcome_stim.setText(outcome_txt)
+            #outcome_stim.draw()
             core.wait(.25)
             trials.addData('resp', resp_val)
             #win.flip()
