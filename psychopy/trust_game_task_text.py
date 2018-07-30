@@ -93,7 +93,7 @@ win = visual.Window([800,600], monitor="testMonitor", units="deg", fullscr=useFu
 
 #define stimulus
 fixation = visual.TextStim(win, text="+", height=2)
-ready_screen = visual.TextStim(win, text="Please wait for the block of trials to begin. \n\nRemember to keep your head still!", height=1.5)
+ready_screen = visual.TextStim(win, text="Please wait for this round of the game to begin. \n\nRemember to keep your head still!", height=1.5)
 waiting = visual.TextStim(win, text="Waiting...", height=1.5)
 
 #decision screen
@@ -112,8 +112,11 @@ outcome_map = {
     }
 
 # instruction screen #
-instruct_screen = visual.TextStim(win, text='Welcome to the Investment Game.\n\nIn this task you will interacting with a few different partners: your friend, the person you met today and the computer.\n\nOn every trial, you will play as the investor and you will begin with $8.\n\n You can choose to send a portion of that money to your partner on a trial by selecting one of the options on the screen.', pos = (0,1), wrapWidth=20, height = 1.2)
-instruct_screen2 = visual.TextStim(win, text='Press Button 2 to send the amount on the lower left of the screen and press Button 3 to send the amount on the lower right of the screen.\n\n Remember, whatever you send means your partner receives 3 times that amount; your partner will be notified of your decision.\n\n If you sent money s/he will choose to share it back evenly with you or keep it all for him/herself.', pos = (0,1), wrapWidth=20, height = 1.2)
+instruct_screen = visual.TextStim(win, text='Welcome to the Investment Game!\nYou have been assigned the role of investor.\n\nIn this game you will interacting with a few different partners: your friend, the person you met today, and the computer.\n\nOn every trial, you will begin with $8.\n\n You can choose to send a portion of that money to your partner on a trial by selecting one of the options on the screen.', pos = (0,1), wrapWidth=20, height = 1.2)
+instruct_screen2 = visual.TextStim(win, text='Press Button 2(index finger) to send the amount on the lower left of the screen. Press Button 3(middle finger) to send the amount on the lower right of the screen.\n\n Remember, whatever you send means your partner receives 3 times that amount; your partner will be notified of your decision.\n\n If you sent money s/he will choose to share it back evenly with you or keep it all for him/herself.', pos = (0,1), wrapWidth=20, height = 1.2)
+
+#exit
+exit_screen = visual.TextStim(win, text='Thanks for playing! Please wait for instructions from the researcher.', pos = (0,1), wrapWidth=20, height = 1.2)
 
 #logging
 expdir = os.getcwd()
@@ -416,3 +419,8 @@ if len (specific_run)==1:
 else:
     for run, trials in enumerate([trials_run1, trials_run2, trials_run3, trials_run4, trials_run5, trials_run6]):
         do_run(run, trials)
+
+# Exit
+exit_screen.draw()
+win.flip()
+event.waitKeys()
