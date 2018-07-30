@@ -17,7 +17,7 @@ useDualScreen=1
 DEBUG = False
 
 frame_rate=1
-initial_fixation_dur = 4 
+initial_fixation_dur = 4
 final_fixation_dur = 10
 decision_dur=2.5
 outcome_dur=1
@@ -35,6 +35,7 @@ if gui.OK:
     subj_id=subjDlg.data[0]
     friend_id=subjDlg.data[1]
     stranger_id=subjDlg.data[2]
+    run = range(0,1)
 
 else:
     sys.exit()
@@ -58,18 +59,18 @@ fixation = visual.TextStim(win, text="+", height=2)
 ready_screen = visual.TextStim(win, text="Please wait for the block of trials to begin. \n\nRemember to keep your head still!", height=1.5)
 
 #decision screen
-nameStim = visual.TextStim(win=win,font='Arial',pos=(0, 6.0), height=1, color='white', colorSpace='rgb', opacity=1,depth=-1.0);
-cardStim = visual.Rect(win=win, name='polygon', width=(8.0,8.0)[0], height=(10.0,10.0)[1], ori=0, pos=(0, 0),lineWidth=5, lineColor=[1,1,1], lineColorSpace='rgb',fillColor=[0,0,0], fillColorSpace='rgb',opacity=1, depth=0.0, interpolate=True)
+nameStim = visual.TextStim(win=win,font='Arial',pos=(0, 5.5), height=1, color='white', colorSpace='rgb', opacity=1,depth=-1.0);
+cardStim = visual.Rect(win=win, name='polygon', width=(7.0,7.0)[0], height=(9.0,9.0)[1], ori=0, pos=(0, 0),lineWidth=5, lineColor=[1,1,1], lineColorSpace='rgb',fillColor=[0,0,0], fillColorSpace='rgb',opacity=1, depth=0.0, interpolate=True)
 question = visual.TextStim(win=win, name='text',text='?',font='Arial',pos=(0, 0), height=1, wrapWidth=None, ori=0, color='white', colorSpace='rgb', opacity=1,depth=-1.0);
-pictureStim =  visual.ImageStim(win, pos=(0,9.0), size=(6.65,6.65))
+pictureStim =  visual.ImageStim(win, pos=(0,9.5), size=(6.65,6.65))
 
 #outcome screen
-outcome_cardStim = visual.Rect(win=win, name='polygon', width=(8.0,8.0)[0], height=(10.0,10.0)[1], ori=0, pos=(0, 0),lineWidth=5, lineColor=[1,1,1], lineColorSpace='rgb',fillColor=[0,0,0], fillColorSpace='rgb',opacity=1, depth=0.0, interpolate=True)
+outcome_cardStim = visual.Rect(win=win, name='polygon', width=(7.0,7.0)[0], height=(9.0,9.0)[1], ori=0, pos=(0, 0),lineWidth=5, lineColor=[1,1,1], lineColorSpace='rgb',fillColor=[0,0,0], fillColorSpace='rgb',opacity=1, depth=0.0, interpolate=True)
 outcome_text = visual.TextStim(win=win, name='text',text='',font='Arial',pos=(0, 0), height=2, wrapWidth=None, ori=0, color='white', colorSpace='rgb', opacity=1,depth=-1.0);
 outcome_money = visual.TextStim(win=win, name='text',text='',font='Wingdings 3',pos=(0, 2.0), height=2, wrapWidth=None, ori=0, colorSpace='rgb', opacity=1,depth=-1.0);
 
 #instructions
-instruct_screen = visual.TextStim(win, text='Welcome to the experiment.\n\nIn this task you will be guessing the numerical value of a card.\n\nPress Button 2 to guess low and press Button 3 to guess high.\n\nCorrect responses will result in a monetary gain of $4, and incorrect responses will result in a monetary loss of $2.00.\n\nRemember, you will be sharing monetary outcomes on each trial with the partner displayed at the top of the screen.', pos = (0,1), wrapWidth=20, height = 1.2)
+instruct_screen = visual.TextStim(win, text='Welcome to the experiment.\n\nIn this task you will be guessing the numerical value of a card.\n\nPress Button 2 to guess low and press Button 3 to guess high.\n\nCorrect responses will result in a monetary gain of $10, and incorrect responses will result in a monetary loss of $5.\n\nRemember, you will be sharing monetary outcomes on each trial with the partner displayed at the top of the screen.', pos = (0,1), wrapWidth=20, height = 1.2)
 
 #exit
 exit_screen = visual.TextStim(win, text='Thanks for playing! Please wait for instructions from the experimenter.', pos = (0,1), wrapWidth=20, height = 1.2)
@@ -87,8 +88,16 @@ logging.setDefaultClock(globalClock)
 timer = core.Clock()
 
 #trial handler
-trial_data = [r for r in csv.DictReader(open('SharedReward_design.csv','rU'))]
-trials = data.TrialHandler(trial_data[:], 1, method="sequential") #change to [] for full run
+trial_data_1 = [r for r in csv.DictReader(open('params/SR_blocks/sub-' + subj_id + '/sub-'
+    + subj_id + '_run-01_design.csv','rU'))]
+trial_data_2  = [r for r in csv.DictReader(open('params/SR_blocks/sub-' + subj_id + '/sub-'
+    + subj_id + '_run-02_design.csv','rU'))]
+
+#trial_data = [r for r in csv.DictReader(open('SharedReward_design.csv','rU'))]
+#trials = data.TrialHandler(trial_data[:], 1, method="sequential") #change to [] for full run
+
+trials_run1 = data.TrialHandler(trial_data_1[:], 1, method="sequential") #change to [] for full run
+trials_run2 = data.TrialHandler(trial_data_2[:], 1, method="sequential") #change to [] for full run
 
 #set partner names
 # 3 = friend, 2 = confederate, 1 = computer
@@ -115,6 +124,7 @@ outcome_map = {
 #checkpoint
 print "got to check 2"
 
+'''
 runs=[]
 for run in range(1):
     run_data = []
@@ -122,6 +132,7 @@ for run in range(1):
         sample = random.sample(range(len(trial_data)),1)[0]
         run_data.append(trial_data.pop(sample))
     runs.append(run_data)
+'''
 
 # main task loop
 # Instructions
@@ -130,9 +141,9 @@ win.flip()
 event.waitKeys(keyList=('space'))
 
 
-def do_run(trial_data, run_num):
+def do_run(run, trials):
     resp=[]
-    fileName=log_file.format(subj_id)
+    fileName=log_file.format(subj_id,run)
 
     #wait for trigger
     ready_screen.draw()
@@ -140,6 +151,7 @@ def do_run(trial_data, run_num):
     event.waitKeys(keyList=('equal'))
     globalClock.reset()
     studyStart = globalClock.getTime()
+
     #Initial Fixation screen
     fixation.draw()
     win.flip()
@@ -197,7 +209,8 @@ def do_run(trial_data, run_num):
         else:
             resp_val = 0
             resp_onset = '999'
-            #rt = 'NA'
+            rt = '999'
+
 
         trials.addData('resp', int(resp_val))
         trials.addData('resp_onset', resp_onset)
@@ -251,6 +264,8 @@ def do_run(trial_data, run_num):
                 outcome_txt='#'
                 outcome_moneyTxt = ''
                 outcome_color='white'
+                outcome_value='999'
+                trials.addData('outcome_val',int(outcome_value))
 
 
             #print outcome_txt
@@ -271,28 +286,30 @@ def do_run(trial_data, run_num):
             trials.addData('trialDuration', duration)
             event.clearEvents()
         print "got to check 3"
-    
+
     # Final Fixation screen after trials completed
     fixation.draw()
     win.flip()
     core.wait(final_fixation_dur)
-    
+
     os.chdir(subjdir)
     trials.saveAsWideText(fileName)
     os.chdir(expdir)
-    if globalClock.getTime() < 850:
-        endTime = (850 - globalClock.getTime())
-    else:
-        endTime = 10
-    core.wait(endTime)
+    #if globalClock.getTime() < 850:
+    #    endTime = (850 - globalClock.getTime())
+    #else:
+    #    endTime = 10
+    #core.wait(endTime)
     print globalClock.getTime()
     #trials.saveAsText(fileName=log_file.format(subj_id),delim = ',',dataOut='all_raw')
-do_run(trial_data,1)
+
+for run, trials in enumerate([trials_run1, trials_run2]):
+    do_run(run, trials)
 
 #final ITI
-fixation.draw()
-win.flip()
-core.wait(12)
+#fixation.draw()
+#win.flip()
+#core.wait(12)
 
 # Exit
 exit_screen.draw()
