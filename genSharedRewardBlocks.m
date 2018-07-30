@@ -35,14 +35,17 @@ mkdir(outfiles);
 for s = [000 999]
     for r = [1 2]
         
-        % 12 blocks
-        pre_block_ITI = [repmat(8,1,6) repmat(10,1,3) repmat(12,1,3)]; % some ITI jitter to estimate Fair/Unfair separately (HCP is fixed at 15 s)
+        % 9 blocks per run (2 runs)
+        pre_block_ITI = [repmat(8,1,3) repmat(10,1,3) repmat(12,1,3)]; % some ITI jitter to estimate Fair/Unfair separately (HCP is fixed at 15 s)
         pre_block_ITI = pre_block_ITI(randperm(length(pre_block_ITI)));
         % this occurrs every 8 trials, starting with trial 1. it should come first
         % need to add at least 12 s at the end of the experiment to catch last HRF
         
-        
-        block_types = [1:6 1:6]; %will name these below. 3 partners * 2 outcomes
+        if r == 1
+            block_types = [1:6 1 2 3];
+        else
+            block_types = [1:6 4 5 6];
+        end
         block_types = block_types(randperm(length(block_types)));
         keep_checking = 1;
         while keep_checking
