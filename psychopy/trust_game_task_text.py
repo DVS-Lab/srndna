@@ -27,10 +27,11 @@ import random
 DEBUG = False
 
 frame_rate=1
-initial_fixation_dur = 4 
+initial_fixation_dur = 4
 final_fixation_dur = 10
 instruct_dur=3
 outcome_dur=1
+decision_dur=3
 
 responseKeys=('2','3','z')
 
@@ -132,7 +133,9 @@ globalClock = core.Clock()
 timer = core.Clock()
 
 #Get proper sub-xxx id, note that subject folder is named ex: sub-101 but files in folder have sub-001 in .csv name
-if int(subj_id) < 110: 
+'''
+if int(subj_id) < 110:
+    temp_adjusted_subj_id = int(subj_id) - 100 # Apply offset ex: 101 to 1
     temp_adjusted_subj_id = int(subj_id) - 100 # Apply offset ex: 101 to 1
     adjusted_subj_id = '00' + str(temp_adjusted_subj_id) # add missing 0s ex: 001 instead of just 1
 elif int(subj_id) < 200:
@@ -141,19 +144,20 @@ elif int(subj_id) < 200:
 else:
     temp_adjusted_subj_id = int(subj_id) - 100
     adjusted_subj_id = str(temp_adjusted_subj_id)
+'''
 #read in stimuli
 trial_data_1 = [r for r in csv.DictReader(open('params/TG_designs/sub-' + subj_id + '/sub-'
-    + adjusted_subj_id + '_run-01_design.csv','rU'))]
+    + subj_id + '_run-01_design.csv','rU'))]
 trial_data_2  = [r for r in csv.DictReader(open('params/TG_designs/sub-' + subj_id + '/sub-'
-    + adjusted_subj_id + '_run-02_design.csv','rU'))]
-trial_data_3  = [r for r in csv.DictReader(open('params/TG_designs/sub-' + subj_id + '/sub-' 
-    + adjusted_subj_id + '_run-03_design.csv','rU'))]
-trial_data_4  = [r for r in csv.DictReader(open('params/TG_designs/sub-' + subj_id + '/sub-' 
-    + adjusted_subj_id + '_run-04_design.csv','rU'))]
-trial_data_5  = [r for r in csv.DictReader(open('params/TG_designs/sub-' + subj_id + '/sub-' 
-    + adjusted_subj_id + '_run-05_design.csv','rU'))]
-trial_data_6  = [r for r in csv.DictReader(open('params/TG_designs/sub-' + subj_id + '/sub-' 
-    + adjusted_subj_id + '_run-06_design.csv','rU'))]
+    + subj_id + '_run-02_design.csv','rU'))]
+trial_data_3  = [r for r in csv.DictReader(open('params/TG_designs/sub-' + subj_id + '/sub-'
+    + subj_id + '_run-03_design.csv','rU'))]
+trial_data_4  = [r for r in csv.DictReader(open('params/TG_designs/sub-' + subj_id + '/sub-'
+    + subj_id + '_run-04_design.csv','rU'))]
+trial_data_5  = [r for r in csv.DictReader(open('params/TG_designs/sub-' + subj_id + '/sub-'
+    + subj_id + '_run-05_design.csv','rU'))]
+trial_data_6  = [r for r in csv.DictReader(open('params/TG_designs/sub-' + subj_id + '/sub-'
+    + subj_id + '_run-06_design.csv','rU'))]
 
 #set up trial handlers
 trials_run1 = data.TrialHandler(trial_data_1[:], 1, method="sequential") #change to [] for full run
@@ -203,10 +207,10 @@ def do_run(run, trials):
     ready_screen.draw()
     win.flip()
     event.waitKeys(keyList=('equal'))
-    
+
     globalClock.reset()
     studyStart = globalClock.getTime()
-    
+
     # Initial Fixation screen
     fixation.draw()
     win.flip()
@@ -325,10 +329,15 @@ def do_run(run, trials):
 
         #Wait screen = (decision_dur - rt) + 1.75
         wait_dur = (trial_onset + decision_dur + 1.75)
-
-        waiting.draw()
-        win.flip()
-        core.wait(wait_dur - globalClock.getTime())
+        if len(resp) > 0:
+            if (int(trial['cLeft']) == 0 and resp_val == 2) or (int(trial['cRight']) == 0 and resp_val == 3):
+                fixation.draw()
+                win.flip()
+                core.wait(wait_dur - globalClock.getTime())
+            else:
+                waiting.draw()
+                win.flip()
+                core.wait(wait_dur - globalClock.getTime())
 
         #Fixation ISI
         fixation.draw()
@@ -377,7 +386,7 @@ def do_run(run, trials):
 #    else:
 #        endTime = 10
 #    core.wait(endTime)
-    
+
     # Final Fixation screen after trials completed
     fixation.draw()
     win.flip()

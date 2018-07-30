@@ -14,7 +14,7 @@ useDualScreen=1
 DEBUG = False
 
 frame_rate=1
-initial_fixation_dur = 4 
+initial_fixation_dur = 4
 final_fixation_dur = 10
 decision_dur=3
 outcome_dur=0.25
@@ -91,8 +91,12 @@ logging.setDefaultClock(globalClock)
 timer = core.Clock()
 
 #trial handler
-trial_data = [r for r in csv.DictReader(open('UG_design_test2DF.csv','rU'))]
-trials = data.TrialHandler(trial_data, 1, method="sequential") #change to [] for full run
+trial_data_1 = [r for r in csv.DictReader(open('params/UG_blocks/sub-' + subj_id + '/sub-'+ subj_id + '_run-01_design.csv','rU'))]
+trial_data_2  = [r for r in csv.DictReader(open('params/UG_blocks/sub-' + subj_id + '/sub-'+ subj_id + '_run-02_design.csv','rU'))]
+
+trials_run1 = data.TrialHandler(trial_data_1[:], 1, method="sequential") #change to [] for full run
+trials_run2 = data.TrialHandler(trial_data_2[:], 1, method="sequential") #change to [] for full run
+
 
 subj_gen = int(subj_gen)
 subj_eth = int(subj_eth)
@@ -171,7 +175,7 @@ win.flip()
 event.waitKeys(keyList=('space'))
 
 
-def do_run(trial_data, run_num):
+def do_run(run, trials):
     resp=[]
     fileName=log_file.format(subj_id)
 
@@ -185,7 +189,7 @@ def do_run(trial_data, run_num):
     fixation.draw()
     win.flip()
     core.wait(initial_fixation_dur)
-    
+
     for trial in trials:
         condition_label = stim_map[trial['Partner']]
         imagepath = os.path.join(expdir,'Images')
@@ -208,23 +212,22 @@ def do_run(trial_data, run_num):
         timer.reset()
         event.clearEvents()
 
-        while timer.getTime() < 2:
-            partner_offer = trial['Offer']
-            partnerOffer = 'Proposal: $%s.00 out of $20.00' % partner_offer
-            offer_text.setText(partnerOffer)
-            offer_text.draw()
-            offer_text.draw()
-            pictureStim.draw()
-            win.flip()
-
         decision_onset = globalClock.getTime()
         trials.addData('decision_onset', decision_onset)
 
-        resp_val=None
-        resp_onset=None
+        while timer.getTime() < decision_dur:
+            while timer.getTime() < 2:
+                partner_offer = trial['Offer']
+                partnerOffer = 'Proposal: $%s.00 out of $20.00' % partner_offer
+                offer_text.setText(partnerOffer)
+                offer_text.draw()
+                offer_text.draw()
+                pictureStim.draw()
+                win.flip()
 
+            resp_val=None
+            resp_onset=None
 
-        while timer.getTime() < 2 + decision_dur:
             resp_text_accept.draw()
             resp_text_reject.draw()
             pictureStim.draw()
@@ -253,52 +256,25 @@ def do_run(trial_data, run_num):
 
 
             else:
-                resp_val='999'
+                resp_val=999
 
-        if resp_val=='999':
-            print "got here"
+
+        if resp_val==999:
             outcome_txt = outcome_map[resp_val]
             outcome_stim.setText(outcome_txt)
             outcome_stim.draw()
             core.wait(.25)
             trials.addData('resp', resp_val)
             #win.flip()
+        else:
+            timer.reset()
+            win.flip()
 
 
         #reset rating number color
         resp_text_accept.setColor('#FFFFFF')
         resp_text_reject.setColor('#FFFFFF')
 
-        '''
-        #outcome phase
-        timer.reset()
-        #win.flip()
-        outcome_onset = globalClock.getTime()
-
-        pictureStim.draw()
-        #win.flip()
-        subjectReceives = trial['Offer']
-        partnerKeeps = trial['PartnerKeeps']
-        if resp_val == 3:
-            outcome_txt = outcome_map[resp_val] % (subjectReceives, partnerKeeps)
-        elif resp_val==2:
-            outcome_txt = outcome_map[resp_val]
-        else:
-            outcome_txt = outcome_map[resp_val]
-
-        outcome_stim.setText(outcome_txt)
-        outcome_stim.draw()
-        #trials.addData('outcome_txt', outcome_txt)
-        trials.addData('outcome_onset', outcome_onset)
-        win.flip()
-        core.wait(outcome_dur)
-        outcome_offset = globalClock.getTime()
-        trials.addData('outcome_offset', outcome_offset)
-
-        fixation.draw()
-        win.flip()
-        core.wait(.75)
-        '''
         trial_offset = globalClock.getTime()
         duration = trial_offset - decision_onset
         trials.addData('trialDuration', duration)
@@ -309,19 +285,20 @@ def do_run(trial_data, run_num):
     fixation.draw()
     win.flip()
     core.wait(final_fixation_dur)
-    
+
     #trials.saveAsText(fileName=log_file.format(subj_id),delim=',',dataOut='all_raw')
     os.chdir(subjdir)
     trials.saveAsWideText(fileName)
     os.chdir(expdir)
-    if globalClock.getTime() < 850:
-        endTime = (850 - globalClock.getTime())
-    else:
-        endTime = 10
-        core.wait(endTime)
-        print globalClock.getTime()
+    #if globalClock.getTime() < 850:
+    #    endTime = (850 - globalClock.getTime())
+    #else:
+    #    endTime = 10
+    #    core.wait(endTime)
+    print globalClock.getTime()
 
-do_run(trial_data,1)
+for run, trials in enumerate([trials_run1, trials_run2]):
+    do_run(run, trials)
 
 #final ITI
 fixation.draw()
