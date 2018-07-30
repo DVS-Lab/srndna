@@ -3,7 +3,17 @@ maindir = pwd;
 outfiles = fullfile(maindir,'psychopy','params','UG_blocks');
 mkdir(outfiles);
 
-for s = [000 999]
+for s = [101:299 999]
+    subout = fullfile(outfiles,sprintf('sub-%03d',s));
+    
+    if rand < 0.5
+        block_types1 = [1:6 1 2 3];
+        block_types2 = [1:6 4 5 6];
+    else
+        block_types2 = [1:6 1 2 3];
+        block_types1 = [1:6 4 5 6];
+    end
+    
     for r = [1 2]
         
         % 9 blocks per run (2 runs)
@@ -13,9 +23,9 @@ for s = [000 999]
         % need to add at least 12 s at the end of the experiment to catch last HRF
         
         if r == 1
-            block_types = [1:6 1 2 3];
+            block_types = block_types1;
         else
-            block_types = [1:6 4 5 6];
+            block_types = block_types2;
         end
         block_types = block_types(randperm(length(block_types)));
         keep_checking = 1;
@@ -33,7 +43,7 @@ for s = [000 999]
         end
         
         
-        fname = fullfile(outfiles,sprintf('sub-%03d_run-%02d_design.csv',s,r));
+        fname = fullfile(subout,sprintf('sub-%03d_run-%02d_design.csv',s,r));
         fid = fopen(fname,'w');
         fprintf(fid,'Trialn,Blockn,Partner,IsFairBlock,Offer,ITI\n');
         
