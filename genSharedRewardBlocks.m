@@ -28,76 +28,85 @@ feedback_dur = 1;
 
 
 
-% 18 blocks
-pre_block_ITI = [repmat(8,1,9) repmat(10,1,6) repmat(12,1,3)]; % some IBI jitter to estimate reward/punishment separately (HCP is fixed at 15 s)
-pre_block_ITI = pre_block_ITI(randperm(length(pre_block_ITI)));
-% this occurrs every 8 trials, starting with trial 1. it should come first
-% need to add at least 12 s at the end of the experiment to catch last HRF
+maindir = pwd;
+outfiles = fullfile(maindir,'psychopy','params','SR_blocks');
+mkdir(outfiles);
 
-
-block_types = [1:6 1:6 1:6]; %will name these below. 3 partners * 2 outcomes
-block_types = block_types(randperm(length(block_types)));
-keep_checking = 1;
-while keep_checking
-    repeats = 0;
-    block_types = block_types(randperm(length(block_types)));
-    for i = 1:length(block_types)-1
-        if block_types(i) == block_types(i+1)
-            repeats = repeats + 1;
+for s = [000 999]
+    for r = [1 2]
+        
+        % 12 blocks
+        pre_block_ITI = [repmat(8,1,6) repmat(10,1,3) repmat(12,1,3)]; % some ITI jitter to estimate Fair/Unfair separately (HCP is fixed at 15 s)
+        pre_block_ITI = pre_block_ITI(randperm(length(pre_block_ITI)));
+        % this occurrs every 8 trials, starting with trial 1. it should come first
+        % need to add at least 12 s at the end of the experiment to catch last HRF
+        
+        
+        block_types = [1:6 1:6]; %will name these below. 3 partners * 2 outcomes
+        block_types = block_types(randperm(length(block_types)));
+        keep_checking = 1;
+        while keep_checking
+            repeats = 0;
+            block_types = block_types(randperm(length(block_types)));
+            for i = 1:length(block_types)-1
+                if block_types(i) == block_types(i+1)
+                    repeats = repeats + 1;
+                end
+            end
+            if ~repeats
+                keep_checking = 0;
+            end
         end
-    end
-    if ~repeats
-        keep_checking = 0;
+        
+        
+        
+        fname = fullfile(outfiles,sprintf('sub-%03d_run-%02d_design.csv',s,r));
+        fid = fopen(fname,'w');
+        fprintf(fid,'Trialn,Blockn,BlockType,Partner,Feedback,ITI\n');
+        
+        nblocks = length(block_types);
+        rand_trials = randperm(nblocks);
+        t = 0;
+        for i = 1:nblocks
+            % Partner is Friend=3, Stranger=2, Computer=1
+            % Feedback is Reward=3, Neutral=2, Punishment=1
+            
+            punishment = [1 1 1 1 1 1 randsample([2 3],1) randsample([2 3],1)];
+            punishment = punishment(randperm(length(punishment)));
+            reward = [3 3 3 3 3 3 randsample([2 1],1) randsample([2 1],1)];
+            reward = reward(randperm(length(reward)));
+            
+            switch block_types(i)
+                case 1 %Computer Punishment
+                    partner = 1;
+                    feedback_mat = punishment;
+                case 2 %Computer Reward
+                    partner = 1;
+                    feedback_mat = reward;
+                case 3 %Stranger Punishment
+                    partner = 2;
+                    feedback_mat = punishment;
+                case 4 %Stranger Reward
+                    partner = 2;
+                    feedback_mat = reward;
+                case 5 %Friend Punishment
+                    partner = 3;
+                    feedback_mat = punishment;
+                case 6 %Friend Reward
+                    partner = 3;
+                    feedback_mat = reward;
+            end
+            
+            for f = 1:length(feedback_mat)
+                t = t + 1;
+                if f == length(feedback_mat)
+                    fprintf(fid,'%d,%d,%d,%d,%d,%d\n',t,i,block_types(i),partner,feedback_mat(f),pre_block_ITI(i));
+                else
+                    fprintf(fid,'%d,%d,%d,%d,%d,%d\n',t,i,block_types(i),partner,feedback_mat(f),1);
+                end
+            end
+        end
+        fclose(fid);
+        
     end
 end
-
-
-
-fid = fopen('SharedReward_design.csv','w');
-fprintf(fid,'Trialn,Blockn,BlockType,Partner,Feedback,ITI\n');
-
-nblocks = length(block_types);
-rand_trials = randperm(nblocks);
-t = 0;
-for i = 1:nblocks
-    % Partner is Friend=3, Stranger=2, Computer=1
-    % Feedback is Reward=3, Neutral=2, Punishment=1
-    
-    punishment = [1 1 1 1 1 1 randsample([2 3],1) randsample([2 3],1)];
-    punishment = punishment(randperm(length(punishment)));
-    reward = [3 3 3 3 3 3 randsample([2 1],1) randsample([2 1],1)];
-    reward = reward(randperm(length(reward)));
-    
-    switch block_types(i)
-        case 1 %Computer Punishment
-            partner = 1;
-            feedback_mat = punishment;
-        case 2 %Computer Reward
-            partner = 1;
-            feedback_mat = reward;
-        case 3 %Stranger Punishment
-            partner = 2;
-            feedback_mat = punishment;
-        case 4 %Stranger Reward
-            partner = 2;
-            feedback_mat = reward;
-        case 5 %Friend Punishment
-            partner = 3;
-            feedback_mat = punishment;
-        case 6 %Friend Reward
-            partner = 3;
-            feedback_mat = reward;
-    end
-    
-    for f = 1:length(feedback_mat)
-        t = t + 1;
-        if f == length(feedback_mat)
-            fprintf(fid,'%d,%d,%d,%d,%d,%d\n',t,i,block_types(i),partner,feedback_mat(f),pre_block_ITI(i));
-        else
-            fprintf(fid,'%d,%d,%d,%d,%d,%d\n',t,i,block_types(i),partner,feedback_mat(f),1);
-        end
-    end
-end
-fclose(fid);
-
-
