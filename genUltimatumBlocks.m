@@ -5,6 +5,7 @@ mkdir(outfiles);
 
 for s = [101:299 999]
     subout = fullfile(outfiles,sprintf('sub-%03d',s));
+    mkdir(subout);
     
     if rand < 0.5
         block_types1 = [1:6 1 2 3];
