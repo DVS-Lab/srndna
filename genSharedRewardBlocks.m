@@ -116,7 +116,7 @@ for s = [101:299 999]
                 if f == length(feedback_mat)
                     fprintf(fid,'%d,%d,%d,%d,%d,%d\n',t,i,block_types(i),partner,feedback_mat(f),pre_block_ITI(i));
                 else
-                    fprintf(fid,'%d,%d,%d,%d,%d,%d\n',t,i,block_types(i),partner,feedback_mat(f),1);
+                    fprintf(fid,'%d,%d,%d,%d,%d,%f\n',t,i,block_types(i),partner,feedback_mat(f),0.75);
                 end
             end
         end
