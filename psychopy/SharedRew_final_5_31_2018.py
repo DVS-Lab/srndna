@@ -17,6 +17,7 @@ useDualScreen=1
 DEBUG = False
 
 frame_rate=1
+instruct_dur=3
 initial_fixation_dur = 4
 final_fixation_dur = 10
 decision_dur=2.5
@@ -70,7 +71,8 @@ outcome_text = visual.TextStim(win=win, name='text',text='',font='Arial',pos=(0,
 outcome_money = visual.TextStim(win=win, name='text',text='',font='Wingdings 3',pos=(0, 2.0), height=2, wrapWidth=None, ori=0, colorSpace='rgb', opacity=1,depth=-1.0);
 
 #instructions
-instruct_screen = visual.TextStim(win, text='Welcome to the experiment.\n\nIn this task you will be guessing the numerical value of a card.\n\nPress Button 2 to guess low and press Button 3 to guess high.\n\nCorrect responses will result in a monetary gain of $10, and incorrect responses will result in a monetary loss of $5.\n\nRemember, you will be sharing monetary outcomes on each trial with the partner displayed at the top of the screen.', pos = (0,1), wrapWidth=20, height = 1.2)
+instruct_screen = visual.TextStim(win, text='Welcome to the Investment Game.\n\nIn this task you will interacting with a few different partners: your friend, the person you met today and the computer.\n\nOn every trial, you will play as the investor and you will begin with $8.\n\n You can choose to send a portion of that money to your partner on a trial by selecting one of the options on the screen.', pos = (0,1), wrapWidth=20, height = 1.2)
+instruct_screen2 = visual.TextStim(win, text='Press Button 2 to send the amount on the lower left of the screen and press Button 3 to send the amount on the lower right of the screen.\n\n Remember, whatever you send means your partner receives 3 times that amount; your partner will be notified of your decision.\n\n If you sent money s/he will choose to share it back evenly with you or keep it all for him/herself.', pos = (0,1), wrapWidth=20, height = 1.2)
 
 #exit
 exit_screen = visual.TextStim(win, text='Thanks for playing! Please wait for instructions from the experimenter.', pos = (0,1), wrapWidth=20, height = 1.2)
@@ -134,13 +136,16 @@ for run in range(1):
     runs.append(run_data)
 '''
 
-# main task loop
 # Instructions
 instruct_screen.draw()
 win.flip()
 event.waitKeys(keyList=('space'))
 
+instruct_screen2.draw()
+win.flip()
+event.waitKeys(keyList=('space'))
 
+# main task loop
 def do_run(run, trials):
     resp=[]
     fileName=log_file.format(subj_id,run)
