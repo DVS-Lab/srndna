@@ -14,8 +14,8 @@ useDualScreen=1
 DEBUG = False
 
 frame_rate=1
-#initial_fixation_dur = 4
-final_fixation_dur = 10
+initial_fixation_dur = 4
+final_fixation_dur = 2
 decision_dur=3
 outcome_dur=0.25
 fileSuffix = 'UG'
@@ -185,29 +185,17 @@ def do_run(run, trials):
     event.waitKeys(keyList=('equal'))
     globalClock.reset()
     studyStart = globalClock.getTime()
+
     #Initial Fixation screen
-    #fixation.draw()
-    #win.flip()
-    #core.wait(initial_fixation_dur)
+    fixation.draw()
+    win.flip()
+    core.wait(initial_fixation_dur)
 
     for trial in trials:
         condition_label = stim_map[trial['Partner']]
         imagepath = os.path.join(expdir,'Images')
         image = os.path.join(imagepath, "%s.png") % condition_label
         pictureStim.setImage(image)
-
-        #ITI
-        logging.log(level=logging.DATA, msg='ITI') #send fixation log event
-        timer.reset()
-        ITI_onset = globalClock.getTime()
-        iti_for_trial = float(trial['ITI'])
-        fixation.draw()
-        win.flip()
-        core.wait(iti_for_trial)
-        ITI_offset = globalClock.getTime()
-
-        trials.addData('ITIonset', ITI_onset)
-        trials.addData('ITIoffset', ITI_offset)
 
         #decision phase
         timer.reset()
@@ -296,6 +284,20 @@ def do_run(run, trials):
         trials.addData('trialDuration', duration)
         event.clearEvents()
         print "got to check 3"
+
+        #ITI
+        logging.log(level=logging.DATA, msg='ITI') #send fixation log event
+        timer.reset()
+        ITI_onset = globalClock.getTime()
+        iti_for_trial = float(trial['ITI'])
+        fixation.draw()
+        win.flip()
+        core.wait(iti_for_trial)
+        ITI_offset = globalClock.getTime()
+
+        trials.addData('ITIonset', ITI_onset)
+        trials.addData('ITIoffset', ITI_offset)
+
 
     # Final Fixation screen after trials completed
     fixation.draw()

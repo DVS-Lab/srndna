@@ -172,16 +172,6 @@ def do_run(run, trials):
         pictureStim.setImage(image)
 
 
-        #ITI
-        logging.log(level=logging.DATA, msg='ITI') #send fixation log event
-        timer.reset()
-        ITI_onset = globalClock.getTime()
-        iti_for_trial = float(trial['ITI'])
-        while timer.getTime() < iti_for_trial:
-            fixation.draw()
-            win.flip()
-        ITI_offset = globalClock.getTime()
-
         #decision phase
         timer.reset()
         event.clearEvents()
@@ -228,7 +218,6 @@ def do_run(run, trials):
 
         trials.addData('resp', int(resp_val))
         trials.addData('resp_onset', resp_onset)
-        trials.addData('ITIonset', ITI_onset)
         trials.addData('rt', rt)
 
 
@@ -300,6 +289,20 @@ def do_run(run, trials):
             event.clearEvents()
         print "got to check 3"
 
+
+        #ITI
+        logging.log(level=logging.DATA, msg='ITI') #send fixation log event
+        timer.reset()
+        ITI_onset = globalClock.getTime()
+        iti_for_trial = float(trial['ITI'])
+        while timer.getTime() < iti_for_trial:
+            fixation.draw()
+            win.flip()
+        ITI_offset = globalClock.getTime()
+        trials.addData('ITIonset', ITI_onset)
+        trials.addData('ITIoffset', ITI_offset)
+
+
     # Final Fixation screen after trials completed
     fixation.draw()
     win.flip()
@@ -318,11 +321,6 @@ def do_run(run, trials):
 
 for run, trials in enumerate([trials_run1, trials_run2]):
     do_run(run, trials)
-
-#final ITI
-#fixation.draw()
-#win.flip()
-#core.wait(12)
 
 # Exit
 exit_screen.draw()
