@@ -82,7 +82,7 @@ try
         fclose(fid);
         rand_trial = randsample(1:36,1);
         if reciprocate(rand_trial)
-            participant = (8 - trust_val(rand_trial)) + (trust_val(rand_trial) * 3)/2;
+            participant = (8 - trust_val(rand_trial)) + ((trust_val(rand_trial) * 3)/2);
             friend = (trust_val(rand_trial) * 3)/2;
         else
             participant = 8 - trust_val(rand_trial);
