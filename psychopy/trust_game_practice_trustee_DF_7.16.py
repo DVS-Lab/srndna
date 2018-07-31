@@ -67,7 +67,7 @@ waiting = visual.TextStim(win, text="Waiting...", height=1.5)
 
 #decision screen
 shareStim =  visual.TextStim(win, pos=(0,1.5), height=1, alignHoriz='center')
-pictureStim =  visual.ImageStim(win, pos=(0,8.0), size=(6.65,5))
+pictureStim =  visual.ImageStim(win, pos=(0,8.0), size=(6.65,6.65))
 investedStim = visual.TextStim(win,pos=(0,0), height=1, alignHoriz='center')
 resp_text_left = visual.TextStim(win, pos =(-7,-4.8), height=1, alignHoriz="center")
 resp_text_right = visual.TextStim(win, pos =(7,-4.8), height=1, alignHoriz="center")

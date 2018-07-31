@@ -26,8 +26,8 @@ _thisDir = os.path.dirname(os.path.abspath(__file__)).decode(sys.getfilesystemen
 os.chdir(_thisDir)
 
 # Store info about the experiment session
-expName = 'set_2_'  # from the Builder filename that created this script
-expInfo = {'participant':'', 'session':'001'}
+expName = 'Card Guessing Game Ratings'  # from the Builder filename that created this script
+expInfo = {'participant':'', 'session':'1'}
 dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
 if dlg.OK == False:
     core.quit()  # user pressed cancel
@@ -66,9 +66,9 @@ else:
 
 # Initialize components for Routine "excited"
 excitedClock = core.Clock()
-q1 = visual.RatingScale(win=win, name='q1', marker='triangle', size=1.5, pos=[0.0, -0.55], low=1, high=7, leftKeys='1', rightKeys='3', acceptKeys='2', markerStart='4', scale='')
+q1 = visual.RatingScale(win=win, name='q1', marker='triangle', size=1.5, pos=[0.0, -0.55], low=-50, high=50, leftKeys='1', rightKeys='3', acceptKeys='2', markerStart='0', scale='')
 q1_ = visual.TextStim(win=win, name='q1_',
-    text='How excited were you to win money with this partner?',
+    text='How did you feel when you won money with this partner?',
     font='Arial',
     pos=(0,-0.1), height=0.1, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1,
@@ -80,20 +80,20 @@ image = visual.ImageStim(
     color=[1,1,1], colorSpace='rgb', opacity=1,
     flipHoriz=False, flipVert=False,
     texRes=128, interpolate=True, depth=-2.0)
-_not_ = visual.TextStim(win=win, name='_not_',
-    text='Not at all',
+_not_ = visual.TextStim(win=win, name='Negative',
+    text='Negative',
     font='Arial',
     pos=(-0.45, -0.4), height=0.07, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1,
     depth=-3.0);
-neutral = visual.TextStim(win=win, name='neutral',
+neutral = visual.TextStim(win=win, name='Neutral',
     text='Neutral',
     font='Arial',
     pos=(0, -0.4), height=0.07, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1,
     depth=-4.0);
-_very_ = visual.TextStim(win=win, name='_very_',
-    text='Very',
+_very_ = visual.TextStim(win=win, name='Positive',
+    text='Positive',
     font='Arial',
     pos=(0.45, -0.4), height=0.07, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1,
@@ -101,7 +101,7 @@ _very_ = visual.TextStim(win=win, name='_very_',
 
 # Initialize components for Routine "disappoint"
 disappointClock = core.Clock()
-q1_4 = visual.RatingScale(win=win, name='q1_4', marker='triangle', size=1.5, pos=[0.0, -0.55], low=1, high=7, leftKeys='1', rightKeys='3', acceptKeys='2', markerStart='4', labels=['Very Untrustworthy', ' Untrustworthy', ' Somewhat Untrustworhy', '  Neutral', ' Somewhat Trustworthy', ' Trustworthy', ' Very Trustworthy'], scale='')
+q1_4 = visual.RatingScale(win=win, name='q1_4', marker='triangle', size=1.5, pos=[0.0, -0.55], low=-50, high=50, leftKeys='1', rightKeys='3', acceptKeys='2', markerStart='0', labels=['Very Untrustworthy', ' Untrustworthy', ' Somewhat Untrustworhy', '  Neutral', ' Somewhat Trustworthy', ' Trustworthy', ' Very Trustworthy'], scale='')
 q1__2 = visual.TextStim(win=win, name='q1__2',
     text='How disappointed were you to lose money with this partner?',
     font='Arial',
@@ -116,7 +116,7 @@ image_2 = visual.ImageStim(
     flipHoriz=False, flipVert=False,
     texRes=128, interpolate=True, depth=-2.0)
 not_ = visual.TextStim(win=win, name='not_',
-    text='Not at all',
+    text='Negative',
     font='Arial',
     pos=(-0.45, -0.4), height=0.07, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1,
@@ -128,7 +128,7 @@ neutral_4 = visual.TextStim(win=win, name='neutral_4',
     color='white', colorSpace='rgb', opacity=1,
     depth=-4.0);
 very_ = visual.TextStim(win=win, name='very_',
-    text='Very',
+    text='Positive',
     font='Arial',
     pos=(0.45, -0.4), height=0.07, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1,

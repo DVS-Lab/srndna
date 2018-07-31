@@ -4,7 +4,7 @@
 This experiment was created using PsychoPy2 Experiment Builder (v1.85.4),
     on April 13, 2018, at 15:41
 If you publish work using this script please cite the PsychoPy publications:
-    Peirce, JW (2007) PsychoPy - Psychophysics software in Python.
+    Peirce, JW (2007) PsychoPy - Psychophysics software in Python.2
         Journal of Neuroscience Methods, 162(1-2), 8-13.
     Peirce, JW (2009) Generating stimuli for neuroscience using PsychoPy.
         Frontiers in Neuroinformatics, 2:10. doi: 10.3389/neuro.11.010.2008
@@ -26,8 +26,8 @@ _thisDir = os.path.dirname(os.path.abspath(__file__)).decode(sys.getfilesystemen
 os.chdir(_thisDir)
 
 # Store info about the experiment session
-expName = 'set1_1'  # from the Builder filename that created this script
-expInfo = {'participant':'', 'session':'001'}
+expName = 'Investment Game Ratings'  # from the Builder filename that created this script
+expInfo = {'participant':'', 'session (change this accordingly; 1, 2)':''}
 dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
 if dlg.OK == False:
     core.quit()  # user pressed cancel
@@ -66,7 +66,7 @@ else:
 
 # Initialize components for Routine "trust1"
 trust1Clock = core.Clock()
-q1 = visual.RatingScale(win=win, name='q1', marker='triangle', size=1.5, pos=[0.0, -0.55], low=1, high=7, leftKeys='1', rightKeys='3', acceptKeys='2', markerStart='4', scale='')
+q1 = visual.RatingScale(win=win, name='q1', marker='triangle', size=1.5, pos=[0.0, -0.55], low=0, high=100, leftKeys='1', rightKeys='3', acceptKeys='2', markerStart='5', scale='')
 q1_ = visual.TextStim(win=win, name='q1_',
     text='How trustworthy do you feel this person is?',
     font='Arial',
@@ -101,7 +101,7 @@ trustworthy = visual.TextStim(win=win, name='trustworthy',
 
 # Initialize components for Routine "likeable"
 likeableClock = core.Clock()
-q1_4 = visual.RatingScale(win=win, name='q1_4', marker='triangle', size=1.5, pos=[0.0, -0.55], low=1, high=7, leftKeys='1', rightKeys='3', acceptKeys='2', markerStart='4', scale='')
+q1_4 = visual.RatingScale(win=win, name='q1_4', marker='triangle', size=1.5, pos=[0.0, -0.55], low=0, high=100, leftKeys='1', rightKeys='3', acceptKeys='2', markerStart='5', scale='')
 q1__2 = visual.TextStim(win=win, name='q1__2',
     text='How likeable do you feel this person is?',
     font='Arial',
@@ -136,7 +136,7 @@ trustworthy_4 = visual.TextStim(win=win, name='trustworthy_4',
 
 # Initialize components for Routine "approachable"
 approachableClock = core.Clock()
-q1_5 = visual.RatingScale(win=win, name='q1_5', marker='triangle', size=1.5, pos=[0.0, -0.55], low=1, high=7, leftKeys='1', rightKeys='3', acceptKeys='2', markerStart='4', scale='')
+q1_5 = visual.RatingScale(win=win, name='q1_5', marker='triangle', size=1.5, pos=[0.0, -0.55], low=0, high=100, leftKeys='1', rightKeys='3', acceptKeys='2', markerStart='5', scale='')
 q1__3 = visual.TextStim(win=win, name='q1__3',
     text='How approachable do you feel this person is?',
     font='Arial',
