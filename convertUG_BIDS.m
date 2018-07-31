@@ -10,13 +10,11 @@ try
         if exist(fname,'file')
             fid = fopen(fname,'r');
         else
-            keyboard
             break;
         end
-        
         C = textscan(fid,repmat('%f',1,17),'Delimiter',',','HeaderLines',1,'EmptyValue', NaN);
         fclose(fid);
-        keyboard
+        
         % "Feedback" is the offer value (out of $20)
         
         onset = C{12};
@@ -76,8 +74,8 @@ try
             end
             
             block_starts = [1 9 17 25 33 41 49 57 65];
-            if ismember(2,block_starts)
-                fprintf(fid,'%f\t%f\t%s\t%f\t%d\n',onset(t),46,['block_' trial_type],'n/a','n/a','n/a'); % need final block duration
+            if ismember(t,block_starts)
+                fprintf(fid,'%f\t%f\t%s\t%f\t%d\n',onset(t),33.5,['block_' trial_type],'n/a','n/a','n/a'); % need final block duration
             end
             
         end
