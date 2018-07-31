@@ -10,6 +10,7 @@ try
         if exist(fname,'file')
             fid = fopen(fname,'r');
         else
+            fprintf('Let''s Make a Deal Game, Run %d: No data found.\n', r+1)
             continue;
         end
         C = textscan(fid,repmat('%f',1,17),'Delimiter',',','HeaderLines',1,'EmptyValue', NaN);
@@ -83,6 +84,16 @@ try
             
         end
         fclose(fid);
+        
+        %display payment information
+        rand_trial = randsample(1:72,1);
+        if response(rand_trial) == 2
+            fprintf('Let''s Make a Deal Game, Run %d: On trial %d, Participant REJECTED the deal and walks away with $0.\n', r+1, rand_trial);
+        elseif response(rand_trial) == 3
+            fprintf('Let''s Make a Deal Game, Run %d: On trial %d, Participant ACCEPTED the deal and walks away with $%.2f.\n', r+1, rand_trial, Offer(rand_trial));
+        elseif response(rand_trial) == 999
+            fprintf('Let''s Make a Deal Game, Run %d: On trial %d, Participant did not respond and walks away with $0.\n', r+1, rand_trial);
+        end
     end
     
     

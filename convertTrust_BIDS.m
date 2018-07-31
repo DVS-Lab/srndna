@@ -88,7 +88,14 @@ try
             participant = 8 - trust_val(rand_trial);
             friend = (trust_val(rand_trial) * 3);
         end
-        fprintf('Investment Game, Run %d: On trial %d, Participant wins $%.2f and Friend wins $%.2f.\n', r+1, rand_trial, participant, friend);
+        if (Partner(rand_trial) == 1)
+            trial_type = 'Computer';
+        elseif (Partner(rand_trial) == 2)
+            trial_type = 'Stranger';
+        elseif (Partner(rand_trial) == 3)
+            trial_type = 'Friend';
+        end
+        fprintf('Investment Game, Run %d: On trial %d, Participant WINS $%.2f and %s WINS $%.2f.\n', r+1, rand_trial, participant, trial_type, friend);
     end
     
 catch ME
