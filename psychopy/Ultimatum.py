@@ -109,7 +109,7 @@ if subj_gen==0 and subj_eth==0 and subj_age > 35:
     '1': 'computer',
     }
 
-elif subj_gen==0 and subj_eth==0 and subj_age < 35:
+elif subj_gen==0 and subj_eth==0 and subj_age <= 35:
     stim_map = {
     '3': 'youngadultMale_C',
     '2': 'olderadultMale_C',
@@ -123,7 +123,7 @@ elif subj_gen==0 and subj_eth==1 and subj_age > 35:
     '1': 'computer',
     }
 
-elif subj_gen==0 and subj_eth==1 and subj_age < 35:
+elif subj_gen==0 and subj_eth==1 and subj_age <= 35:
     stim_map = {
     '3': 'youngadultMale_M',
     '2': 'olderadultMale_M',
@@ -136,7 +136,7 @@ elif subj_gen==1 and subj_eth==0 and subj_age > 35:
     '2': 'youngadultFemale_C',
     '1': 'computer',
     }
-elif subj_gen==1 and subj_eth==0 and subj_age < 35:
+elif subj_gen==1 and subj_eth==0 and subj_age <= 35:
     stim_map = {
     '3': 'youngadultFemale_C',
     '2': 'olderadultFemale_C',
@@ -148,7 +148,7 @@ elif subj_gen==1 and subj_eth==1 and subj_age > 35:
     '2': 'youngadultFemale_M',
     '1': 'computer',
     }
-elif subj_gen==1 and subj_eth==1 and subj_age < 35:
+elif subj_gen==1 and subj_eth==1 and subj_age <= 35:
     stim_map = {
     '3': 'youngadultFemale_M',
     '2': 'olderadultFemale_M',
