@@ -123,7 +123,7 @@ expdir = os.getcwd()
 subjdir = '%s/logs/%s' % (expdir, subj_id)
 if not os.path.exists(subjdir):
     os.makedirs(subjdir)
-log_file = os.path.join(subjdir,'sub{}_task-trust_run{}_raw.csv')
+log_file = os.path.join(subjdir,'sub-{}_task-trust_run-{}_raw.csv')
 
 # double check that friend and stranger photos are created
 imgdir = '%s/Images/friend.png' % (expdir)

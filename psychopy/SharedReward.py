@@ -82,7 +82,7 @@ expdir = os.getcwd()
 subjdir = '%s/logs/%s' % (expdir, subj_id)
 if not os.path.exists(subjdir):
     os.makedirs(subjdir)
-log_file = os.path.join(subjdir,'sub{}_task-sharedreward_run{}_raw.csv')
+log_file = os.path.join(subjdir,'sub-{}_task-sharedreward_run-{}_raw.csv')
 
 globalClock = core.Clock()
 logging.setDefaultClock(globalClock)
