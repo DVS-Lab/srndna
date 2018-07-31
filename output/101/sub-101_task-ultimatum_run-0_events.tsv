@@ -1,0 +1,91 @@
+onset	duration	trial_type	response_time	Offer
+1.052190	1.297330	event_accept_ingroup_fair	1.032640	8
+1.052190	33.500000	block_ingroup_fair	110.000000	47
+97.000000	110.000000	/a	110.000000	47
+97.000000	3.367010	1.915850	event_accept_ingroup_fair	1.651460	10
+6.302270	1.933960	event_accept_ingroup_fair	1.665100	9
+9.252600	1.816000	event_reject_ingroup_fair	1.551710	2
+12.085800	1.783380	event_accept_ingroup_fair	1.518830	10
+14.886000	1.750750	event_accept_ingroup_fair	1.484520	7
+17.654000	2.065360	event_accept_ingroup_fair	1.801510	10
+31.736300	2.783700	event_reject_ingroup_fair	2.520720	5
+35.536700	2.302950	event_reject_computer_fair	2.036540	7
+35.536700	33.500000	block_computer_fair	110.000000	47
+97.000000	110.000000	/a	110.000000	47
+97.000000	38.855200	1.834090	event_reject_computer_fair	1.568370	7
+41.703800	1.786500	event_reject_computer_fair	1.520020	5
+44.504400	1.852570	event_reject_computer_fair	1.585370	8
+47.369000	2.053520	event_reject_computer_fair	1.788500	1
+50.437800	2.118720	event_reject_computer_fair	1.854700	7
+53.568600	1.700670	event_accept_computer_fair	1.437510	10
+65.287400	2.320140	event_accept_computer_fair	2.056790	8
+68.618900	2.190960	event_reject_computer_unfair	1.922110	1
+68.618900	33.500000	block_computer_unfair	110.000000	47
+97.000000	110.000000	/a	110.000000	47
+97.000000	71.826400	1.883380	event_reject_computer_unfair	1.617500	3
+74.726600	1.815500	event_reject_computer_unfair	1.551900	4
+77.551600	1.757380	event_reject_computer_unfair	1.491830	4
+80.325800	2.066160	event_reject_computer_unfair	1.802190	3
+83.410600	1.682060	event_accept_computer_unfair	1.417450	9
+86.109200	1.834690	event_reject_computer_unfair	1.566330	5
+95.960100	2.018740	event_reject_computer_unfair	1.754150	4
+98.995100	2.368900	event_reject_outgroup_fair	2.102980	6
+98.995100	33.500000	block_outgroup_fair	110.000000	47
+97.000000	110.000000	/a	110.000000	47
+97.000000	102.378000	1.684160	event_accept_outgroup_fair	1.420580	9
+105.079000	1.734390	event_accept_outgroup_fair	1.469470	9
+107.830000	1.767820	event_reject_outgroup_fair	1.501960	3
+110.613000	1.716120	event_accept_outgroup_fair	1.452840	7
+113.348000	1.716190	event_accept_outgroup_fair	1.452200	9
+116.080000	1.984800	event_accept_outgroup_fair	1.719410	10
+126.080000	1.769150	event_accept_outgroup_fair	1.503290	10
+128.866000	1.816070	event_accept_outgroup_unfair	1.551690	10
+128.866000	33.500000	block_outgroup_unfair	110.000000	47
+97.000000	110.000000	/a	110.000000	47
+97.000000	131.699000	2.551400	event_reject_outgroup_unfair	2.284390	2
+135.267000	1.950630	event_accept_outgroup_unfair	1.685580	4
+138.232000	2.017050	event_accept_outgroup_unfair	1.753750	4
+141.268000	2.267160	event_accept_outgroup_unfair	2.001960	3
+144.547000	2.186700	event_reject_outgroup_unfair	1.922650	1
+147.748000	1.835970	event_reject_outgroup_unfair	1.571810	4
+161.598000	1.904050	event_accept_outgroup_unfair	1.637790	5
+164.514000	1.822560	event_accept_outgroup_fair	1.557820	9
+164.514000	33.500000	block_outgroup_fair	110.000000	47
+97.000000	110.000000	/a	110.000000	47
+97.000000	167.347000	1.957470	event_accept_outgroup_fair	1.691410	9
+170.320000	1.967790	event_accept_outgroup_fair	1.701500	9
+173.303000	1.950900	event_accept_outgroup_fair	1.687520	9
+176.270000	1.768300	event_accept_outgroup_fair	1.502790	7
+179.054000	1.834930	event_accept_outgroup_fair	1.569760	10
+181.904000	1.868300	event_accept_outgroup_fair	1.602480	6
+191.788000	2.236070	event_accept_outgroup_fair	1.969490	4
+195.038000	2.051860	event_reject_ingroup_unfair	1.786800	2
+195.038000	33.500000	block_ingroup_unfair	110.000000	47
+97.000000	110.000000	/a	110.000000	47
+97.000000	198.106000	1.767620	event_accept_ingroup_unfair	1.501650	4
+200.889000	1.867900	event_reject_ingroup_unfair	1.603750	1
+203.774000	1.982160	event_reject_ingroup_unfair	1.719490	2
+206.776000	1.830980	event_accept_ingroup_unfair	1.568200	6
+209.626000	2.062540	event_reject_ingroup_unfair	1.798040	3
+212.706000	1.734320	event_accept_ingroup_unfair	1.467840	8
+226.458000	2.069750	event_reject_ingroup_unfair	1.803520	1
+229.544000	1.834670	event_accept_ingroup_fair	1.567280	10
+229.544000	33.500000	block_ingroup_fair	110.000000	47
+97.000000	110.000000	/a	110.000000	47
+97.000000	232.394000	1.733840	event_accept_ingroup_fair	1.467950	9
+235.144000	2.151780	event_reject_ingroup_fair	1.886690	3
+238.311000	1.768070	event_accept_ingroup_fair	1.501130	10
+241.094000	1.751490	event_accept_ingroup_fair	1.485500	9
+243.860000	1.786090	event_accept_ingroup_fair	1.521440	8
+246.660000	2.037100	event_reject_ingroup_fair	1.771660	5
+258.709000	1.767470	event_accept_ingroup_fair	1.501690	10
+261.493000	2.037940	event_accept_outgroup_unfair	1.774110	9
+261.493000	33.500000	block_outgroup_unfair	110.000000	47
+97.000000	110.000000	/a	110.000000	47
+97.000000	264.542000	2.201300	event_reject_outgroup_unfair	1.936230	5
+267.760000	1.839050	event_reject_outgroup_unfair	1.572550	4
+270.615000	2.134200	event_reject_outgroup_unfair	1.867890	2
+273.766000	1.950710	event_accept_outgroup_unfair	1.685210	4
+276.732000	1.900000	event_accept_outgroup_unfair	1.635060	3
+279.650000	2.116060	event_accept_outgroup_unfair	1.851870	3
+291.782000	1.969450	event_accept_outgroup_unfair	1.705040	1
