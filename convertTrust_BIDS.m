@@ -14,7 +14,7 @@ try
         if exist(fname,'file')
             fid = fopen(fname,'r');
         else
-            disp('missing file')
+            fprintf('Investment Game, Run %d: No data found.\n', r+1)
             continue;
         end
         
@@ -80,6 +80,15 @@ try
             
         end
         fclose(fid);
+        rand_trial = randsample(1:36,1);
+        if reciprocate(rand_trial)
+            participant = (trust_val(rand_trial) * 3)/2;
+            friend = (trust_val(rand_trial) * 3)/2;
+        else
+            participant = 8 - trust_val(rand_trial);
+            friend = (trust_val(rand_trial) * 3);
+        end
+        fprintf('Investment Game, Run %d: On trial %d, Participant wins $%.2f and Friend wins $%.2f.\n', r+1, rand_trial, participant, friend);
     end
     
 catch ME
