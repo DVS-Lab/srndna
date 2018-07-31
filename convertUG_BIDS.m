@@ -6,11 +6,11 @@ try
     
     for r = 0:1
         % sub-101_task-ultimatum_run-0_raw.csv
-        fname = fullfile(maindir,'data',num2str(subj),sprintf('sub-%03d_task-ultimatum_run-%d_raw.csv',subj,r));
+        fname = fullfile(maindir,'psychopy','logs',num2str(subj),sprintf('sub-%03d_task-ultimatum_run-%d_raw.csv',subj,r));
         if exist(fname,'file')
             fid = fopen(fname,'r');
         else
-            break;
+            continue;
         end
         C = textscan(fid,repmat('%f',1,17),'Delimiter',',','HeaderLines',1,'EmptyValue', NaN);
         fclose(fid);
@@ -33,6 +33,7 @@ try
         myfile = fullfile(output,fname);
         fid = fopen(myfile,'w');
         fprintf(fid,'onset\tduration\ttrial_type\tresponse_time\tOffer\n');
+        
         for t = 1:length(onset);
             
             %{
@@ -60,6 +61,8 @@ try
                 trial_type = 'ingroup_unfair';
             elseif (IsFairBlock(t) == 0) && (Partner(t) == 3)
                 trial_type = 'outgroup_unfair';
+            else
+                keyboard
             end
             
             % 2 is reject
@@ -70,12 +73,12 @@ try
             elseif response(t) == 3
                 fprintf(fid,'%f\t%f\t%s\t%f\t%d\n',onset(t),duration(t),['event_accept_' trial_type],RT(t),Offer(t));
             elseif response(t) == 999
-                fprintf(fid,'%f\t%f\t%s\t%f\t%d\n',onset(t),duration(t),'missed_trial_',duration(t),Offer(t),'n/a');
+                fprintf(fid,'%f\t%f\t%s\t%s\t%d\n',onset(t),duration(t),'missed_trial','n/a', Offer(t));
             end
             
             block_starts = [1 9 17 25 33 41 49 57 65];
             if ismember(t,block_starts)
-                fprintf(fid,'%f\t%f\t%s\t%f\t%d\n',onset(t),33.5,['block_' trial_type],'n/a','n/a','n/a'); % need final block duration
+                fprintf(fid,'%f\t%f\t%s\t%s\t%s\n',onset(t),33.5,['block_' trial_type],'n/a','n/a');
             end
             
         end
