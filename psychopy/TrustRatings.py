@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy2 Experiment Builder (v1.85.4),
-    on April 13, 2018, at 16:03
+    on April 13, 2018, at 15:41
 If you publish work using this script please cite the PsychoPy publications:
-    Peirce, JW (2007) PsychoPy - Psychophysics software in Python.
+    Peirce, JW (2007) PsychoPy - Psychophysics software in Python.2
         Journal of Neuroscience Methods, 162(1-2), 8-13.
     Peirce, JW (2009) Generating stimuli for neuroscience using PsychoPy.
         Frontiers in Neuroinformatics, 2:10. doi: 10.3389/neuro.11.010.2008
@@ -26,8 +26,8 @@ _thisDir = os.path.dirname(os.path.abspath(__file__)).decode(sys.getfilesystemen
 os.chdir(_thisDir)
 
 # Store info about the experiment session
-expName = 'Card Guessing Game Ratings'  # from the Builder filename that created this script
-expInfo = {'participant':'', 'session':'1'}
+expName = 'Investment Game Ratings'  # from the Builder filename that created this script
+expInfo = {'participant':'', 'session (change this accordingly; 1, 2)':''}
 dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
 if dlg.OK == False:
     core.quit()  # user pressed cancel
@@ -40,7 +40,7 @@ filename = _thisDir + os.sep + u'data/%s_%s_%s' % (expInfo['participant'], expNa
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
     extraInfo=expInfo, runtimeInfo=None,
-    originPath=u'C:\\Users\\Jojo\\Downloads\\Psychopy\\set_2_.psyexp',
+    originPath=u'C:\\Users\\Jojo\\Downloads\\Psychopy\\set1_1.psyexp',
     savePickle=True, saveWideText=True,
     dataFileName=filename)
 # save a log file for detail verbose info
@@ -64,11 +64,11 @@ if expInfo['frameRate'] != None:
 else:
     frameDur = 1.0 / 60.0  # could not measure, so guess
 
-# Initialize components for Routine "excited"
-excitedClock = core.Clock()
-q1 = visual.RatingScale(win=win, name='q1', marker='triangle', size=1.5, pos=[0.0, -0.55], low=-50, high=50, leftKeys='1', rightKeys='3', acceptKeys='2', markerStart='0', scale='')
+# Initialize components for Routine "trust1"
+trust1Clock = core.Clock()
+q1 = visual.RatingScale(win=win, name='q1', marker='triangle', size=1.5, pos=[0.0, -0.55], low=0, high=100, leftKeys='1', rightKeys='3', acceptKeys='2', markerStart='5', scale='')
 q1_ = visual.TextStim(win=win, name='q1_',
-    text='How did you feel when you won money with this partner?',
+    text='How trustworthy do you feel this person is?',
     font='Arial',
     pos=(0,-0.1), height=0.1, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1,
@@ -80,30 +80,30 @@ image = visual.ImageStim(
     color=[1,1,1], colorSpace='rgb', opacity=1,
     flipHoriz=False, flipVert=False,
     texRes=128, interpolate=True, depth=-2.0)
-_not_ = visual.TextStim(win=win, name='Negative',
-    text='Negative',
+not_trustworthy = visual.TextStim(win=win, name='not_trustworthy',
+    text='Not at all',
     font='Arial',
     pos=(-0.45, -0.4), height=0.07, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1,
     depth=-3.0);
-neutral = visual.TextStim(win=win, name='Neutral',
+neutral = visual.TextStim(win=win, name='neutral',
     text='Neutral',
     font='Arial',
     pos=(0, -0.4), height=0.07, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1,
     depth=-4.0);
-_very_ = visual.TextStim(win=win, name='Positive',
-    text='Positive',
+trustworthy = visual.TextStim(win=win, name='trustworthy',
+    text='Very',
     font='Arial',
     pos=(0.45, -0.4), height=0.07, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1,
     depth=-5.0);
 
-# Initialize components for Routine "disappoint"
-disappointClock = core.Clock()
-q1_4 = visual.RatingScale(win=win, name='q1_4', marker='triangle', size=1.5, pos=[0.0, -0.55], low=-50, high=50, leftKeys='1', rightKeys='3', acceptKeys='2', markerStart='0', labels=['Very Untrustworthy', ' Untrustworthy', ' Somewhat Untrustworhy', '  Neutral', ' Somewhat Trustworthy', ' Trustworthy', ' Very Trustworthy'], scale='')
+# Initialize components for Routine "likeable"
+likeableClock = core.Clock()
+q1_4 = visual.RatingScale(win=win, name='q1_4', marker='triangle', size=1.5, pos=[0.0, -0.55], low=0, high=100, leftKeys='1', rightKeys='3', acceptKeys='2', markerStart='5', scale='')
 q1__2 = visual.TextStim(win=win, name='q1__2',
-    text='How disappointed were you to lose money with this partner?',
+    text='How likeable do you feel this person is?',
     font='Arial',
     pos=(0,-0.1), height=0.1, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1,
@@ -115,8 +115,8 @@ image_2 = visual.ImageStim(
     color=[1,1,1], colorSpace='rgb', opacity=1,
     flipHoriz=False, flipVert=False,
     texRes=128, interpolate=True, depth=-2.0)
-not_ = visual.TextStim(win=win, name='not_',
-    text='Negative',
+not_trustworthy_4 = visual.TextStim(win=win, name='not_trustworthy_4',
+    text='Not at all',
     font='Arial',
     pos=(-0.45, -0.4), height=0.07, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1,
@@ -127,8 +127,43 @@ neutral_4 = visual.TextStim(win=win, name='neutral_4',
     pos=(0, -0.4), height=0.07, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1,
     depth=-4.0);
-very_ = visual.TextStim(win=win, name='very_',
-    text='Positive',
+trustworthy_4 = visual.TextStim(win=win, name='trustworthy_4',
+    text='Very',
+    font='Arial',
+    pos=(0.45, -0.4), height=0.07, wrapWidth=None, ori=0, 
+    color='white', colorSpace='rgb', opacity=1,
+    depth=-5.0);
+
+# Initialize components for Routine "approachable"
+approachableClock = core.Clock()
+q1_5 = visual.RatingScale(win=win, name='q1_5', marker='triangle', size=1.5, pos=[0.0, -0.55], low=0, high=100, leftKeys='1', rightKeys='3', acceptKeys='2', markerStart='5', scale='')
+q1__3 = visual.TextStim(win=win, name='q1__3',
+    text='How approachable do you feel this person is?',
+    font='Arial',
+    pos=(0,-0.1), height=0.1, wrapWidth=None, ori=0, 
+    color='white', colorSpace='rgb', opacity=1,
+    depth=-1.0);
+image_3 = visual.ImageStim(
+    win=win, name='image_3',
+    image='sin', mask=None,
+    ori=0, pos=(0, 0.5), size=(0.4, 0.7),
+    color=[1,1,1], colorSpace='rgb', opacity=1,
+    flipHoriz=False, flipVert=False,
+    texRes=128, interpolate=True, depth=-2.0)
+not_trustworthy_5 = visual.TextStim(win=win, name='not_trustworthy_5',
+    text='Not at all',
+    font='Arial',
+    pos=(-0.45, -0.4), height=0.07, wrapWidth=None, ori=0, 
+    color='white', colorSpace='rgb', opacity=1,
+    depth=-3.0);
+neutral_5 = visual.TextStim(win=win, name='neutral_5',
+    text='Neutral',
+    font='Arial',
+    pos=(0, -0.4), height=0.07, wrapWidth=None, ori=0, 
+    color='white', colorSpace='rgb', opacity=1,
+    depth=-4.0);
+trustworthy_5 = visual.TextStim(win=win, name='trustworthy_5',
+    text='Very',
     font='Arial',
     pos=(0.45, -0.4), height=0.07, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1,
@@ -141,7 +176,7 @@ routineTimer = core.CountdownTimer()  # to track time remaining of each (non-sli
 # set up handler to look after randomisation of conditions etc
 trials = data.TrialHandler(nReps=1, method='sequential', 
     extraInfo=expInfo, originPath=-1,
-    trialList=data.importConditions('SharedRewardPost.csv'),
+    trialList=data.importConditions('Trust.csv'),
     seed=None, name='trials')
 thisExp.addLoop(trials)  # add the loop to the experiment
 thisTrial = trials.trialList[0]  # so we can initialise stimuli with some values
@@ -157,24 +192,24 @@ for thisTrial in trials:
         for paramName in thisTrial.keys():
             exec(paramName + '= thisTrial.' + paramName)
     
-    # ------Prepare to start Routine "excited"-------
+    # ------Prepare to start Routine "trust1"-------
     t = 0
-    excitedClock.reset()  # clock
+    trust1Clock.reset()  # clock
     frameN = -1
     continueRoutine = True
     # update component parameters for each repeat
     q1.reset()
-    image.setImage(excited)
+    image.setImage(trust)
     # keep track of which components have finished
-    excitedComponents = [q1, q1_, image, _not_, neutral, _very_]
-    for thisComponent in excitedComponents:
+    trust1Components = [q1, q1_, image, not_trustworthy, neutral, trustworthy]
+    for thisComponent in trust1Components:
         if hasattr(thisComponent, 'status'):
             thisComponent.status = NOT_STARTED
     
-    # -------Start Routine "excited"-------
+    # -------Start Routine "trust1"-------
     while continueRoutine:
         # get current time
-        t = excitedClock.getTime()
+        t = trust1Clock.getTime()
         frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
         # update/draw components on each frame
         # *q1* updates
@@ -199,12 +234,12 @@ for thisTrial in trials:
             image.frameNStart = frameN  # exact frame index
             image.setAutoDraw(True)
         
-        # *_not_* updates
-        if t >= 0.0 and _not_.status == NOT_STARTED:
+        # *not_trustworthy* updates
+        if t >= 0.0 and not_trustworthy.status == NOT_STARTED:
             # keep track of start time/frame for later
-            _not_.tStart = t
-            _not_.frameNStart = frameN  # exact frame index
-            _not_.setAutoDraw(True)
+            not_trustworthy.tStart = t
+            not_trustworthy.frameNStart = frameN  # exact frame index
+            not_trustworthy.setAutoDraw(True)
         
         # *neutral* updates
         if t >= 0.0 and neutral.status == NOT_STARTED:
@@ -213,18 +248,18 @@ for thisTrial in trials:
             neutral.frameNStart = frameN  # exact frame index
             neutral.setAutoDraw(True)
         
-        # *_very_* updates
-        if t >= 0.0 and _very_.status == NOT_STARTED:
+        # *trustworthy* updates
+        if t >= 0.0 and trustworthy.status == NOT_STARTED:
             # keep track of start time/frame for later
-            _very_.tStart = t
-            _very_.frameNStart = frameN  # exact frame index
-            _very_.setAutoDraw(True)
+            trustworthy.tStart = t
+            trustworthy.frameNStart = frameN  # exact frame index
+            trustworthy.setAutoDraw(True)
         
         # check if all components have finished
         if not continueRoutine:  # a component has requested a forced-end of Routine
             break
         continueRoutine = False  # will revert to True if at least one component still running
-        for thisComponent in excitedComponents:
+        for thisComponent in trust1Components:
             if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
                 continueRoutine = True
                 break  # at least one component has not yet finished
@@ -237,14 +272,14 @@ for thisTrial in trials:
         if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
             win.flip()
     
-    # -------Ending Routine "excited"-------
-    for thisComponent in excitedComponents:
+    # -------Ending Routine "trust1"-------
+    for thisComponent in trust1Components:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
     # store data for trials (TrialHandler)
     trials.addData('q1.response', q1.getRating())
     trials.addData('q1.rt', q1.getRT())
-    # the Routine "excited" was not non-slip safe, so reset the non-slip timer
+    # the Routine "trust1" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
     thisExp.nextEntry()
     
@@ -254,7 +289,7 @@ for thisTrial in trials:
 # set up handler to look after randomisation of conditions etc
 trials_2 = data.TrialHandler(nReps=1, method='sequential', 
     extraInfo=expInfo, originPath=-1,
-    trialList=data.importConditions('SharedRewardPost.csv'),
+    trialList=data.importConditions('Trust.csv'),
     seed=None, name='trials_2')
 thisExp.addLoop(trials_2)  # add the loop to the experiment
 thisTrial_2 = trials_2.trialList[0]  # so we can initialise stimuli with some values
@@ -270,24 +305,24 @@ for thisTrial_2 in trials_2:
         for paramName in thisTrial_2.keys():
             exec(paramName + '= thisTrial_2.' + paramName)
     
-    # ------Prepare to start Routine "disappoint"-------
+    # ------Prepare to start Routine "likeable"-------
     t = 0
-    disappointClock.reset()  # clock
+    likeableClock.reset()  # clock
     frameN = -1
     continueRoutine = True
     # update component parameters for each repeat
     q1_4.reset()
-    image_2.setImage(disappointed)
+    image_2.setImage(likeable)
     # keep track of which components have finished
-    disappointComponents = [q1_4, q1__2, image_2, not_, neutral_4, very_]
-    for thisComponent in disappointComponents:
+    likeableComponents = [q1_4, q1__2, image_2, not_trustworthy_4, neutral_4, trustworthy_4]
+    for thisComponent in likeableComponents:
         if hasattr(thisComponent, 'status'):
             thisComponent.status = NOT_STARTED
     
-    # -------Start Routine "disappoint"-------
+    # -------Start Routine "likeable"-------
     while continueRoutine:
         # get current time
-        t = disappointClock.getTime()
+        t = likeableClock.getTime()
         frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
         # update/draw components on each frame
         # *q1_4* updates
@@ -312,12 +347,12 @@ for thisTrial_2 in trials_2:
             image_2.frameNStart = frameN  # exact frame index
             image_2.setAutoDraw(True)
         
-        # *not_* updates
-        if t >= 0.0 and not_.status == NOT_STARTED:
+        # *not_trustworthy_4* updates
+        if t >= 0.0 and not_trustworthy_4.status == NOT_STARTED:
             # keep track of start time/frame for later
-            not_.tStart = t
-            not_.frameNStart = frameN  # exact frame index
-            not_.setAutoDraw(True)
+            not_trustworthy_4.tStart = t
+            not_trustworthy_4.frameNStart = frameN  # exact frame index
+            not_trustworthy_4.setAutoDraw(True)
         
         # *neutral_4* updates
         if t >= 0.0 and neutral_4.status == NOT_STARTED:
@@ -326,18 +361,18 @@ for thisTrial_2 in trials_2:
             neutral_4.frameNStart = frameN  # exact frame index
             neutral_4.setAutoDraw(True)
         
-        # *very_* updates
-        if t >= 0.0 and very_.status == NOT_STARTED:
+        # *trustworthy_4* updates
+        if t >= 0.0 and trustworthy_4.status == NOT_STARTED:
             # keep track of start time/frame for later
-            very_.tStart = t
-            very_.frameNStart = frameN  # exact frame index
-            very_.setAutoDraw(True)
+            trustworthy_4.tStart = t
+            trustworthy_4.frameNStart = frameN  # exact frame index
+            trustworthy_4.setAutoDraw(True)
         
         # check if all components have finished
         if not continueRoutine:  # a component has requested a forced-end of Routine
             break
         continueRoutine = False  # will revert to True if at least one component still running
-        for thisComponent in disappointComponents:
+        for thisComponent in likeableComponents:
             if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
                 continueRoutine = True
                 break  # at least one component has not yet finished
@@ -350,18 +385,131 @@ for thisTrial_2 in trials_2:
         if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
             win.flip()
     
-    # -------Ending Routine "disappoint"-------
-    for thisComponent in disappointComponents:
+    # -------Ending Routine "likeable"-------
+    for thisComponent in likeableComponents:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
     # store data for trials_2 (TrialHandler)
     trials_2.addData('q1_4.response', q1_4.getRating())
     trials_2.addData('q1_4.rt', q1_4.getRT())
-    # the Routine "disappoint" was not non-slip safe, so reset the non-slip timer
+    # the Routine "likeable" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
     thisExp.nextEntry()
     
 # completed 1 repeats of 'trials_2'
+
+
+# set up handler to look after randomisation of conditions etc
+trials_3 = data.TrialHandler(nReps=1, method='sequential', 
+    extraInfo=expInfo, originPath=-1,
+    trialList=data.importConditions('Trust.csv'),
+    seed=None, name='trials_3')
+thisExp.addLoop(trials_3)  # add the loop to the experiment
+thisTrial_3 = trials_3.trialList[0]  # so we can initialise stimuli with some values
+# abbreviate parameter names if possible (e.g. rgb = thisTrial_3.rgb)
+if thisTrial_3 != None:
+    for paramName in thisTrial_3.keys():
+        exec(paramName + '= thisTrial_3.' + paramName)
+
+for thisTrial_3 in trials_3:
+    currentLoop = trials_3
+    # abbreviate parameter names if possible (e.g. rgb = thisTrial_3.rgb)
+    if thisTrial_3 != None:
+        for paramName in thisTrial_3.keys():
+            exec(paramName + '= thisTrial_3.' + paramName)
+    
+    # ------Prepare to start Routine "approachable"-------
+    t = 0
+    approachableClock.reset()  # clock
+    frameN = -1
+    continueRoutine = True
+    # update component parameters for each repeat
+    q1_5.reset()
+    image_3.setImage(approach)
+    # keep track of which components have finished
+    approachableComponents = [q1_5, q1__3, image_3, not_trustworthy_5, neutral_5, trustworthy_5]
+    for thisComponent in approachableComponents:
+        if hasattr(thisComponent, 'status'):
+            thisComponent.status = NOT_STARTED
+    
+    # -------Start Routine "approachable"-------
+    while continueRoutine:
+        # get current time
+        t = approachableClock.getTime()
+        frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+        # update/draw components on each frame
+        # *q1_5* updates
+        if t >= 0.0 and q1_5.status == NOT_STARTED:
+            # keep track of start time/frame for later
+            q1_5.tStart = t
+            q1_5.frameNStart = frameN  # exact frame index
+            q1_5.setAutoDraw(True)
+        continueRoutine &= q1_5.noResponse  # a response ends the trial
+        
+        # *q1__3* updates
+        if t >= 0.0 and q1__3.status == NOT_STARTED:
+            # keep track of start time/frame for later
+            q1__3.tStart = t
+            q1__3.frameNStart = frameN  # exact frame index
+            q1__3.setAutoDraw(True)
+        
+        # *image_3* updates
+        if t >= 0.0 and image_3.status == NOT_STARTED:
+            # keep track of start time/frame for later
+            image_3.tStart = t
+            image_3.frameNStart = frameN  # exact frame index
+            image_3.setAutoDraw(True)
+        
+        # *not_trustworthy_5* updates
+        if t >= 0.0 and not_trustworthy_5.status == NOT_STARTED:
+            # keep track of start time/frame for later
+            not_trustworthy_5.tStart = t
+            not_trustworthy_5.frameNStart = frameN  # exact frame index
+            not_trustworthy_5.setAutoDraw(True)
+        
+        # *neutral_5* updates
+        if t >= 0.0 and neutral_5.status == NOT_STARTED:
+            # keep track of start time/frame for later
+            neutral_5.tStart = t
+            neutral_5.frameNStart = frameN  # exact frame index
+            neutral_5.setAutoDraw(True)
+        
+        # *trustworthy_5* updates
+        if t >= 0.0 and trustworthy_5.status == NOT_STARTED:
+            # keep track of start time/frame for later
+            trustworthy_5.tStart = t
+            trustworthy_5.frameNStart = frameN  # exact frame index
+            trustworthy_5.setAutoDraw(True)
+        
+        # check if all components have finished
+        if not continueRoutine:  # a component has requested a forced-end of Routine
+            break
+        continueRoutine = False  # will revert to True if at least one component still running
+        for thisComponent in approachableComponents:
+            if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+                continueRoutine = True
+                break  # at least one component has not yet finished
+        
+        # check for quit (the Esc key)
+        if endExpNow or event.getKeys(keyList=["escape"]):
+            core.quit()
+        
+        # refresh the screen
+        if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+            win.flip()
+    
+    # -------Ending Routine "approachable"-------
+    for thisComponent in approachableComponents:
+        if hasattr(thisComponent, "setAutoDraw"):
+            thisComponent.setAutoDraw(False)
+    # store data for trials_3 (TrialHandler)
+    trials_3.addData('q1_5.response', q1_5.getRating())
+    trials_3.addData('q1_5.rt', q1_5.getRT())
+    # the Routine "approachable" was not non-slip safe, so reset the non-slip timer
+    routineTimer.reset()
+    thisExp.nextEntry()
+    
+# completed 1 repeats of 'trials_3'
 
 # these shouldn't be strictly necessary (should auto-save)
 thisExp.saveAsWideText(filename+'.csv')
