@@ -72,7 +72,7 @@ outcome_stim = visual.TextStim(win, pos = (0,-2.5),text='')
 
 #instructions
 instruct_screen = visual.TextStim(win, text='Welcome to Lets Make a Deal!\n\nIn this task you will interacting with a few different partners.\n\nOn every trial, your partner will have $20, which s/he can propose to divide in any way between the two of you.\n\nYour task is to choose to either accept or reject the proposed split of money.', pos = (0,1), wrapWidth=20, height = 1.2)
-instruct_screen2 = visual.TextStim(win, text='Press Button 2 to accept the offer. Press Button 3 to reject the offer.\n\nIf you choose to reject the offer, you and your partner will both receive $0 for that trial.', pos = (0,1), wrapWidth=20, height = 1.2)
+instruct_screen2 = visual.TextStim(win, text='Press Button 2 to reject the offer. Press Button 3 to accept the offer.\n\nIf you choose to reject the offer, you and your partner will both receive $0 for that trial.', pos = (0,1), wrapWidth=20, height = 1.2)
 
 #exit
 exit_screen = visual.TextStim(win, text='Thanks for playing! Please wait for instructions from the experimenter.', pos = (0,1), wrapWidth=20, height = 1.2)
