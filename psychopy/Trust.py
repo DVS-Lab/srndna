@@ -279,14 +279,14 @@ def do_run(run, trials):
                 ISI_pad = decision_dur-rt
                 #answer = 1
                 if resp_val == 2:
-                    resp_text_left.setColor('red')
+                    resp_text_left.setColor('darkorange')
                     response = resp_left
                     if resp_left < resp_right:
                         highlow = 'low'
                     else:
                         highlow = 'high'
                 if resp_val == 3:
-                    resp_text_right.setColor('red')
+                    resp_text_right.setColor('darkorange')
                     response = resp_right
                     if resp_left < resp_right:
                         highlow = 'high'
@@ -367,7 +367,7 @@ def do_run(run, trials):
                 if partner_resp == 1:
                     outcome_stim.setColor('lime')
                 if partner_resp == 0:
-                    outcome_stim.setColor('red')
+                    outcome_stim.setColor('darkred')
                 outcome_onset=globalClock.getTime()
                 outcome_stim.draw()
                 win.flip()
