@@ -364,6 +364,10 @@ def do_run(run, trials):
             else:
                 outcome_txt = outcome_map[2][partner_resp].format(condition_label)
                 outcome_stim.setText(outcome_txt)
+                if partner_resp == 1:
+                    outcome_stim.setColor('green')
+                if partner_resp == 0:
+                    outcome_stim.setColor('red')
                 outcome_onset=globalClock.getTime()
                 outcome_stim.draw()
                 win.flip()
