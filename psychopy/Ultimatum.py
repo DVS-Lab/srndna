@@ -239,9 +239,9 @@ def do_run(run, trials):
                 resp_onset = globalClock.getTime()
                 rt = resp_onset - decision_onset
                 if resp_val == 2:
-                    resp_text_reject.setColor('red')
+                    resp_text_reject.setColor('darkorange')
                 if resp_val == 3:
-                    resp_text_accept.setColor('red')
+                    resp_text_accept.setColor('darkorange')
                 resp_text_accept.draw()
                 resp_text_reject.draw()
                 pictureStim.draw()

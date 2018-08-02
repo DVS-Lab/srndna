@@ -235,12 +235,12 @@ def do_run(run, trials):
             if trial['Feedback'] == '3' and resp_val == 2:
                 outcome_txt = int(random.randint(1,4))
                 outcome_moneyTxt= 'h'
-                outcome_color='green'
+                outcome_color='lime'
                 trials.addData('outcome_val', int(outcome_txt))
             elif trial['Feedback'] == '3' and resp_val == 3:
                 outcome_txt = int(random.randint(6,9))
                 outcome_moneyTxt= 'h'
-                outcome_color='green'
+                outcome_color='lime'
                 trials.addData('outcome_val', int(outcome_txt))
             elif trial['Feedback'] == '2' and resp_val == 2:
                 outcome_txt = int(5)
@@ -255,12 +255,12 @@ def do_run(run, trials):
             elif trial['Feedback'] == '1' and resp_val == 2:
                 outcome_txt = int(random.randint(6,9))
                 outcome_moneyTxt= 'i'
-                outcome_color='red'
+                outcome_color='darkred'
                 trials.addData('outcome_val', int(outcome_txt))
             elif trial['Feedback'] == '1' and resp_val == 3:
                 outcome_txt = int (random.randint(1,4))
                 outcome_moneyTxt= 'i'
-                outcome_color='red'
+                outcome_color='darkred'
                 trials.addData('outcome_val', int(outcome_txt))
             elif resp_val == 0:
                 outcome_txt='#'
