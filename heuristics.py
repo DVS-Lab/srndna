@@ -34,7 +34,7 @@ def infotodict(seqinfo):
             info[trust].append({'item': s.series_id})
         if (s.dim4 == 202) and ('reward' in s.series_id):
             info[sharedreward].append({'item': s.series_id})
-        if (s.dim4 == 197) and ('ultimatum' in s.series_id):
+        if (s.dim4 == 197) and ('ultimatum' in s.protocol_name):
             info[ultimatum].append({'item': s.series_id})
 
 
