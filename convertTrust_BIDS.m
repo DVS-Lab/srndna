@@ -25,7 +25,7 @@ try
         choiceonset = C{11}; % should be locked to the presentation of the partner cue (at least 500 ms before choice screen)
         RT = C{16};
         Partner = C{4};
-        reciprocate = C{7};
+        reciprocate = C{3};
         response = C{15}; % high/low -- build in check below to check recording
         trust_val = C{13}; % 0-8 (with '999' for no response)
         cLeft = C{6};
