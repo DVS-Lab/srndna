@@ -9,7 +9,7 @@ maindir = pwd;
 
 try
     
-    for r = 0:5
+    for r = 0:4
         fname = fullfile(maindir,'psychopy','logs',num2str(subj),sprintf('sub-%03d_task-trust_run-%d_raw.csv',subj,r));
         if exist(fname,'file')
             fid = fopen(fname,'r');
@@ -33,8 +33,8 @@ try
         options = [cLeft cRight];
         
         
-        fname = sprintf('sub-%03d_task-trust_run-%d_events.tsv',subj,r);
-        output = fullfile(maindir,'output',num2str(subj));
+        fname = sprintf('sub-%03d_task-trust_run-%02d_events.tsv',subj,r+1);
+        output = fullfile(maindir,'output',num2str(subj)); %needs to go to bids/sub-{subj}, but bids folder is in the .gitignore, so run locally.
         if ~exist(output,'dir')
             mkdir(output)
         end
@@ -81,21 +81,25 @@ try
         end
         fclose(fid);
         rand_trial = randsample(1:36,1);
-        if reciprocate(rand_trial)
-            participant = (8 - trust_val(rand_trial)) + ((trust_val(rand_trial) * 3)/2);
-            friend = (trust_val(rand_trial) * 3)/2;
+        if trust_val(rand_trial) == 999
+            fprintf('Investment Game, Run %d: On trial %d, Participant did not respond.\n', r+1, rand_trial);
         else
-            participant = 8 - trust_val(rand_trial);
-            friend = (trust_val(rand_trial) * 3);
+            if reciprocate(rand_trial)
+                participant = (8 - trust_val(rand_trial)) + ((trust_val(rand_trial) * 3)/2);
+                friend = (trust_val(rand_trial) * 3)/2;
+            else
+                participant = 8 - trust_val(rand_trial);
+                friend = (trust_val(rand_trial) * 3);
+            end
+            if (Partner(rand_trial) == 1)
+                trial_type = 'Computer';
+            elseif (Partner(rand_trial) == 2)
+                trial_type = 'Stranger';
+            elseif (Partner(rand_trial) == 3)
+                trial_type = 'Friend';
+            end
+            fprintf('Investment Game, Run %d: On trial %d, Participant WINS $%.2f and %s WINS $%.2f.\n', r+1, rand_trial, participant, trial_type, friend);
         end
-        if (Partner(rand_trial) == 1)
-            trial_type = 'Computer';
-        elseif (Partner(rand_trial) == 2)
-            trial_type = 'Stranger';
-        elseif (Partner(rand_trial) == 3)
-            trial_type = 'Friend';
-        end
-        fprintf('Investment Game, Run %d: On trial %d, Participant WINS $%.2f and %s WINS $%.2f.\n', r+1, rand_trial, participant, trial_type, friend);
     end
     
 catch ME

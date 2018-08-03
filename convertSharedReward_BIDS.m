@@ -27,7 +27,7 @@ try
         feedback = C{3};
         
         
-        fname = sprintf('sub-%03d_task-sharedreward_run-%d_events.tsv',subj,r); % need to make fMRI run number consistent with this?
+        fname = sprintf('sub-%03d_task-sharedreward_run-%02d_events.tsv',subj,r+1); % need to make fMRI run number consistent with this?
         output = fullfile(maindir,'output',num2str(subj));
         if ~exist(output,'dir')
             mkdir(output)
