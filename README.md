@@ -9,10 +9,10 @@ The psychopy folder contains all of the code for stimulus delivery. Input files 
 
 ## Basic steps for experimenters
 1. Transfer data from XNAT to dicoms folder (e.g., /data/projects/srndna/dicoms/SMITH-AgingDM-102)
-1. Run [heudiconv][3] to convert dicoms to BIDS
+1. Run [heudiconv][3] to convert dicoms to BIDS. See `batch_convert.sh` for details that apply to our file structure.
 1. Run convert*BIDS.m scripts to place events files in bids folder
-1. Run [mriqc][4] and [fmriprep][5]
-1. Convert *_events.tsv files to 3-column files (compatible with FSL) using Tom Nichols' [BIDSto3col.sh][2] script
+1. Run [mriqc][4] and [fmriprep][5] using `bash mriqc_example.sh` and `bash fmriprep_example.sh`, respectively. (NB: you need to edit these scripts first to point it to correct subject.)
+1. Convert *_events.tsv files to 3-column files (compatible with FSL) using Tom Nichols' [BIDSto3col.sh][2] script. This script is wrapped into our pipeline using `bash gen_3col_files.sh` (NB: edit to add subject numbers)
 1. Run analyses in FSL
 
 [1]: https://openneuro.org/
