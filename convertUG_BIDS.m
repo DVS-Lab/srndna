@@ -3,9 +3,10 @@ maindir = pwd;
 
 try
     
-    
+
     for r = 0:1
-        % sub-101_task-ultimatum_run-0_raw.csv
+
+        % sub-101_task-ultimatum_run-0_raw.csv sub-102_task-ultimatum_run-1_raw.csv
         fname = fullfile(maindir,'psychopy','logs',num2str(subj),sprintf('sub-%03d_task-ultimatum_run-%d_raw.csv',subj,r));
         if exist(fname,'file')
             fid = fopen(fname,'r');
@@ -15,18 +16,19 @@ try
         end
         C = textscan(fid,repmat('%f',1,17),'Delimiter',',','HeaderLines',1,'EmptyValue', NaN);
         fclose(fid);
+
         
         % "Feedback" is the offer value (out of $20)
         
-        onset = C{12};
-        RT = C{14};
-        duration = C{17};
+        onset = C{10};
+        RT = C{12};
+        duration = C{15};
         IsFairBlock = C{2};
         Partner = C{5};
         Offer = C{4};
-        response = C{13};
+        response = C{11};
         
-        fname = sprintf('sub-%03d_task-ultimatum_run-%d_events.tsv',subj,r); % need to make fMRI run number consistent with this?
+        fname = sprintf('sub-%03d_task-ultimatum_run-%02d_events.tsv',subj,r+1); % making compatible with bids output
         output = fullfile(maindir,'output',num2str(subj));
         if ~exist(output,'dir')
             mkdir(output)
@@ -36,7 +38,7 @@ try
         fprintf(fid,'onset\tduration\ttrial_type\tresponse_time\tOffer\n');
         
         for t = 1:length(onset);
-            
+
             %{
 
   if subj_gen==0 and subj_eth==0 and subj_age > 35:
