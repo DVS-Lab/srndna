@@ -30,10 +30,10 @@ set fmri(featwatcher_yn) 0
 set fmri(sscleanup_yn) 0
 
 # Output directory
-set fmri(outputdir) "/data/projects/srndna/fsl/trust_test"
+set fmri(outputdir) "/data/projects/srndna/fsl/trust_test_run-01"
 
 # TR(s)
-set fmri(tr) 2.020000 
+set fmri(tr) 2.020000
 
 # Total volumes
 set fmri(npts) 218
@@ -254,7 +254,7 @@ set fmri(regstandard_dof) 12
 set fmri(regstandard_nonlinear_yn) 0
 
 # Control nonlinear warp field resolution
-set fmri(regstandard_nonlinear_warpres) 10 
+set fmri(regstandard_nonlinear_warpres) 10
 
 # High pass filter cutoff
 set fmri(paradigm_hp) 100
@@ -267,7 +267,7 @@ set fmri(totalVoxels) 196773122
 set fmri(ncopeinputs) 0
 
 # 4D AVW data or FEAT directory (1)
-set feat_files(1) "/data/projects/srndna/fmriprep/fmriprep/sub-102/func/sub-102_task-trust_run-02_bold_space-MNI152NLin2009cAsym_variant-smoothAROMAnonaggr_preproc"
+set feat_files(1) "/data/projects/srndna/fmriprep/fmriprep/sub-102/func/sub-102_task-trust_run-01_bold_space-MNI152NLin2009cAsym_variant-smoothAROMAnonaggr_preproc"
 
 # Add confound EVs text file
 set fmri(confoundevs) 0
@@ -371,8 +371,7 @@ set fmri(tempfilt_yn2) 1
 set fmri(deriv_yn2) 0
 
 # Custom EV file (EV 2)
-set fmri(custom2) "/data/projects/srndna/fsl/EVfiles/sub-102/trust/run-01_choice_friend.txt
-"
+set fmri(custom2) "/data/projects/srndna/fsl/EVfiles/sub-102/trust/run-01_choice_friend.txt"
 
 # Orthogonalise EV 2 wrt EV 0
 set fmri(ortho2.0) 0
@@ -573,8 +572,7 @@ set fmri(tempfilt_yn5) 1
 set fmri(deriv_yn5) 0
 
 # Custom EV file (EV 5)
-set fmri(custom5) "/data/projects/srndna/fsl/EVfiles/sub-102/trust/run-01_outcome_computer_recip.txt
-"
+set fmri(custom5) "/data/projects/srndna/fsl/EVfiles/sub-102/trust/run-01_outcome_computer_recip.txt"
 
 # Orthogonalise EV 5 wrt EV 0
 set fmri(ortho5.0) 0
@@ -708,8 +706,7 @@ set fmri(tempfilt_yn7) 1
 set fmri(deriv_yn7) 0
 
 # Custom EV file (EV 7)
-set fmri(custom7) "/data/projects/srndna/fsl/EVfiles/sub-102/trust/run-01_outcome_friend_recip.txt
-"
+set fmri(custom7) "/data/projects/srndna/fsl/EVfiles/sub-102/trust/run-01_outcome_friend_recip.txt"
 
 # Orthogonalise EV 7 wrt EV 0
 set fmri(ortho7.0) 0
@@ -776,8 +773,7 @@ set fmri(tempfilt_yn8) 1
 set fmri(deriv_yn8) 0
 
 # Custom EV file (EV 8)
-set fmri(custom8) "/data/projects/srndna/fsl/EVfiles/sub-102/trust/run-01_outcome_stranger_defect.txt
-"
+set fmri(custom8) "/data/projects/srndna/fsl/EVfiles/sub-102/trust/run-01_outcome_stranger_defect.txt"
 
 # Orthogonalise EV 8 wrt EV 0
 set fmri(ortho8.0) 0
@@ -844,8 +840,7 @@ set fmri(tempfilt_yn9) 1
 set fmri(deriv_yn9) 0
 
 # Custom EV file (EV 9)
-set fmri(custom9) "/data/projects/srndna/fsl/EVfiles/sub-102/trust/run-01_outcome_stranger_recip.txt
-"
+set fmri(custom9) "/data/projects/srndna/fsl/EVfiles/sub-102/trust/run-01_outcome_stranger_recip.txt"
 
 # Orthogonalise EV 9 wrt EV 0
 set fmri(ortho9.0) 0
