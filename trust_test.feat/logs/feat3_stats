@@ -1,0 +1,17 @@
+</pre><hr>Stats<br><pre>
+
+mkdir -p custom_timing_files ; /usr/share/fsl/5.0/bin/fslFixText /data/projects/srndna/fsl/EVfiles/sub-102/trust/run-01_choice_computer.txt custom_timing_files/ev1.txt
+
+mkdir -p custom_timing_files ; /usr/share/fsl/5.0/bin/fslFixText /data/projects/srndna/fsl/EVfiles/sub-102/trust/run-01_choice_friend.txt
+ custom_timing_files/ev2.txt
+Usage: fslFixText <input text file> <output text file>
+Ensures standard UNIX line endings in output text file
+sh: 2: custom_timing_files/ev2.txt: not found
+
+FATAL ERROR ENCOUNTERED:
+COMMAND:
+mkdir -p custom_timing_files ; /usr/share/fsl/5.0/bin/fslFixText /data/projects/srndna/fsl/EVfiles/sub-102/trust/run-01_choice_friend.txt
+ custom_timing_files/ev2.txt
+ERROR MESSAGE:
+child process exited abnormally
+END OF ERROR MESSAGE
