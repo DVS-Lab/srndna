@@ -6,7 +6,7 @@ sub=$1
 run=$2
 
 EVDIR=${maindir}/fsl/EVfiles/sub-${sub}/trust/run-0${run}
-DATA=${maindir}/bids/sub-${sub}/func/sub-${sub}_task-trust_run-0${run}_bold_space-MNI152NLin2009cAsym_variant-smoothAROMAnonaggr_preproc.nii.gz
+DATA=${maindir}/fmriprep/fmriprep/sub-${sub}/func/sub-${sub}_task-trust_run-0${run}_bold_space-MNI152NLin2009cAsym_variant-smoothAROMAnonaggr_preproc.nii.gz
 MAINOUTPUT=${maindir}/fsl/sub-${sub}/
 mkdir -p $MAINOUTPUT
 OUTPUT=${MAINOUTPUT}/L1_task-trust_model-01_type-act_run-0${run}
