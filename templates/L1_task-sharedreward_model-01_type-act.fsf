@@ -30,10 +30,10 @@ set fmri(featwatcher_yn) 0
 set fmri(sscleanup_yn) 0
 
 # Output directory
-set fmri(outputdir) "/data/projects/srndna/fsl/sharedreward_test_run-01"
+set fmri(outputdir) "OUTPUT"
 
 # TR(s)
-set fmri(tr) 2.020000 
+set fmri(tr) 2.020000
 
 # Total volumes
 set fmri(npts) 202
@@ -254,7 +254,7 @@ set fmri(regstandard_dof) 12
 set fmri(regstandard_nonlinear_yn) 0
 
 # Control nonlinear warp field resolution
-set fmri(regstandard_nonlinear_warpres) 10 
+set fmri(regstandard_nonlinear_warpres) 10
 
 # High pass filter cutoff
 set fmri(paradigm_hp) 200
@@ -267,7 +267,7 @@ set fmri(totalVoxels) 182331058
 set fmri(ncopeinputs) 0
 
 # 4D AVW data or FEAT directory (1)
-set feat_files(1) "/data/projects/srndna/fmriprep/fmriprep/sub-102/func/sub-102_task-sharedreward_run-01_bold_space-MNI152NLin2009cAsym_variant-smoothAROMAnonaggr_preproc"
+set feat_files(1) "DATA"
 
 # Add confound EVs text file
 set fmri(confoundevs) 0
@@ -304,7 +304,7 @@ set fmri(tempfilt_yn1) 1
 set fmri(deriv_yn1) 0
 
 # Custom EV file (EV 1)
-set fmri(custom1) "/data/projects/srndna/fsl/EVfiles/sub-102/sharedreward/run-01_block_computer_punish.txt"
+set fmri(custom1) "EVDIR_block_computer_punish.txt"
 
 # Orthogonalise EV 1 wrt EV 0
 set fmri(ortho1.0) 0
@@ -359,7 +359,7 @@ set fmri(tempfilt_yn2) 1
 set fmri(deriv_yn2) 0
 
 # Custom EV file (EV 2)
-set fmri(custom2) "/data/projects/srndna/fsl/EVfiles/sub-102/sharedreward/run-01_block_computer_reward.txt"
+set fmri(custom2) "EVDIR_block_computer_reward.txt"
 
 # Orthogonalise EV 2 wrt EV 0
 set fmri(ortho2.0) 0
@@ -414,7 +414,7 @@ set fmri(tempfilt_yn3) 1
 set fmri(deriv_yn3) 0
 
 # Custom EV file (EV 3)
-set fmri(custom3) "/data/projects/srndna/fsl/EVfiles/sub-102/sharedreward/run-01_block_friend_punish.txt"
+set fmri(custom3) "EVDIR_block_friend_punish.txt"
 
 # Orthogonalise EV 3 wrt EV 0
 set fmri(ortho3.0) 0
@@ -469,7 +469,7 @@ set fmri(tempfilt_yn4) 1
 set fmri(deriv_yn4) 0
 
 # Custom EV file (EV 4)
-set fmri(custom4) "/data/projects/srndna/fsl/EVfiles/sub-102/sharedreward/run-01_block_friend_reward.txt"
+set fmri(custom4) "EVDIR_block_friend_reward.txt"
 
 # Orthogonalise EV 4 wrt EV 0
 set fmri(ortho4.0) 0
@@ -524,7 +524,7 @@ set fmri(tempfilt_yn5) 1
 set fmri(deriv_yn5) 0
 
 # Custom EV file (EV 5)
-set fmri(custom5) "/data/projects/srndna/fsl/EVfiles/sub-102/sharedreward/run-01_block_stranger_punish.txt"
+set fmri(custom5) "EVDIR_block_stranger_punish.txt"
 
 # Orthogonalise EV 5 wrt EV 0
 set fmri(ortho5.0) 0
@@ -579,7 +579,7 @@ set fmri(tempfilt_yn6) 1
 set fmri(deriv_yn6) 0
 
 # Custom EV file (EV 6)
-set fmri(custom6) "/data/projects/srndna/fsl/EVfiles/sub-102/sharedreward/run-01_block_stranger_reward.txt"
+set fmri(custom6) "EVDIR_block_stranger_reward.txt"
 
 # Orthogonalise EV 6 wrt EV 0
 set fmri(ortho6.0) 0
