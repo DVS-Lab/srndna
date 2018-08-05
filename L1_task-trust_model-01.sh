@@ -13,7 +13,7 @@ OUTPUT=${MAINOUTPUT}/L1_task-trust_model-01_type-act_run-0${run}
 rm -rf ${OUTPUT}.feat
 
 MISSED_TRIAL=${EVDIR}_missed_trial.txt
-if [ -e $MISSED_TRIAL ];
+if [ -e $MISSED_TRIAL ]; then
   EV_SHAPE=3
 else
   EV_SHAPE=10
