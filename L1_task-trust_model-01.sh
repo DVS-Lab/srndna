@@ -10,12 +10,22 @@ DATA=${maindir}/fmriprep/fmriprep/sub-${sub}/func/sub-${sub}_task-trust_run-0${r
 MAINOUTPUT=${maindir}/fsl/sub-${sub}/
 mkdir -p $MAINOUTPUT
 OUTPUT=${MAINOUTPUT}/L1_task-trust_model-01_type-act_run-0${run}
+rm -rf ${OUTPUT}.feat
+
+MISSED_TRIAL=${EVDIR}_missed_trial.txt
+if [ -e $MISSED_TRIAL ];
+  EV_SHAPE=3
+else
+  EV_SHAPE=10
+fi
 
 ITEMPLATE=${maindir}/templates/L1_task-trust_model-01_type-act.fsf
 OTEMPLATE=${MAINOUTPUT}/L1_task-trust_model-01_type-act_run-0${run}.fsf
 sed -e 's@OUTPUT@'$OUTPUT'@g' \
 -e 's@DATA@'$DATA'@g' \
 -e 's@EVDIR@'$EVDIR'@g' \
+-e 's@MISSED_TRIAL@'$MISSED_TRIAL'@g' \
+-e 's@EV_SHAPE@'$EV_SHAPE'@g' \
 <$ITEMPLATE> $OTEMPLATE
 
 # runs feat on output template

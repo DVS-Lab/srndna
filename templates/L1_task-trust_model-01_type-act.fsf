@@ -885,7 +885,7 @@ set fmri(evtitle10) "miss"
 # 3 : Custom (3 column format)
 # 4 : Interaction
 # 10 : Empty (all zeros)
-set fmri(shape10) 3
+set fmri(shape10) EV_SHAPE
 
 # Convolution (EV 10)
 # 0 : None
@@ -907,7 +907,7 @@ set fmri(tempfilt_yn10) 1
 set fmri(deriv_yn10) 0
 
 # Custom EV file (EV 10)
-set fmri(custom10) "EVDIR_missed_trial.txt"
+set fmri(custom10) "MISSED_TRIAL"
 
 # Orthogonalise EV 10 wrt EV 0
 set fmri(ortho10.0) 0
