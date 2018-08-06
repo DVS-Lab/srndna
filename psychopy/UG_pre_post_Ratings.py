@@ -184,7 +184,7 @@ for trial in trials:
         questionStim.setText(ratingQ)
         win.flip()
 
-        resp = event.getKeys(keyList = responseKeys)
+        #resp = event.getKeys(keyList = responseKeys)
 
         if len(resp)>0:
             if resp[0] == 'escape':
