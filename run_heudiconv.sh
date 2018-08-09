@@ -44,4 +44,4 @@ FUNC09=\"sub-${sub}_task-ultimatum_run-02_bold.nii.gz\"
 #the formatting of this line is kind of tricky with all the special characters: \n \t
 #be sure to include ,\n\t\t in between each ${FUNCFILENAME} (but not after the last one)
 #after the last ${FUNCFILENAME} in the line there should be the characters ],/g before the closing quotation mark (")
-sed -i "1s/{/{\n\t\"IntendedFor\": [${FUNC01},\n\t\t${FUNC02},\n\t\t${FUNC03}],\n\t\t${FUNC04}],\n\t\t${FUNC05}],\n\t\t${FUNC06}],\n\t\t${FUNC07}],\n\t\t${FUNC08}],\n\t\t${FUNC09}],/g" ${bidsroot}/sub-${sub}/fmap/sub-${sub}_*.json
+sed -i "1s/{/{\n\t\"IntendedFor\": [${FUNC01},\n\t\t${FUNC02},\n\t\t${FUNC03},\n\t\t${FUNC04},\n\t\t${FUNC05},\n\t\t${FUNC06},\n\t\t${FUNC07},\n\t\t${FUNC08},\n\t\t${FUNC09}],/g" ${bidsroot}/sub-${sub}/fmap/sub-${sub}_*.json
