@@ -9,19 +9,19 @@ sub=$1
 xnat=$2
 bidsroot=/data/projects/srndna/bids
 #
-# if [ $xnat == 1 ]; then
-#   docker run --rm -it -v /data/projects/srndna:/data:ro \
-#   -v ${bidsroot}:/output \
-#   nipy/heudiconv:latest \
-#   -d /data/dicoms/SMITH-AgingDM-{subject}/scans/*/DICOM/*.dcm -s $sub \
-#   -f /data/heuristics.py -c dcm2niix -b -o /output
-# else
-#   docker run --rm -it -v /data/projects/srndna:/data:ro \
-#   -v ${bidsroot}:/output \
-#   nipy/heudiconv:latest \
-#   -d /data/dicoms/SMITH-AgingDM-{subject}/*/*/*.IMA -s $sub \
-#   -f /data/heuristics.py -c dcm2niix -b -o /output
-# fi
+if [ $xnat == 1 ]; then
+  docker run --rm -it -v /data/projects/srndna:/data:ro \
+  -v ${bidsroot}:/output \
+  nipy/heudiconv:latest \
+  -d /data/dicoms/SMITH-AgingDM-{subject}/scans/*/DICOM/*.dcm -s $sub \
+  -f /data/heuristics.py -c dcm2niix -b -o /output
+else
+  docker run --rm -it -v /data/projects/srndna:/data:ro \
+  -v ${bidsroot}:/output \
+  nipy/heudiconv:latest \
+  -d /data/dicoms/SMITH-AgingDM-{subject}/*/*/*.IMA -s $sub \
+  -f /data/heuristics.py -c dcm2niix -b -o /output
+fi
 
 # need to select a version and stick with it instead of nipy/heudiconv:latest
 # need to check anonymization (e.g., dcm2niix -ba -y)???
