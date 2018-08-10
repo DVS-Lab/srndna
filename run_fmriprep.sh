@@ -9,8 +9,6 @@ docker run -it --rm \
 -v /data/projects/srndna/bids:/data:ro \
 -v /data/projects/srndna/fmriprep:/out \
 -v /data/projects/srndna/fs_license.txt:/opt/freesurfer/fs_license.txt \
-poldracklab/fmriprep:latest \
+poldracklab/fmriprep:1.1.4 \
 /data /out \
 participant --participant_label $sub --use-aroma --fs-no-reconall --fs-license-file /opt/freesurfer/fs_license.txt
-
-# need to select a version and stick with it instead of poldracklab/fmriprep:latest
