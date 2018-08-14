@@ -204,12 +204,20 @@ def do_run(run, trials):
                 resp_val = int(resp[0])
                 if resp_val==2:
                     resp_onset = globalClock.getTime()
+                    question.setColor('darkorange')
                     rt = resp_onset - decision_onset
-                    core.wait(decision_dur - rt)
+                    #core.wait(decision_dur - rt)
                 if resp_val==3:
                     resp_onset = globalClock.getTime()
+                    question.setColor('darkorange')
                     rt = resp_onset - decision_onset
-                    core.wait(decision_dur -rt)
+                    #core.wait(decision_dur -rt)
+                cardStim.draw()
+                question.draw()
+                pictureStim.draw()
+                nameStim.draw()
+                win.flip()
+                core.wait(decision_dur - rt)
                 break
             else:
                 resp_val = 0
@@ -220,7 +228,8 @@ def do_run(run, trials):
         trials.addData('resp_onset', resp_onset)
         trials.addData('rt', rt)
 
-
+        ###reset question mark color
+        question.setColor('white')
 #outcome phase
         timer.reset()
         #win.flip()
