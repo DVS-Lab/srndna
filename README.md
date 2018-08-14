@@ -12,8 +12,8 @@ Here are the basic steps for transferring and processing data. Note that when yo
 
 1. Transfer data from XNAT to dicoms folder (e.g., /data/projects/srndna/dicoms/SMITH-AgingDM-102)
 1. Run [heudiconv][3] to convert dicoms to BIDS using `bash run_heudiconv.sh $sub`.
+1. Run PyDeface to remove the face from the anats. This is done using `bash run_pydeface.sh $sub`. This updates permissions.
 1. Run convert*BIDS.m scripts to place events files in bids folder. Note, this is a Matlab script.
-1. Run PyDeface to remove the face from the anats. This is done using `bash run_pydeface.sh $sub`. 
 1. Run [mriqc][4] and [fmriprep][5] using `bash run_mriqc.sh $sub` and `bash run_fmriprep.sh $sub`, respectively.
 1. Convert `*_events.tsv` files to 3-column files (compatible with FSL) using Tom Nichols' [BIDSto3col.sh][2] script. This script is wrapped into our pipeline using `bash gen_3col_files.sh $sub`
 1. Run analyses in FSL. Analyses in FSL consist of two stages, which we call "Level 1" (L1) and "Level 2" (L2). The basic analysis scripts follow the same logic as above but also include a run number for L1 analyses: `bash L1_task-trust_model-01.sh $sub $run`
