@@ -28,7 +28,7 @@ try
         
         
         fname = sprintf('sub-%03d_task-sharedreward_run-%02d_events.tsv',subj,r+1); % need to make fMRI run number consistent with this?
-        output = fullfile(maindir,'output',num2str(subj));
+        output = fullfile(maindir,'bids',['sub-' num2str(subj)],'func');
         if ~exist(output,'dir')
             mkdir(output)
         end

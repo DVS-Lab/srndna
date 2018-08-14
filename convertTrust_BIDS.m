@@ -34,7 +34,7 @@ try
         
         
         fname = sprintf('sub-%03d_task-trust_run-%02d_events.tsv',subj,r+1);
-        output = fullfile(maindir,'output',num2str(subj)); %needs to go to bids/sub-{subj}, but bids folder is in the .gitignore, so run locally.
+        output = fullfile(maindir,'bids',['sub-' num2str(subj)],'func');
         if ~exist(output,'dir')
             mkdir(output)
         end
