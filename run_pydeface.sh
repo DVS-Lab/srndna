@@ -8,7 +8,7 @@
 sub=$1
 bidsroot=/data/projects/srndna/bids
 
-sudo chmod -R aug+rwx ${bidsroot}/sub-${sub}
+#sudo chmod -R aug+rwx ${bidsroot}/sub-${sub}
 
 # defacing anatomicals to ensure compatibility with data sharing
 pydeface.py ${bidsroot}/sub-${sub}/anat/sub-${sub}_T1w.nii.gz
