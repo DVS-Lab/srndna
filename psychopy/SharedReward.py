@@ -19,7 +19,7 @@ DEBUG = False
 frame_rate=1
 instruct_dur=3
 initial_fixation_dur = 4
-final_fixation_dur = 2
+#final_fixation_dur = 2
 decision_dur=2.5
 outcome_dur=1
 
@@ -315,19 +315,20 @@ def do_run(run, trials):
     # Final Fixation screen after trials completed
     fixation.draw()
     win.flip()
-    core.wait(final_fixation_dur)
-
+    #core.wait(final_fixation_dur)
     os.chdir(subjdir)
     trials.saveAsWideText(fileName)
     os.chdir(expdir)
-    #if globalClock.getTime() < 408:
-    #10 seconds above what task is clocking in at
-    #    endTime = (408 - globalClock.getTime())
-    #else:
-    #    endTime = 10
-    #core.wait(endTime)
+    endTime = 0.01 # not sure if this will take a 0, so giving it 0.01 and making sure it is defined
+    expected_dur = 398
+    buffer_dur = 10
+    total_dur = expected_dur + buffer_dur
+    if globalClock.getTime() < total_dur:
+        endTime = (total_dur - globalClock.getTime())
+    else:
+        endTime = buffer_dur
+    core.wait(endTime)
     print globalClock.getTime()
-    #trials.saveAsText(fileName=log_file.format(subj_id),delim = ',',dataOut='all_raw')
 
 for run, trials in enumerate([trials_run1, trials_run2]):
     do_run(run, trials)
