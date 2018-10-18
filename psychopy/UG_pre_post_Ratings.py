@@ -36,6 +36,7 @@ if gui.OK:
 else:
     sys.exit()
 
+subj_session = int(subj_session)
 
 run_data = {
     'Participant ID': subj_id,
@@ -72,9 +73,13 @@ subjdir = '%s/logs/%s' % (expdir, subj_id)
 if not os.path.exists(subjdir):
     os.makedirs(subjdir)
 log_file = os.path.join(subjdir,'sub{}_Bargaining-Ratings-{}.csv')
-trial_data = [r for r in csv.DictReader(open('UGRatings.csv','rU'))]
-trials = data.TrialHandler(trial_data[:], 1, method="sequential")
 
+if subj_session==1:
+    trial_data = [r for r in csv.DictReader(open('UGRatings_Pre.csv','rU'))]
+    trials = data.TrialHandler(trial_data[:], 1, method="sequential")
+elif subj_session==2:
+    trial_data = [r for r in csv.DictReader(open('UGRatings_Post.csv','rU'))]
+    trials = data.TrialHandler(trial_data[:], 1, method="sequential")
 
 subj_gen = int(subj_gen)
 subj_eth = int(subj_eth)
@@ -142,6 +147,8 @@ elif subj_gen==1 and subj_eth==1 and subj_age <= 35:
 question_map = {
     '2': 'fair',
     '1': 'likeable',
+    '0': 'angry',
+    '4': 'satisfied'
     }
 
 #clock
@@ -155,6 +162,8 @@ timer = core.Clock()
 instruct_screen.draw()
 win.flip()
 event.waitKeys(keyList=('space'))
+
+
 for trial in trials:
     condition_label = stim_map[trial['Partner']]
     imagepath = os.path.join(expdir,'Images')
@@ -163,6 +172,8 @@ for trial in trials:
     question_label = question_map[trial['Trait']]
     #position = trial['position']
     fileName=log_file.format(subj_id,subj_session)
+
+
 
     # rating scale
     scale = visual.RatingScale(win, low=0, high=10, size=2, tickMarks=['0','10'],
@@ -176,13 +187,15 @@ for trial in trials:
 
 
     trial_onset = globalClock.getTime()
-    while scale.noResponse:
-        scale.draw()
-        pictureStim.draw()
-        questionStim.draw()
-        ratingQ = 'How %s do you feel this partner is?' % question_label
-        questionStim.setText(ratingQ)
-        win.flip()
+
+    if int(trial['Trait'])==1 or int(trial['Trait'])==2:
+        while scale.noResponse:
+            scale.draw()
+            pictureStim.draw()
+            questionStim.draw()
+            ratingQ = 'How %s do you feel this partner is?' % question_label
+            questionStim.setText(ratingQ)
+            win.flip()
 
         #resp = event.getKeys(keyList = responseKeys)
 
@@ -196,9 +209,27 @@ for trial in trials:
                 core.quit()
 
 
-    trials.addData('Rating', scale.getRating())
+        trials.addData('Rating', scale.getRating())
 
+    elif int(trial['Trait'])==0 or int(trial['Trait'])==4:
+        while scale.noResponse:
+            scale.draw()
+            pictureStim.draw()
+            questionStim.draw()
+            ratingQ = 'How %s were you with offers from this partner?' % question_label
+            questionStim.setText(ratingQ)
+            win.flip()
 
+        if len(resp)>0:
+            if resp[0] == 'escape':
+                trials.addData('Rating', scale.getRating())
+                os.chdir(subjdir)
+                trials.saveAsWideText(fileName)
+                os.chdir(expdir)
+                win.close()
+                core.quit()
+
+        trials.addData('Rating', scale.getRating())
 
 os.chdir(subjdir)
 trials.saveAsWideText(fileName)

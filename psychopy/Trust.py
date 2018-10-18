@@ -159,8 +159,8 @@ trial_data_4  = [r for r in csv.DictReader(open('params/TG_designs/sub-' + subj_
     + subj_id + '_run-04_design.csv','rU'))]
 trial_data_5  = [r for r in csv.DictReader(open('params/TG_designs/sub-' + subj_id + '/sub-'
     + subj_id + '_run-05_design.csv','rU'))]
-trial_data_6  = [r for r in csv.DictReader(open('params/TG_designs/sub-' + subj_id + '/sub-'
-    + subj_id + '_run-06_design.csv','rU'))]
+#trial_data_6  = [r for r in csv.DictReader(open('params/TG_designs/sub-' + subj_id + '/sub-'
+#    + subj_id + '_run-06_design.csv','rU'))]
 
 #set up trial handlers
 trials_run1 = data.TrialHandler(trial_data_1[:], 1, method="sequential") #change to [] for full run
@@ -168,7 +168,7 @@ trials_run2 = data.TrialHandler(trial_data_2[:], 1, method="sequential") #change
 trials_run3 = data.TrialHandler(trial_data_3[:], 1, method="sequential") #change to [] for full run
 trials_run4 = data.TrialHandler(trial_data_4[:], 1, method="sequential") #change to [] for full run
 trials_run5 = data.TrialHandler(trial_data_5[:], 1, method="sequential") #change to [] for full run
-trials_run6 = data.TrialHandler(trial_data_6[:], 1, method="sequential") #change to [] for full run
+#trials_run6 = data.TrialHandler(trial_data_6[:], 1, method="sequential") #change to [] for full run
 
 # condition to stim mapping
 # might need to edit this with text logic
@@ -431,11 +431,11 @@ if len (specific_run)==1:
         do_run(3, trials_run4)
     elif run == 5:
         do_run(4, trials_run5)
-    elif run == 6:
-        do_run(5, trials_run6)
+    #elif run == 6:
+    #    do_run(5, trials_run6)
     else: 'Run index is not permissible.'
 else:
-    for run, trials in enumerate([trials_run1, trials_run2, trials_run3, trials_run4, trials_run5, trials_run6]):
+    for run, trials in enumerate([trials_run1, trials_run2, trials_run3, trials_run4, trials_run5]):
         do_run(run, trials)
 
 # Exit
