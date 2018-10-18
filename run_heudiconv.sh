@@ -12,12 +12,14 @@ bidsroot=/data/projects/srndna/bids
 if [ $xnat == 1 ]; then
   docker run --rm -it -v /data/projects/srndna:/data:ro \
   -v ${bidsroot}:/output \
+  -u $(id -u):$(id -g) \
   nipy/heudiconv:latest \
   -d /data/dicoms/SMITH-AgingDM-{subject}/scans/*/DICOM/*.dcm -s $sub \
   -f /data/heuristics.py -c dcm2niix -b --minmeta -o /output
 else
   docker run --rm -it -v /data/projects/srndna:/data:ro \
   -v ${bidsroot}:/output \
+  -u $(id -u):$(id -g) \
   nipy/heudiconv:latest \
   -d /data/dicoms/SMITH-AgingDM-{subject}/*/*/*.IMA -s $sub \
   -f /data/heuristics.py -c dcm2niix -b --minmeta -o /output
