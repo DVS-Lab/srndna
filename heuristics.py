@@ -26,15 +26,15 @@ def infotodict(seqinfo):
             info[mag] = [s.series_id]
         if (s.dim3 == 36) and ('gre_field' in s.protocol_name):
             info[phase] = [s.series_id]
-        if (s.dim2 == 224) and ('T1w' in s.protocol_name) and ('NORM' in s.image_type):
+        if (s.dim2 == 192) and ('T1w' in s.protocol_name) and ('NORM' in s.image_type):
             info[t1w] = [s.series_id]
         if (s.dim2 == 192) and ('T2w' in s.protocol_name) and ('NORM' in s.image_type):
             info[t2w] = [s.series_id]
-        if (s.dim4 == 218) and ('trust' in s.protocol_name):
+        if (s.dim4 == 217) and ('trust' in s.protocol_name):
             info[trust].append({'item': s.series_id})
         if (s.dim4 == 202) and ('reward' in s.protocol_name):
             info[sharedreward].append({'item': s.series_id})
-        if (s.dim4 == 197) and ('UG' in s.protocol_name):
+        if (s.dim4 == 200) and ('UG' in s.protocol_name):
             info[ultimatum].append({'item': s.series_id})
 
 
