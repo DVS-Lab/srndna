@@ -7,8 +7,9 @@ if [ ! -d ${baseout} ]; then
 fi
 
 sub=$1
+nruns=$2
 
-for run in 1 2 3 4 5; do
+for run in `seq $nruns`; do
   input=${maindir}/bids/sub-${sub}/func/sub-${sub}_task-trust_run-0${run}_events.tsv
   output=${baseout}/sub-${sub}/trust
   mkdir -p $output
@@ -16,6 +17,7 @@ for run in 1 2 3 4 5; do
     bash BIDSto3col.sh $input ${output}/run-0${run}
   else
     echo "PATH ERROR: cannot locate ${input}."
+    exit
   fi
 done
 for run in 1 2; do
@@ -26,6 +28,7 @@ for run in 1 2; do
     bash BIDSto3col.sh $input ${output}/run-0${run}
   else
     echo "PATH ERROR: cannot locate ${input}."
+    exit
   fi
 done
 for run in 1 2; do
@@ -36,5 +39,6 @@ for run in 1 2; do
     bash BIDSto3col.sh $input ${output}/run-0${run}
   else
     echo "PATH ERROR: cannot locate ${input}."
+    exit
   fi
 done
