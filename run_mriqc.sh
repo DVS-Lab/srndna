@@ -6,7 +6,7 @@
 #sub=$1
 umask 0000 # the joys of docker
 
-sudo docker run -it --rm \
+docker run -it --rm \
 -v /data/projects/srndna/bids:/data:ro \
 -v /data/projects/srndna/mriqc:/out \
 -u $(id -u):$(id -g) \
