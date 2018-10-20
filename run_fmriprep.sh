@@ -4,11 +4,13 @@
 # example: bash run_fmriprep.sh 102
 
 sub=$1
+umask 0000 # the joys of docker
 
 docker run -it --rm \
 -v /data/projects/srndna/bids:/data:ro \
 -v /data/projects/srndna/fmriprep:/out \
 -v /data/projects/srndna/fs_license.txt:/opt/freesurfer/fs_license.txt \
+-u $(id -u):$(id -g) \
 poldracklab/fmriprep:1.1.4 \
 /data /out \
 participant --participant_label $sub --use-aroma --fs-no-reconall --fs-license-file /opt/freesurfer/fs_license.txt
