@@ -3,7 +3,7 @@
 # usage: bash run_mriqc.sh sub
 # example: bash run_mriqc.sh 102
 
-sub=$1
+#sub=$1
 umask 0000 # the joys of docker
 
 sudo docker run -it --rm \
@@ -12,4 +12,6 @@ sudo docker run -it --rm \
 -u $(id -u):$(id -g) \
 poldracklab/mriqc:0.12.1 \
 /data /out \
-participant --participant_label $sub
+participant --n_cpus 12 --fft-spikes-detector --ica
+
+# #--participant_label $sub
