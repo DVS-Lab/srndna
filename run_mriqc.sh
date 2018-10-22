@@ -9,9 +9,11 @@ umask 0000 # the joys of docker
 docker run -it --rm \
 -v /data/projects/srndna/bids:/data:ro \
 -v /data/projects/srndna/mriqc:/out \
+-v /data/projects/srndna/scratch:/scratch \
 -u $(id -u):$(id -g) \
+-w /scratch \
 poldracklab/mriqc:0.12.1 \
 /data /out \
-participant --n_cpus 12 --fft-spikes-detector --ica
+participant --n_cpus 12 --fft-spikes-detector --ica -w /scratch
 
 # #--participant_label $sub
