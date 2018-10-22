@@ -11,9 +11,10 @@ The psychopy folder contains all of the code for stimulus delivery. Input files 
 Here are the basic steps for transferring and processing data. Note that when you see `$sub`, it should be replaced with your subject number (e.g., 102). Remember, always check your input and output for each step. If the input/output isn't clear, look through the scripts and talk to someone.
 
 1. Transfer data from XNAT to dicoms folder (e.g., /data/projects/srndna/dicoms/SMITH-AgingDM-102). Be sure to save a backup on the S: drive.
-1. Run [heudiconv][3] to convert dicoms to BIDS using `bash run_heudiconv.sh $sub $xnat $nruns`. The `$xnat` argument indicates whether the data were downloaded from XNAT (1) or transferred directly on disk (0). The `$nruns` argument necessary because some subjects will not have the full set of five runs for the trust task.
-1. Run PyDeface to remove the face from the anats. This is done using `bash run_pydeface.sh $sub`.
-1. Run [mriqc][4] and [fmriprep][5] using `bash run_mriqc.sh $sub` and `bash run_fmriprep.sh $sub`, respectively.
+1. Convert data to BIDS, preprocess, and run QA using the wrapper `bash run_prestats.sh $sub $xnat $nruns`. The `$xnat` argument indicates whether the data were downloaded from XNAT (1) or transferred directly on disk (0). The `$nruns` argument necessary because some subjects will not have the full set of five runs for the trust task. This wrapper will do the following:
+  - Run [heudiconv][3] to convert dicoms to BIDS using `bash run_heudiconv.sh $sub $xnat $nruns`.
+  - Run PyDeface to remove the face from the anats. This is done using `bash run_pydeface.sh $sub`.
+  - Run [mriqc][4] and [fmriprep][5] using `bash run_mriqc.sh $sub` and `bash run_fmriprep.sh $sub`, respectively.
 1. Run convert*BIDS.m scripts to place events files in bids folder. Note, this is a Matlab script.
 1. Convert `*_events.tsv` files to 3-column files (compatible with FSL) using Tom Nichols' [BIDSto3col.sh][2] script. This script is wrapped into our pipeline using `bash gen_3col_files.sh $sub`
 1. Run analyses in FSL. Analyses in FSL consist of two stages, which we call "Level 1" (L1) and "Level 2" (L2). The basic analysis scripts follow the same logic as above but also include a run number for L1 analyses: `bash L1_task-trust_model-01.sh $sub $run`
