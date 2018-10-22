@@ -4,7 +4,6 @@
 # example: bash run_fmriprep.sh 102
 
 sub=$1
-umask 0000 # the joys of docker
 
 docker run -it --rm \
 -v /data/projects/srndna/bids:/data:ro \

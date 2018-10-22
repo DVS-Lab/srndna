@@ -8,7 +8,6 @@
 sub=$1
 xnat=$2
 nruns=$3
-umask 0000 # the joys of docker
 
 bidsroot=/data/projects/srndna/bids
 #
@@ -43,7 +42,7 @@ if [ $nruns -eq 5 ]; then
 	FUNC07=\"func\\/sub-${sub}_task-trust_run-05_bold.nii.gz\"
 	FUNC08=\"func\\/sub-${sub}_task-ultimatum_run-01_bold.nii.gz\"
 	FUNC09=\"func\\/sub-${sub}_task-ultimatum_run-02_bold.nii.gz\"
-	
+
 	#FMAP_INTENDEDFOR edit the line below so that it only includes as many FUNC_FILENAME as you need
 	#the formatting of this line is kind of tricky with all the special characters: \n \t
 	#be sure to include ,\n\t\t in between each ${FUNCFILENAME} (but not after the last one)
@@ -60,7 +59,7 @@ elif [ $nruns -eq 4 ]; then
 	FUNC06=\"func\\/sub-${sub}_task-trust_run-04_bold.nii.gz\"
 	FUNC08=\"func\\/sub-${sub}_task-ultimatum_run-01_bold.nii.gz\"
 	FUNC09=\"func\\/sub-${sub}_task-ultimatum_run-02_bold.nii.gz\"
-	
+
 	sed -i "1s/{/{\n\t\"IntendedFor\": [${FUNC01},\n\t\t${FUNC02},\n\t\t${FUNC03},\n\t\t${FUNC04},\n\t\t${FUNC05},\n\t\t${FUNC06},\n\t\t${FUNC08},\n\t\t${FUNC09}],/g" ${bidsroot}/sub-${sub}/fmap/sub-${sub}_*.json
 
 
@@ -73,9 +72,9 @@ elif [ $nruns -eq 3 ]; then
 	FUNC05=\"func\\/sub-${sub}_task-trust_run-03_bold.nii.gz\"
 	FUNC08=\"func\\/sub-${sub}_task-ultimatum_run-01_bold.nii.gz\"
 	FUNC09=\"func\\/sub-${sub}_task-ultimatum_run-02_bold.nii.gz\"
-	
+
 	sed -i "1s/{/{\n\t\"IntendedFor\": [${FUNC01},\n\t\t${FUNC02},\n\t\t${FUNC03},\n\t\t${FUNC04},\n\t\t${FUNC05},\n\t\t${FUNC08},\n\t\t${FUNC09}],/g" ${bidsroot}/sub-${sub}/fmap/sub-${sub}_*.json
-	
+
 
 elif [ $nruns -eq 2 ]; then
 
@@ -85,7 +84,7 @@ elif [ $nruns -eq 2 ]; then
 	FUNC04=\"func\\/sub-${sub}_task-trust_run-02_bold.nii.gz\"
 	FUNC08=\"func\\/sub-${sub}_task-ultimatum_run-01_bold.nii.gz\"
 	FUNC09=\"func\\/sub-${sub}_task-ultimatum_run-02_bold.nii.gz\"
-	
+
 	sed -i "1s/{/{\n\t\"IntendedFor\": [${FUNC01},\n\t\t${FUNC02},\n\t\t${FUNC03},\n\t\t${FUNC04},\n\t\t${FUNC08},\n\t\t${FUNC09}],/g" ${bidsroot}/sub-${sub}/fmap/sub-${sub}_*.json
 
 

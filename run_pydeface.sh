@@ -6,7 +6,6 @@
 # example: bash run_pydeface.sh 102
 
 sub=$1
-umask 0000 # the joys of docker
 
 bidsroot=/data/projects/srndna/bids
 
