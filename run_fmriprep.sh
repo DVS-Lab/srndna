@@ -16,4 +16,4 @@ docker run -it --rm \
 poldracklab/fmriprep:1.1.4 \
 /data /out \
 participant --participant_label $sub \
---use-aroma --fs-no-reconall --fs-license-file /opt/freesurfer/fs_license.txt -w /scratch
+--n_cpus 12 --use-aroma --fs-no-reconall --fs-license-file /opt/freesurfer/fs_license.txt -w /scratch
