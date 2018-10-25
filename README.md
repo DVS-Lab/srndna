@@ -44,9 +44,13 @@ To do this, make sure you are in the /data/projects/srndna path.
 
 WHY? FSL is how we will do the majority of our analyses.  It is a visual tool that we can use to see 2D and 3D images of the brains that we scanned.
 There should be an FSL command for each of the tasks run:
+
 L1_task-sharedreward_model-01.sh (5 runs)
+
 L1_task-trust_model-01.sh (2 runs)
+
 L1_task-ultimateum_model-01.sh (2 runs)
+
 For each of these tasks, make sure to run through each individual run (number of runs listed above).
 **Note: this will NOT run unless you’ve done all the other steps.
 
