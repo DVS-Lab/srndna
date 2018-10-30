@@ -10,6 +10,7 @@ DATA=${maindir}/fmriprep/fmriprep/sub-${sub}/func/sub-${sub}_task-sharedreward_r
 MAINOUTPUT=${maindir}/fsl/sub-${sub}/
 mkdir -p $MAINOUTPUT
 OUTPUT=${MAINOUTPUT}/L1_task-sharedreward_model-01_type-act_run-0${run}
+rm -rf ${OUTPUT}.feat
 
 ITEMPLATE=${maindir}/templates/L1_task-sharedreward_model-01_type-act.fsf
 OTEMPLATE=${MAINOUTPUT}/L1_task-sharedreward_model-01_type-act_run-0${run}.fsf
