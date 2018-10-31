@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
- umask 0000
+umask 0000
 sub=$1
 xnat=$2
 nruns=$3
