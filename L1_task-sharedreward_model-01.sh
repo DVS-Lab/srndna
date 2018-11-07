@@ -10,7 +10,9 @@ DATA=${maindir}/fmriprep/fmriprep/sub-${sub}/func/sub-${sub}_task-sharedreward_r
 MAINOUTPUT=${maindir}/fsl/sub-${sub}/
 mkdir -p $MAINOUTPUT
 OUTPUT=${MAINOUTPUT}/L1_task-sharedreward_model-01_type-act_run-0${run}
-if [ ! -e ${OUTPUT}.feat/cluster_mask_zstat1.nii.gz ]; then
+if [ -e ${OUTPUT}.feat/cluster_mask_zstat1.nii.gz ]; then
+	exit
+else
 	rm -rf ${OUTPUT}.feat
 fi
 
