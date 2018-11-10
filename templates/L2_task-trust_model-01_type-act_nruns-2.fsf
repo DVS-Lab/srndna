@@ -36,7 +36,7 @@ set fmri(outputdir) "OUTPUT"
 set fmri(tr) 3
 
 # Total volumes
-set fmri(npts) 3
+set fmri(npts) 2
 
 # Delete volumes
 set fmri(ndelete) 0
@@ -322,9 +322,6 @@ set feat_files(1) "INPUT1"
 # 4D AVW data or FEAT directory (2)
 set feat_files(2) "INPUT2"
 
-# 4D AVW data or FEAT directory (3)
-set feat_files(3) "INPUT3"
-
 # Add confound EVs text file
 set fmri(confoundevs) 0
 
@@ -374,17 +371,11 @@ set fmri(evg1.1) 1.0
 # Higher-level EV value for EV 1 and input 2
 set fmri(evg2.1) 1.0
 
-# Higher-level EV value for EV 1 and input 3
-set fmri(evg3.1) 1.0
-
 # Group membership for input 1
 set fmri(groupmem.1) 1
 
 # Group membership for input 2
 set fmri(groupmem.2) 1
-
-# Group membership for input 3
-set fmri(groupmem.3) 1
 
 # Contrast & F-tests mode
 # real : control real EVs
