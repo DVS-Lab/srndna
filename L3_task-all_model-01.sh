@@ -7,6 +7,7 @@ copenum=$2
 copename=$3
 
 MAINOUTPUT=${maindir}/fsl/L3_all_n9
+mkdir -p $MAINOUTPUT
 
 
 OUTPUT=${MAINOUTPUT}/L3_task-${task}_model-01_type-act_copenum-${copenum}_copename-${copename}
