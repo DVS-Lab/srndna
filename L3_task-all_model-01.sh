@@ -6,7 +6,7 @@ task=$1
 copenum=$2
 copename=$3
 
-MAINOUTPUT=${maindir}/fsl/L3_all_n16_rfx
+MAINOUTPUT=${maindir}/fsl/L3_all_n16_fixed
 mkdir -p $MAINOUTPUT
 
 
