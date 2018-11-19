@@ -2,7 +2,7 @@
 
 maindir=`pwd`
 
-TASK=${TASK}
+TASK=trust
 
 sub=$1
 run=$2
