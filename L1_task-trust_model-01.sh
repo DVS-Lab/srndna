@@ -35,8 +35,8 @@ else
   EV_SHAPE=10
 fi
 
-ITEMPLATE=${maindir}/templates/L1_task-${TASK}_model-01_type-${TYPE}.fsf
-OTEMPLATE=${MAINOUTPUT}/L1_task-${TASK}_model-01_type-${TYPE}_run-0${run}.fsf
+ITEMPLATE=${maindir}/templates/L1_task-${TASK}_model-01_seed-${ppi}.fsf
+OTEMPLATE=${MAINOUTPUT}/L1_task-${TASK}_model-01_seed-${ppi}_run-0${run}.fsf
 
 if [ $ppi -eq 0 ]; then
 	sed -e 's@OUTPUT@'$OUTPUT'@g' \
