@@ -35,8 +35,6 @@ if [ $ppi -eq 0 ]; then
 	sed -e 's@OUTPUT@'$OUTPUT'@g' \
 	-e 's@DATA@'$DATA'@g' \
 	-e 's@EVDIR@'$EVDIR'@g' \
-	-e 's@MISSED_TRIAL@'$MISSED_TRIAL'@g' \
-	-e 's@EV_SHAPE@'$EV_SHAPE'@g' \
 	<$ITEMPLATE> $OTEMPLATE
 else
 	PHYS=${MAINOUTPUT}/ts_task-trust_mask-${ppi}_run-0${run}.txt
@@ -45,8 +43,6 @@ else
 	sed -e 's@OUTPUT@'$OUTPUT'@g' \
 	-e 's@DATA@'$DATA'@g' \
 	-e 's@EVDIR@'$EVDIR'@g' \
-	-e 's@MISSED_TRIAL@'$MISSED_TRIAL'@g' \
-	-e 's@EV_SHAPE@'$EV_SHAPE'@g' \
 	-e 's@PHYS@'$PHYS'@g' \
 	<$ITEMPLATE> $OTEMPLATE
 fi

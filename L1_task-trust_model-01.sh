@@ -30,9 +30,9 @@ fi
 
 MISSED_TRIAL=${EVDIR}_missed_trial.txt
 if [ -e $MISSED_TRIAL ]; then
-  EV_SHAPE=3
+	EV_SHAPE=3
 else
-  EV_SHAPE=10
+	EV_SHAPE=10
 fi
 
 ITEMPLATE=${maindir}/templates/L1_task-${TASK}_model-01_seed-${ppi}.fsf
