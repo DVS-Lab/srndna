@@ -12,7 +12,7 @@ MAINOUTPUT=${maindir}/fsl/sub-${sub}
 mkdir -p $MAINOUTPUT
 
 EVDIR=${maindir}/fsl/EVfiles/sub-${sub}/${TASK}/run-0${run}
-if [ $ppi -eq 0 ]; then
+if [ "$ppi" == "0" ]; then
 	DATA=${maindir}/fmriprep/fmriprep/sub-${sub}/func/sub-${sub}_task-${TASK}_run-0${run}_bold_space-MNI152NLin2009cAsym_variant-smoothAROMAnonaggr_preproc.nii.gz
 	TYPE=act
 	OUTPUT=${MAINOUTPUT}/L1_task-${TASK}_model-01_type-${TYPE}_run-0${run}
@@ -38,7 +38,7 @@ fi
 ITEMPLATE=${maindir}/templates/L1_task-${TASK}_model-01_seed-${ppi}.fsf
 OTEMPLATE=${MAINOUTPUT}/L1_task-${TASK}_model-01_seed-${ppi}_run-0${run}.fsf
 
-if [ $ppi -eq 0 ]; then
+if [ "$ppi" == "0" ]; then
 	sed -e 's@OUTPUT@'$OUTPUT'@g' \
 	-e 's@DATA@'$DATA'@g' \
 	-e 's@EVDIR@'$EVDIR'@g' \
@@ -73,6 +73,6 @@ rm -rf ${OUTPUT}.feat/stats/res4d.nii.gz
 rm -rf ${OUTPUT}.feat/stats/corrections.nii.gz
 rm -rf ${OUTPUT}.feat/stats/threshac1.nii.gz
 
-if [ ! $ppi -eq 0 ]; then
+if [ ! "$ppi" == "0" ]; then
 	rm -rf ${OUTPUT}.feat/filtered_func_data.nii.gz
 fi
