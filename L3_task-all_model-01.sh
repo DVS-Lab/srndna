@@ -7,7 +7,7 @@ copenum=$2
 copename=$3
 other=$4 # type-ppi_seed-ffa
 
-MAINOUTPUT=${maindir}/fsl/L3_model-01_ppi_n16_rfx
+MAINOUTPUT=${maindir}/fsl/L3_model-01_ppi_n16_rfx_CDT-z2p6
 mkdir -p $MAINOUTPUT
 REPLACEME=task-${task}_model-01_${other}
 
