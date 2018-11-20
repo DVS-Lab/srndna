@@ -3,7 +3,7 @@
 # Note that Contrast N for PPI is always PHYS in these models.
 # Remove for type-act or add if-statement to ignore/skip
 
-for other in "type-ppi_seed-ffa" "type-ppi_seed-ffa" "type-ppi_seed-ffa"; do
+for other in "type-ppi_seed-ffa" "type-ppi_seed-vs" "type-ppi_seed-amyg"; do
 	
 	# Ultimatum
 	# Lower-level contrast 7 (unfair-fair)
