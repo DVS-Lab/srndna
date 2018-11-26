@@ -9,6 +9,9 @@ run=$2
 ppi=$3 # 0 for activation, otherwise name of the roi
 sm=$4
 
+MAINOUTPUT=${maindir}/fsl/sub-${sub}
+mkdir -p $MAINOUTPUT
+
 # denoise data, if it doesn't exist
 cd ${maindir}/fmriprep/fmriprep/sub-${sub}/func
 if [ ! -e sub-${sub}_task-${TASK}_run-0${run}_bold_space-MNI152NLin2009cAsym_variant-unsmoothedAROMAnonaggr_preproc.nii.gz ]; then
