@@ -7,19 +7,29 @@ TASK=sharedreward
 sub=$1
 run=$2
 ppi=$3 # 0 for activation, otherwise name of the roi
+sm=$4
 
 MAINOUTPUT=${maindir}/fsl/sub-${sub}
 mkdir -p $MAINOUTPUT
 
+# denoise data, if it doesn't exist
+cd ${maindir}/fmriprep/fmriprep/sub-${sub}/func
+if [ ! -e sub-${sub}_task-${TASK}_run-0${run}_bold_space-MNI152NLin2009cAsym_variant-unsmoothedAROMAnonaggr_preproc.nii.gz ]; then
+	fsl_regfilt -i sub-${sub}_${TASK}-mid_run-0${run}_bold_space-MNI152NLin2009cAsym_preproc.nii.gz \
+	    -f $(cat sub-${sub}_${TASK}-mid_run-0${run}_bold_AROMAnoiseICs.csv) \
+	    -d sub-${sub}_task-${TASK}_run-0${run}_bold_MELODICmix.tsv \
+	    -o sub-${sub}_task-${TASK}_run-0${run}_bold_space-MNI152NLin2009cAsym_variant-unsmoothedAROMAnonaggr_preproc.nii.gz
+fi
+
 EVDIR=${maindir}/fsl/EVfiles/sub-${sub}/${TASK}/run-0${run}
 if [ "$ppi" == "0" ]; then
-	DATA=${maindir}/fmriprep/fmriprep/sub-${sub}/func/sub-${sub}_task-${TASK}_run-0${run}_bold_space-MNI152NLin2009cAsym_variant-smoothAROMAnonaggr_preproc.nii.gz
+	DATA=${maindir}/fmriprep/fmriprep/sub-${sub}/func/sub-${sub}_task-${TASK}_run-0${run}_bold_space-MNI152NLin2009cAsym_variant-unsmoothedAROMAnonaggr_preproc.nii.gz
 	TYPE=act
-	OUTPUT=${MAINOUTPUT}/L1_task-${TASK}_model-01_type-${TYPE}_run-0${run}
+	OUTPUT=${MAINOUTPUT}/L1_task-${TASK}_model-01_type-${TYPE}_run-0${run}_sm-${SMOOTH}
 else
-	DATA=${MAINOUTPUT}/L1_task-${TASK}_model-01_type-act_run-0${run}.feat/filtered_func_data.nii.gz
+	DATA=${MAINOUTPUT}/L1_task-${TASK}_model-01_type-act_run-0${run}_sm-${SMOOTH}.feat/filtered_func_data.nii.gz
 	TYPE=ppi
-	OUTPUT=${MAINOUTPUT}/L1_task-${TASK}_model-01_type-${TYPE}_seed-${ppi}_run-0${run}
+	OUTPUT=${MAINOUTPUT}/L1_task-${TASK}_model-01_type-${TYPE}_seed-${ppi}_run-0${run}_sm-${SMOOTH}
 fi
 
 if [ -e ${OUTPUT}.feat/cluster_mask_zstat1.nii.gz ]; then
