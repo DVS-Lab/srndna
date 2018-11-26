@@ -4,6 +4,10 @@ maindir=`pwd`
 
 TASK=trust
 
+sub=$1
+run=$2
+ppi=$3 # 0 for activation, otherwise name of the roi
+sm=$4
 
 # denoise data, if it doesn't exist
 cd ${maindir}/fmriprep/fmriprep/sub-${sub}/func
