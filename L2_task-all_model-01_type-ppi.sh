@@ -5,19 +5,20 @@ maindir=`pwd`
 sub=$1
 nruns=$2
 ppi=$3
+sm=$4
 
 MAINOUTPUT=${maindir}/fsl/sub-${sub}
 
 # Trust Task
 NCOPES=19
-INPUT1=${MAINOUTPUT}/L1_task-trust_model-01_type-ppi_seed-${ppi}_run-01.feat
-INPUT2=${MAINOUTPUT}/L1_task-trust_model-01_type-ppi_seed-${ppi}_run-02.feat
-INPUT3=${MAINOUTPUT}/L1_task-trust_model-01_type-ppi_seed-${ppi}_run-03.feat
-INPUT4=${MAINOUTPUT}/L1_task-trust_model-01_type-ppi_seed-${ppi}_run-04.feat
-INPUT5=${MAINOUTPUT}/L1_task-trust_model-01_type-ppi_seed-${ppi}_run-05.feat
+INPUT1=${MAINOUTPUT}/L1_task-trust_model-01_type-ppi_seed-${ppi}_run-01_sm-${sm}.feat
+INPUT2=${MAINOUTPUT}/L1_task-trust_model-01_type-ppi_seed-${ppi}_run-02_sm-${sm}.feat
+INPUT3=${MAINOUTPUT}/L1_task-trust_model-01_type-ppi_seed-${ppi}_run-03_sm-${sm}.feat
+INPUT4=${MAINOUTPUT}/L1_task-trust_model-01_type-ppi_seed-${ppi}_run-04_sm-${sm}.feat
+INPUT5=${MAINOUTPUT}/L1_task-trust_model-01_type-ppi_seed-${ppi}_run-05_sm-${sm}.feat
 
 
-OUTPUT=${MAINOUTPUT}/L2_task-trust_model-01_type-ppi_seed-${ppi}
+OUTPUT=${MAINOUTPUT}/L2_task-trust_model-01_type-ppi_seed-${ppi}_sm-${sm}
 if [ -e ${OUTPUT}.gfeat/cope${NCOPES}.feat/cluster_mask_zstat1.nii.gz ]; then
 	echo "skipping existing output"
 else
@@ -70,10 +71,10 @@ fi
 
 # Shared Reward Task
 NCOPES=14
-INPUT1=${MAINOUTPUT}/L1_task-sharedreward_model-01_type-ppi_seed-${ppi}_run-01.feat
-INPUT2=${MAINOUTPUT}/L1_task-sharedreward_model-01_type-ppi_seed-${ppi}_run-02.feat
+INPUT1=${MAINOUTPUT}/L1_task-sharedreward_model-01_type-ppi_seed-${ppi}_run-01_sm-${sm}.feat
+INPUT2=${MAINOUTPUT}/L1_task-sharedreward_model-01_type-ppi_seed-${ppi}_run-02_sm-${sm}.feat
 
-OUTPUT=${MAINOUTPUT}/L2_task-sharedreward_model-01_type-ppi_seed-${ppi}
+OUTPUT=${MAINOUTPUT}/L2_task-sharedreward_model-01_type-ppi_seed-${ppi}_sm-${sm}
 if [ -e ${OUTPUT}.gfeat/cope${NCOPES}.feat/cluster_mask_zstat1.nii.gz ]; then
 	echo "skipping existing output"
 else
@@ -101,10 +102,10 @@ fi
 
 # Ultimatum Game Task
 NCOPES=13
-INPUT1=${MAINOUTPUT}/L1_task-ultimatum_model-01_type-ppi_seed-${ppi}_run-01.feat
-INPUT2=${MAINOUTPUT}/L1_task-ultimatum_model-01_type-ppi_seed-${ppi}_run-02.feat
+INPUT1=${MAINOUTPUT}/L1_task-ultimatum_model-01_type-ppi_seed-${ppi}_run-01_sm-${sm}.feat
+INPUT2=${MAINOUTPUT}/L1_task-ultimatum_model-01_type-ppi_seed-${ppi}_run-02_sm-${sm}.feat
 
-OUTPUT=${MAINOUTPUT}/L2_task-ultimatum_model-01_type-ppi_seed-${ppi}
+OUTPUT=${MAINOUTPUT}/L2_task-ultimatum_model-01_type-ppi_seed-${ppi}_sm-${sm}
 if [ -e ${OUTPUT}.gfeat/cope${NCOPES}.feat/cluster_mask_zstat1.nii.gz ]; then
 	echo "skipping existing output"
 else
