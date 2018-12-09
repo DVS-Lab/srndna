@@ -2,29 +2,28 @@
 
 # example code for heudiconv
 # runs heudiconv on input subject
-# usage: bash run_heudiconv.sh sub xnat
+# usage: bash run_heudiconv.sh sub
 # example: bash run_heudiconv.sh 102 1
 
 sub=$1
-xnat=$2
-nruns=$3
+nruns=$2
 
 bidsroot=/data/projects/srndna/bids
 rm -rf ${bidsroot}/sub-${sub}
 
-if [ $xnat == 1 ]; then
+if [ $sub -gt 121 ]; then
   docker run --rm -it -v /data/projects/srndna:/data:ro \
+  -v ${bidsroot}:/output \
+  -u $(id -u):$(id -g) \
+  nipy/heudiconv:latest \
+  -d /data/dicoms/SMITH-AgingDM-{subject}/*/DICOM/*.dcm -s $sub \
+  -f /data/heuristics.py -c dcm2niix -b --minmeta -o /output
+else
+ docker run --rm -it -v /data/projects/srndna:/data:ro \
   -v ${bidsroot}:/output \
   -u $(id -u):$(id -g) \
   nipy/heudiconv:latest \
   -d /data/dicoms/SMITH-AgingDM-{subject}/scans/*/DICOM/*.dcm -s $sub \
-  -f /data/heuristics.py -c dcm2niix -b --minmeta -o /output
-else
-  docker run --rm -it -v /data/projects/srndna:/data:ro \
-  -v ${bidsroot}:/output \
-  -u $(id -u):$(id -g) \
-  nipy/heudiconv:latest \
-  -d /data/dicoms/SMITH-AgingDM-{subject}/*/*/*.IMA -s $sub \
   -f /data/heuristics.py -c dcm2niix -b --minmeta -o /output
 fi
 
