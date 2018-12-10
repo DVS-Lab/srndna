@@ -38,7 +38,7 @@ for ppi in "dmn" "ecn"; do
 		sub=$1
 		nruns=$2
 		bash L2_task-all_model-01_type-nppi.sh $sub $nruns $ppi &
-		sleep 5
+		sleep 10
 
 	done
 done
