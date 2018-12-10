@@ -5,9 +5,9 @@ maindir=`pwd`
 task=$1
 copenum=$2
 copename=$3
-other=$4 # type-ppi_seed-ffa
+other=$4 #type-nppi-dmn_sm-4, type-ppi_seed-FFA_sm-4 (Amyg, VS), type-act_sm-4, type-act_sm-0
 
-MAINOUTPUT=${maindir}/fsl/L3_model-01_ppi_n16_rfx_CDT-z2p6
+MAINOUTPUT=${maindir}/fsl/L3_model-01_n20_rfx
 mkdir -p $MAINOUTPUT
 REPLACEME=task-${task}_model-01_${other}
 
@@ -17,7 +17,7 @@ if [ -e ${OUTPUT}.gfeat/cope1.feat/cluster_mask_zstat1.nii.gz ]; then
 else
 	rm -rf ${OUTPUT}.gfeat
 
-	ITEMPLATE=${maindir}/templates/L3_template_n16.fsf
+	ITEMPLATE=${maindir}/templates/L3_template_n20.fsf
 	OTEMPLATE=${MAINOUTPUT}/L3_task-${task}_${REPLACEME}_copenum-${copenum}.fsf
 	sed -e 's@OUTPUT@'$OUTPUT'@g' \
 	-e 's@COPENUM@'$copenum'@g' \

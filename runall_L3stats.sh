@@ -3,18 +3,8 @@
 # Note that Contrast N for PPI is always PHYS in these models.
 # Remove for type-act or add if-statement to ignore/skip
 
-for other in "type-ppi_seed-ffa" "type-ppi_seed-vs" "type-ppi_seed-amyg"; do
-	
-	# Ultimatum
-	# Lower-level contrast 7 (unfair-fair)
-	# Lower-level contrast 8 (soc-comp)
-	# Lower-level contrast 9 (unfair-fair (IG-OG))
-	# Lower-level contrast 10 (unfair-fair (IG-C))
-	# Lower-level contrast 11 (unfair-fair (OG-C))
-	# Lower-level contrast 12 (unfair-fair (IG-C))
-	
-	
-	for subrun in "7 unfair-fair" "8 soc-comp" "9 fairness_IG-OG" "10 fairness_IG-C" "11 fairness_OG-C" "13 phys"; do
+for other in "type-nppi-dmn_sm-4" "type-nppi-ecn_sm-4" "type-ppi_seed-FFA_sm-4" "type-ppi_seed-Amyg_sm-4" "type-ppi_seed-VS_sm-4" "type-act_sm-4"; do
+	for subrun in "7 unfair-fair" "8 soc-comp" "9 fairness_IG-OG" "10 fairness_IG-C" "11 fairness_OG-C"; do
 	
 		set -- $subrun
 		copenum=$1
@@ -23,49 +13,21 @@ for other in "type-ppi_seed-ffa" "type-ppi_seed-vs" "type-ppi_seed-amyg"; do
 		sleep 5
 	
 	done
+done
 	
-	
-	
-	# Shared Reward
-	# Lower-level contrast 7 (rew-pun)
-	# Lower-level contrast 8 (F-S)
-	# Lower-level contrast 9 (F-C)
-	# Lower-level contrast 10 ((F+S)-C)
-	# Lower-level contrast 11 (F-S (rew-pun))
-	# Lower-level contrast 12 (S-C (rew-pun))
-	# Lower-level contrast 13 (F-C (rew-pun))
-	
-	for subrun in "7 rew-pun" "8 F-S" "9 F-C" "10 FS-C" "11 reward_F-S" "12 reward_S-C" "13 reward_F-C" "14 phys"; do
-	
+for other in "type-ppi_seed-FFA_sm-4" "type-ppi_seed-Amyg_sm-4" "type-ppi_seed-VS_sm-4" "type-act_sm-4"; do
+	for subrun in "7 rew-pun" "8 F-S" "9 F-C" "10 FS-C" "11 reward_F-S" "12 reward_S-C" "13 reward_F-C"; do
 		set -- $subrun
 		copenum=$1
 		copename=$2
 		bash L3_task-all_model-01.sh sharedreward $copenum $copename $other &
 		sleep 5
-	
 	done
-	
-	
-	
-	# Trust
-	#Lower-level contrast 10 (rec-def)
-	#Lower-level contrast 11 (S+F > C (face))
-	#Lower-level contrast 12 (F > S (rec-def))
-	#Lower-level contrast 13 (F > S)
-	#Lower-level contrast 14 (F > C)
-	#Lower-level contrast 15 (S > C)
-	#Lower-level contrast 16 (rec_SocClose)
-	#Lower-level contrast 17 (def_SocClose)
-	#Lower-level contrast 18 (rec-def (SocClose))
-	
-	for subrun in "10 rec-def" "11 face" "12 reciprocation_F-S" "13 F-S" "14 F-C" "15 S-C" "16 rec_SocClose" "17 def_SocClose" "18 rec-def_SocClose" "19 phys"; do
-	
+	for subrun in "10 rec-def" "11 face" "12 reciprocation_F-S" "13 F-S" "14 F-C" "15 S-C" "16 rec_SocClose" "17 def_SocClose" "18 rec-def_SocClose"; do
 		set -- $subrun
 		copenum=$1
 		copename=$2
 		bash L3_task-all_model-01.sh trust $copenum $copename $other &
 		sleep 5
-	
 	done
-
 done
