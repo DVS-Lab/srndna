@@ -56,7 +56,7 @@ for s = 1:length(sublist)
 
     end
     % subnum,avg_comp_fair,avg_diffage_fair,avg_sameage_fair,avg_comp_unfair,avg_diffage_unfair,avg_sameage_unfair,pct_miss
-    fprintf(fid_subj,'%d,%f,%f,%f,%f,%f,%f,%f\n',subj,mean(tmp_data));
+    fprintf(fid_subj,'%d,%d,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f\n',subj,mean(tmp_data));
 
     subj = sublist(s);
     runs = 2;
