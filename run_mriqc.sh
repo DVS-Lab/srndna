@@ -13,6 +13,6 @@ docker run -it --rm \
 -w /scratch \
 poldracklab/mriqc:0.12.1 \
 /data /out \
-participant --participant_label $sub --n_cpus 12 --fft-spikes-detector --ica -w /scratch
+participant --participant_label $sub --fft-spikes-detector --ica -w /scratch
 
 # #--participant_label $sub
