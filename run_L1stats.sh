@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-umask 0000
 sub=$1
 nruns=$2
 
