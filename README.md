@@ -8,20 +8,20 @@ The psychopy folder contains all of the code for stimulus delivery. Input files 
 
 
 ## Basic steps for experimenters
-Here are the basic steps for transferring and processing data. Note that when you see `$sub`, it should be replaced with your subject number (e.g., 102). Remember, always check your input and output for each step. If the input/output isn't clear, look through the scripts and talk to someone. In many scripts and wrappers, the `$nruns` argument is necessary because some subjects will not have the full set of five runs for the trust task.
+Here are the basic steps for transferring and processing data. Note that when you see `$sub`, it should be replaced with your subject number (e.g., 102). Remember, always check your input and output for each step. If the input/output isn't clear, look through the scripts and talk to someone. In many scripts and wrappers, the `$nruns` argument is necessary because some subjects will not have the full set of five runs for the trust task. If you are processing more than 1 subject at a time, consider using the `runall_*` script. 
 
 1. Transfer data from XNAT to dicoms folder (e.g., /data/projects/srndna/dicoms/SMITH-AgingDM-102). Be sure to save a backup on the S: drive.
 1. Convert data to BIDS, preprocess, and run QA using the wrapper `bash run_prestats.sh $sub $nruns`. This wrapper will do the following:
     - Run [heudiconv][3] to convert dicoms to BIDS using `bash run_heudiconv.sh $sub $nruns`.
     - Run PyDeface to remove the face from the anats. This is done using `bash run_pydeface.sh $sub`.
     - Run [mriqc][4] and [fmriprep][5] using `bash run_mriqc.sh $sub` and `bash run_fmriprep.sh $sub`, respectively.
-1. Run convert*BIDS.m scripts to place events files in bids folder. Note, this is a Matlab script.
+1. Open Matlab and Run `pay_subject(subnum)`, making sure to replace with the appropriate subject number in the (). This will run all three convert*BIDS.m scripts to place events files in bids folder. Note, this is a Matlab script.
 1. Convert `*_events.tsv` files to 3-column files (compatible with FSL) using Tom Nichols' [BIDSto3col.sh][2] script. This script is wrapped into our pipeline using `bash gen_3col_files.sh $sub $nruns`
 1. Run analyses in FSL. Analyses in FSL consist of two stages, which we call "Level 1" (L1) and "Level 2" (L2). For L1, we have a wrapper that runs all tasks simultaneously `bash run_L1stats.sh $sub $nruns`. This wrapper will do the following:
     - Run `L1_task-trust_model-01.sh` on all runs.
     - Run `L1_task-sharedreward_model-01.sh` on all runs.
     - Run `L1_task-ultimatum_model-01.sh` on all runs.
-
+1. Display the `runall_L2stats.sh script` and edit the two `for subrun in` lines to include the appropriate subject numbers and trust runs they had
 
 
 [1]: https://openneuro.org/
