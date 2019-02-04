@@ -2,17 +2,21 @@ clear;
 maindir = pwd;
 
 % open output files
-fname = fullfile(maindir,'UG_summary_run_12_2018_InOut_FairUnfair.csv');
+fname = fullfile(maindir,'UG_summary_run_2_2019_InOut_FairUnfair.csv');
 fid_run = fopen(fname,'w');
 %fprintf(fid_run,'subnum,run,avg_comp,avg_OutGrp,avg_InGrp,avg_comp_RT,avg_OutGrp_RT,avg_InGrp_RT,misses\n');
 fprintf(fid_run,'subnum,run,avg_compFair,avg_compUnfair,avg_OutGrpFair,avg_OutGrpUnfair,avg_InGrpFair,avg_InGrpUnfair,avg_compFairRT,avg_compUnfairRT,avg_OutGrpFairRT,avg_OutGrpUnfairRT,avg_InGrpFairRT,avg_InGrpUnfairRT,misses\n');
-fname = fullfile(maindir,'UG_summary_subj_12_2018InOut_FairUnfair.csv');
+fname = fullfile(maindir,'UG_summary_subj_2_2019_InOut_FairUnfair.csv');
 fid_subj = fopen(fname,'w');
 %fprintf(fid_subj,'subnum,avg_comp,avg_OutGrp,avg_InGrp,avg_comp_RT,avg_OutGrp_RT,avg_InGrp_RT,misses\n');
 fprintf(fid_subj,'subnum,avg_compFair,avg_compUnfair,avg_OutGrpFair,avg_OutGrpUnfair,avg_InGrpFair,avg_InGrpUnfair,avg_compFairRT,avg_compUnfairRT,avg_OutGrpFairRT,avg_OutGrpUnfairRT,avg_InGrpFairRT,avg_InGrpUnfairRT,misses\n');
 
 %scan subjects only
-sublist = [104 105 106 107 108 109 110 111 112 113 115 116 117 118 120 121 122 124 125 126];
+sublist = [103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 120 121 122 124 125 126 127 128 129 204 205 206 207 208 209 210 211 212 213 215 216 217 218 220 221 222 224 225 226 227 228];
+
+%older adults are subjects 111/211, 127/227, 128/228, 129/229
+%new subs include 122/222, 123 (?) 223, 124-129/224-229 (?)
+% subj 229 and 123 missing behav data
 
 %ethinicity=0: 105-111, 115, 117, 120-122
 %ethnicity=1: 104, 112-114, 116, 118-119, 124-126
