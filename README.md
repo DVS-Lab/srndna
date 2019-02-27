@@ -17,7 +17,7 @@ Here are the basic steps for transferring and processing data. Note that when yo
     - Run [mriqc][4] and [fmriprep][5] using `bash run_mriqc.sh $sub` and `bash run_fmriprep.sh $sub`, respectively.
 1. Open Matlab and Run `pay_subject(subnum)`, making sure to replace with the appropriate subject number in the (). This will run all three convert*BIDS.m scripts to place events files in bids folder. Note, this is a Matlab script. If you run into issues opening Matlab in your terminal, see the steps outlined on the Wiki https://smithlabinternal.cla.temple.edu/computing/labcomputers
 1. Convert `*_events.tsv` files to 3-column files (compatible with FSL) using Tom Nichols' [BIDSto3col.sh][2] script. This script is wrapped into our pipeline using `bash gen_3col_files.sh $sub $nruns`
-1. Run analyses in FSL. Analyses in FSL consist of two stages, which we call "Level 1" (L1) and "Level 2" (L2). For L1, we have a wrapper that runs all tasks simultaneously `bash run_L1stats.sh $sub $nruns`. This wrapper will do the following:
+1. Run analyses in FSL. Analyses in FSL consist of two stages, which we call "Level 1" (L1) and "Level 2" (L2). For L1, we have a wrapper that runs all tasks simultaneously `bash run_L1stats.sh $sub $nruns $ppi $sm`. Enter '5' for number of trust runs (unless otherwise), enter '0' for ppi to indicate run activation analyses and enter '4' for sm (smoothing) which refers to a 4 mm smoothing kernel. This wrapper will do the following:
     - Run `L1_task-trust_model-01.sh` on all runs.
     - Run `L1_task-sharedreward_model-01.sh` on all runs.
     - Run `L1_task-ultimatum_model-01.sh` on all runs.
