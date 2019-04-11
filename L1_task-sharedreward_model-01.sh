@@ -28,7 +28,7 @@ if [ "$ppi" == "0" ]; then
 	OUTPUT=${MAINOUTPUT}/L1_task-${TASK}_model-01_type-${TYPE}_run-0${run}_sm-${sm}
 else
 	DATA=${MAINOUTPUT}/L1_task-${TASK}_model-01_type-act_run-0${run}_sm-${sm}.feat/filtered_func_data.nii.gz
-	DATAPPI=${MAINOUTPUT}/L1_task-${TASK}_model-01_type-act_run-0${run}_sm-0.feat/filtered_func_data.nii.gz	
+	DATAPPI=${MAINOUTPUT}/L1_task-${TASK}_model-01_type-act_run-0${run}_sm-${sm}.feat/filtered_func_data.nii.gz	
 	TYPE=ppi
 	OUTPUT=${MAINOUTPUT}/L1_task-${TASK}_model-01_type-${TYPE}_seed-${ppi}_run-0${run}_sm-${sm}
 fi
