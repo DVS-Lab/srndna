@@ -32,7 +32,7 @@ for ppi in dmn ecn; do
 	  for run in `seq 2`; do
 	  	#Manages the number of jobs and cores
 	  	SCRIPTNAME=L1_task-ultimatum_model-01_type-nppi.sh
-	  	NCORES=16
+	  	NCORES=8
 	  	while [ $(ps -ef | grep -v grep | grep $SCRIPTNAME | wc -l) -ge $NCORES ]; do
 	    		sleep 1s
 	  	done

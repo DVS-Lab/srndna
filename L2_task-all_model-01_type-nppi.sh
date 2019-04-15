@@ -5,7 +5,7 @@ maindir=`pwd`
 sub=$1
 nruns=$2
 ppi=$3
-sm=4
+sm=6
 
 MAINOUTPUT=${maindir}/fsl/sub-${sub}
 #

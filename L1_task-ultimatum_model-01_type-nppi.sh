@@ -3,7 +3,7 @@
 maindir=`pwd`
 
 TASK=ultimatum
-sm=4
+sm=6
 
 sub=$1
 run=$2
@@ -19,6 +19,7 @@ OUTPUT=${MAINOUTPUT}/L1_task-${TASK}_model-01_nppi-${ppi}_run-0${run}_sm-${sm}
 if [ -e ${OUTPUT}.feat/cluster_mask_zstat1.nii.gz ]; then
 	exit
 else
+   echo "missing: $OUTPUT " >> ${maindir}/re-runL1.log
 	rm -rf ${OUTPUT}.feat
 fi
 
