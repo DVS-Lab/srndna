@@ -2,15 +2,15 @@ clear;
 maindir = pwd;
 
 % open output files
-fname = fullfile(maindir,'trust_summary_run_2_1_2019_InOut.csv');
+fname = fullfile(maindir,'trust_summary_run_3_19_2019_InOut_wmeanRT.csv');
 fid_run = fopen(fname,'w');
-fprintf(fid_run,'subnum,run,avg_comp,avg_stranger,avg_friend,avg_comp_RT,avg_stranger_RT,avg_friend_RT,misses\n');
-fname = fullfile(maindir,'trust_summary_subj_2_1_2018_InOut.csv');
+fprintf(fid_run,'subnum,run,avg_comp,avg_stranger,avg_friend,avg_comp_logRT,avg_stranger_logRT,avg_friend_logRT,avg_comp_RT,avg_stranger_RT,avg_friend_RT,misses\n');
+fname = fullfile(maindir,'trust_summary_subj_3_19_2019_InOut_wmeanRT.csv');
 fid_subj = fopen(fname,'w');
-fprintf(fid_subj,'subnum,avg_comp,avg_stranger,avg_friend,avg_comp_RT,avg_stranger_RT,avg_friend_RT,misses\n');
+fprintf(fid_subj,'subnum,avg_comp,avg_stranger,avg_friend,avg_comp_logRT,avg_stranger_logRT,avg_friend_logRT,avg_comp_RT,avg_stranger_RT,avg_friend_RT,misses\n');
 
 %sublist = [103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 120 121];
-sublist = [103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 120 121 122 124 125 126 127 128 129 204 205 206 207 208 209 210 211 212 213 215 216 217 218 220 221 222 224 225 226 227 228];
+sublist = [103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 120 121 122 124 125 126 127 128 129 130 131 132 133 204 205 206 207 208 209 210 211 212 213 215 216 217 218 220 221 222 224 225 226 227 228];
 
 %older adults are subjects 111/211, 127/227, 128/228, 129/229
 %new subs include 122/222, 123 (?) 223, 124-129/224-229 (?)
@@ -28,9 +28,9 @@ for s = 1:length(sublist)
         runs = 5;
     end
     
-    tmp_data = zeros(runs,7);
+    tmp_data = zeros(runs,10);
     for r = 1:runs
-        fname = fullfile(maindir,'psychopy','logs',num2str(subj),sprintf('sub-%03d_task-trust_run-%d_raw.csv',subj,r-1));
+        fname = fullfile(maindir,'psychopy','logs',num2str(subj),sprintf('sub-Rej_%02d_task-intertemporalchoice_run%d_raw.csv',subj,r-1));
         fid = fopen(fname,'r');
         C = textscan(fid,[repmat('%f',1,14) '%s' repmat('%f',1,9)],'Delimiter',',','HeaderLines',1,'EmptyValue', NaN);
         fclose(fid);
@@ -53,15 +53,18 @@ for s = 1:length(sublist)
         avg_comp_logRT = mean(logRT(Partner==1,1));
         avg_stranger_logRT = mean(logRT(Partner==2,1));
         avg_friend_logRT = mean(logRT(Partner==3,1));
-        tmp_data(r,:) = [avg_comp avg_stranger avg_friend avg_comp_logRT avg_stranger_logRT avg_friend_logRT misses];
+        avg_comp_RT = mean(RT(Partner==1,1));
+        avg_stranger_RT = mean(RT(Partner==2,1));
+        avg_friend_RT = mean(RT(Partner==3,1));
+        tmp_data(r,:) = [avg_comp avg_stranger avg_friend avg_comp_logRT avg_stranger_logRT avg_friend_logRT avg_comp_RT avg_stranger_RT avg_friend_RT misses];
         
         
         % subnum,run,avg_comp,avg_stranger,avg_friend,pct_miss
-        fprintf(fid_run,'%d,%d,%f,%f,%f,%f,%f,%f,%f\n',subj,r,tmp_data(r,:));
+        fprintf(fid_run,'%d,%d,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f\n',subj,r,tmp_data(r,:));
         
     end
     % subnum,avg_comp,avg_stranger,avg_friend,pct_miss
-    fprintf(fid_subj,'%d,%f,%f,%f,%f,%f,%f,%f\n',subj,mean(tmp_data));
+    fprintf(fid_subj,'%d,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f\n',subj,mean(tmp_data));
     
 end
 fclose(fid_subj);
