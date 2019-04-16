@@ -14,7 +14,7 @@ for sm in 6; do
 		  for run in `seq $nruns`; do
 		  	#Manages the number of jobs and cores
 		  	SCRIPTNAME=L1_task-trust_model-01.sh
-		  	NCORES=16
+		  	NCORES=12
 		  	while [ $(ps -ef | grep -v grep | grep $SCRIPTNAME | wc -l) -ge $NCORES ]; do
 		    		sleep 1s
 		  	done
