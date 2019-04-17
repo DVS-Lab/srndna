@@ -30,7 +30,7 @@ set fmri(featwatcher_yn) 0
 set fmri(sscleanup_yn) 0
 
 # Output directory
-set fmri(outputdir) "/data/projects/srndna/fsl/__tmpL3_n32_twogroup"
+set fmri(outputdir) "OUTPUT"
 
 # TR(s)
 set fmri(tr) 3
@@ -263,100 +263,100 @@ set fmri(paradigm_hp) 100
 set fmri(ncopeinputs) 0
 
 # 4D AVW data or FEAT directory (1)
-set feat_files(1) "/data/projects/srndna/fsl/sub-104/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(1) "/data/projects/srndna/fsl/sub-104/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (2)
-set feat_files(2) "/data/projects/srndna/fsl/sub-105/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(2) "/data/projects/srndna/fsl/sub-105/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (3)
-set feat_files(3) "/data/projects/srndna/fsl/sub-106/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(3) "/data/projects/srndna/fsl/sub-106/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (4)
-set feat_files(4) "/data/projects/srndna/fsl/sub-107/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(4) "/data/projects/srndna/fsl/sub-107/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (5)
-set feat_files(5) "/data/projects/srndna/fsl/sub-108/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(5) "/data/projects/srndna/fsl/sub-108/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (6)
-set feat_files(6) "/data/projects/srndna/fsl/sub-109/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(6) "/data/projects/srndna/fsl/sub-109/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (7)
-set feat_files(7) "/data/projects/srndna/fsl/sub-110/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(7) "/data/projects/srndna/fsl/sub-110/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (8)
-set feat_files(8) "/data/projects/srndna/fsl/sub-111/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(8) "/data/projects/srndna/fsl/sub-111/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (9)
-set feat_files(9) "/data/projects/srndna/fsl/sub-112/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(9) "/data/projects/srndna/fsl/sub-112/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (10)
-set feat_files(10) "/data/projects/srndna/fsl/sub-113/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(10) "/data/projects/srndna/fsl/sub-113/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (11)
-set feat_files(11) "/data/projects/srndna/fsl/sub-115/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(11) "/data/projects/srndna/fsl/sub-115/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (12)
-set feat_files(12) "/data/projects/srndna/fsl/sub-116/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(12) "/data/projects/srndna/fsl/sub-116/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (13)
-set feat_files(13) "/data/projects/srndna/fsl/sub-117/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(13) "/data/projects/srndna/fsl/sub-117/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (14)
-set feat_files(14) "/data/projects/srndna/fsl/sub-118/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(14) "/data/projects/srndna/fsl/sub-118/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (15)
-set feat_files(15) "/data/projects/srndna/fsl/sub-120/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(15) "/data/projects/srndna/fsl/sub-120/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (16)
-set feat_files(16) "/data/projects/srndna/fsl/sub-121/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(16) "/data/projects/srndna/fsl/sub-121/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (17)
-set feat_files(17) "/data/projects/srndna/fsl/sub-122/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(17) "/data/projects/srndna/fsl/sub-122/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (18)
-set feat_files(18) "/data/projects/srndna/fsl/sub-124/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(18) "/data/projects/srndna/fsl/sub-124/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (19)
-set feat_files(19) "/data/projects/srndna/fsl/sub-125/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(19) "/data/projects/srndna/fsl/sub-125/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (20)
-set feat_files(20) "/data/projects/srndna/fsl/sub-126/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(20) "/data/projects/srndna/fsl/sub-126/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (21)
-set feat_files(21) "/data/projects/srndna/fsl/sub-127/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(21) "/data/projects/srndna/fsl/sub-127/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (22)
-set feat_files(22) "/data/projects/srndna/fsl/sub-128/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(22) "/data/projects/srndna/fsl/sub-128/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (23)
-set feat_files(23) "/data/projects/srndna/fsl/sub-129/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(23) "/data/projects/srndna/fsl/sub-129/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (24)
-set feat_files(24) "/data/projects/srndna/fsl/sub-130/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(24) "/data/projects/srndna/fsl/sub-130/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (25)
-set feat_files(25) "/data/projects/srndna/fsl/sub-131/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(25) "/data/projects/srndna/fsl/sub-131/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (26)
-set feat_files(26) "/data/projects/srndna/fsl/sub-132/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(26) "/data/projects/srndna/fsl/sub-132/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (27)
-set feat_files(27) "/data/projects/srndna/fsl/sub-133/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(27) "/data/projects/srndna/fsl/sub-133/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (28)
-set feat_files(28) "/data/projects/srndna/fsl/sub-134/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(28) "/data/projects/srndna/fsl/sub-134/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (29)
-set feat_files(29) "/data/projects/srndna/fsl/sub-135/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(29) "/data/projects/srndna/fsl/sub-135/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (30)
-set feat_files(30) "/data/projects/srndna/fsl/sub-136/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(30) "/data/projects/srndna/fsl/sub-136/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (31)
-set feat_files(31) "/data/projects/srndna/fsl/sub-137/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(31) "/data/projects/srndna/fsl/sub-137/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (32)
-set feat_files(32) "/data/projects/srndna/fsl/sub-138/L2_task-sharedreward_model-01_type-act_sm-6.gfeat/cope7.feat/stats/cope1.nii.gz"
+set feat_files(32) "/data/projects/srndna/fsl/sub-138/L2_REPLACEME.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # Add confound EVs text file
 set fmri(confoundevs) 0
