@@ -70,7 +70,7 @@ fi
 
 
 # Shared Reward Task
-NCOPES=14
+NCOPES=20
 INPUT1=${MAINOUTPUT}/L1_task-sharedreward_model-01_type-ppi_seed-${ppi}_run-01_sm-${sm}.feat
 INPUT2=${MAINOUTPUT}/L1_task-sharedreward_model-01_type-ppi_seed-${ppi}_run-02_sm-${sm}.feat
 

@@ -68,7 +68,7 @@ fi
 
 
 # Shared Reward Task
-NCOPES=13
+NCOPES=19
 INPUT1=${MAINOUTPUT}/L1_task-sharedreward_model-01_type-act_run-01_sm-${sm}.feat
 INPUT2=${MAINOUTPUT}/L1_task-sharedreward_model-01_type-act_run-02_sm-${sm}.feat
 
