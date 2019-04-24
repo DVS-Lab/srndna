@@ -51,7 +51,7 @@ if [ "$ppi" == "0" ]; then
 	-e 's@SMOOTH@'$sm'@g' \
 	<$ITEMPLATE> $OTEMPLATE
 else
-	PHYS=${MAINOUTPUT}/ts_task-trust_mask-${ppi}_run-0${run}.txt
+	PHYS=${MAINOUTPUT}/ts_task-${TASK}_mask-${ppi}_run-0${run}.txt
 	MASK=${maindir}/masks/r${ppi}_func.nii.gz
 	fslmeants -i $DATAPPI -o $PHYS -m $MASK
 	sed -e 's@OUTPUT@'$OUTPUT'@g' \
