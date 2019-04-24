@@ -254,13 +254,13 @@ set fmri(regstandard_dof) 12
 set fmri(regstandard_nonlinear_yn) 0
 
 # Control nonlinear warp field resolution
-set fmri(regstandard_nonlinear_warpres) 10
+set fmri(regstandard_nonlinear_warpres) 10 
 
 # High pass filter cutoff
 set fmri(paradigm_hp) 100
 
 # Total voxels
-set fmri(totalVoxels) 196773122
+set fmri(totalVoxels) 68144076
 
 
 # Number of lower-level copes feeding into higher-level analysis
@@ -1366,16 +1366,16 @@ set fmri(con_real12.4) 0
 set fmri(con_real12.5) 0
 
 # Real contrast_real vector 12 element 6
-set fmri(con_real12.6) 1.0
+set fmri(con_real12.6) -1.0
 
 # Real contrast_real vector 12 element 7
-set fmri(con_real12.7) -1.0
+set fmri(con_real12.7) 1.0
 
 # Real contrast_real vector 12 element 8
-set fmri(con_real12.8) -1.0
+set fmri(con_real12.8) 1.0
 
 # Real contrast_real vector 12 element 9
-set fmri(con_real12.9) 1.0
+set fmri(con_real12.9) -1.0
 
 # Real contrast_real vector 12 element 10
 set fmri(con_real12.10) 0
@@ -1387,13 +1387,13 @@ set fmri(conpic_real.13) 1
 set fmri(conname_real.13) "F > S"
 
 # Real contrast_real vector 13 element 1
-set fmri(con_real13.1) -1.0
+set fmri(con_real13.1) 0.0
 
 # Real contrast_real vector 13 element 2
 set fmri(con_real13.2) 1.0
 
 # Real contrast_real vector 13 element 3
-set fmri(con_real13.3) 0
+set fmri(con_real13.3) -1.0
 
 # Real contrast_real vector 13 element 4
 set fmri(con_real13.4) 0
@@ -1540,19 +1540,19 @@ set fmri(con_real17.2) 0
 set fmri(con_real17.3) 0
 
 # Real contrast_real vector 17 element 4
-set fmri(con_real17.4) 0
+set fmri(con_real17.4) -1.0
 
 # Real contrast_real vector 17 element 5
 set fmri(con_real17.5) 0
 
 # Real contrast_real vector 17 element 6
-set fmri(con_real17.6) -1.0
+set fmri(con_real17.6) 1.0
 
 # Real contrast_real vector 17 element 7
 set fmri(con_real17.7) 0
 
 # Real contrast_real vector 17 element 8
-set fmri(con_real17.8) 1.0
+set fmri(con_real17.8) 0.0
 
 # Real contrast_real vector 17 element 9
 set fmri(con_real17.9) 0
@@ -1576,19 +1576,19 @@ set fmri(con_real18.2) 0
 set fmri(con_real18.3) 0
 
 # Real contrast_real vector 18 element 4
-set fmri(con_real18.4) 0
+set fmri(con_real18.4) 1.0
 
 # Real contrast_real vector 18 element 5
 set fmri(con_real18.5) -1.0
 
 # Real contrast_real vector 18 element 6
-set fmri(con_real18.6) 1.0
+set fmri(con_real18.6) -1.0
 
 # Real contrast_real vector 18 element 7
 set fmri(con_real18.7) 1.0
 
 # Real contrast_real vector 18 element 8
-set fmri(con_real18.8) -1.0
+set fmri(con_real18.8) 0.0
 
 # Real contrast_real vector 18 element 9
 set fmri(con_real18.9) 0
@@ -2014,16 +2014,16 @@ set fmri(con_orig12.4) 0
 set fmri(con_orig12.5) 0
 
 # Real contrast_orig vector 12 element 6
-set fmri(con_orig12.6) 1.0
+set fmri(con_orig12.6) -1.0
 
 # Real contrast_orig vector 12 element 7
-set fmri(con_orig12.7) -1.0
+set fmri(con_orig12.7) 1.0
 
 # Real contrast_orig vector 12 element 8
-set fmri(con_orig12.8) -1.0
+set fmri(con_orig12.8) 1.0
 
 # Real contrast_orig vector 12 element 9
-set fmri(con_orig12.9) 1.0
+set fmri(con_orig12.9) -1.0
 
 # Real contrast_orig vector 12 element 10
 set fmri(con_orig12.10) 0
@@ -2035,13 +2035,13 @@ set fmri(conpic_orig.13) 1
 set fmri(conname_orig.13) "F > S"
 
 # Real contrast_orig vector 13 element 1
-set fmri(con_orig13.1) -1.0
+set fmri(con_orig13.1) 0.0
 
 # Real contrast_orig vector 13 element 2
 set fmri(con_orig13.2) 1.0
 
 # Real contrast_orig vector 13 element 3
-set fmri(con_orig13.3) 0
+set fmri(con_orig13.3) -1.0
 
 # Real contrast_orig vector 13 element 4
 set fmri(con_orig13.4) 0
@@ -2188,19 +2188,19 @@ set fmri(con_orig17.2) 0
 set fmri(con_orig17.3) 0
 
 # Real contrast_orig vector 17 element 4
-set fmri(con_orig17.4) 0
+set fmri(con_orig17.4) -1.0
 
 # Real contrast_orig vector 17 element 5
 set fmri(con_orig17.5) 0
 
 # Real contrast_orig vector 17 element 6
-set fmri(con_orig17.6) -1.0
+set fmri(con_orig17.6) 1.0
 
 # Real contrast_orig vector 17 element 7
 set fmri(con_orig17.7) 0
 
 # Real contrast_orig vector 17 element 8
-set fmri(con_orig17.8) 1.0
+set fmri(con_orig17.8) 0.0
 
 # Real contrast_orig vector 17 element 9
 set fmri(con_orig17.9) 0
@@ -2224,19 +2224,19 @@ set fmri(con_orig18.2) 0
 set fmri(con_orig18.3) 0
 
 # Real contrast_orig vector 18 element 4
-set fmri(con_orig18.4) 0
+set fmri(con_orig18.4) 1.0
 
 # Real contrast_orig vector 18 element 5
 set fmri(con_orig18.5) -1.0
 
 # Real contrast_orig vector 18 element 6
-set fmri(con_orig18.6) 1.0
+set fmri(con_orig18.6) -1.0
 
 # Real contrast_orig vector 18 element 7
 set fmri(con_orig18.7) 1.0
 
 # Real contrast_orig vector 18 element 8
-set fmri(con_orig18.8) -1.0
+set fmri(con_orig18.8) 0.0
 
 # Real contrast_orig vector 18 element 9
 set fmri(con_orig18.9) 0

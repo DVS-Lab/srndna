@@ -30,13 +30,13 @@ set fmri(featwatcher_yn) 0
 set fmri(sscleanup_yn) 0
 
 # Output directory
-set fmri(outputdir) "/data/projects/srndna/fsl/trust_test_run-01"
+set fmri(outputdir) "/data/projects/srndna/fsl/sub-104/L1_task-trust_model-01_type-act_run-01_sm-6"
 
 # TR(s)
 set fmri(tr) 2.020000
 
 # Total volumes
-set fmri(npts) 218
+set fmri(npts) 217
 
 # Delete volumes
 set fmri(ndelete) 0
@@ -106,7 +106,7 @@ set fmri(st_file) ""
 set fmri(bet_yn) 1
 
 # Spatial smoothing FWHM (mm)
-set fmri(smooth) 0.0
+set fmri(smooth) 6
 
 # Intensity normalization
 set fmri(norm_yn) 0
@@ -260,14 +260,14 @@ set fmri(regstandard_nonlinear_warpres) 10
 set fmri(paradigm_hp) 100
 
 # Total voxels
-set fmri(totalVoxels) 196773122
+set fmri(totalVoxels) 68144076
 
 
 # Number of lower-level copes feeding into higher-level analysis
 set fmri(ncopeinputs) 0
 
 # 4D AVW data or FEAT directory (1)
-set feat_files(1) "/data/projects/srndna/fmriprep/fmriprep/sub-102/func/sub-102_task-trust_run-01_bold_space-MNI152NLin2009cAsym_variant-smoothAROMAnonaggr_preproc"
+set feat_files(1) "/data/projects/srndna/fmriprep/fmriprep/sub-104/func/sub-104_task-trust_run-01_bold_space-MNI152NLin2009cAsym_variant-unsmoothedAROMAnonaggr_preproc"
 
 # Add confound EVs text file
 set fmri(confoundevs) 0
@@ -304,7 +304,7 @@ set fmri(tempfilt_yn1) 1
 set fmri(deriv_yn1) 0
 
 # Custom EV file (EV 1)
-set fmri(custom1) "/data/projects/srndna/fsl/EVfiles/sub-102/trust/run-01_choice_computer.txt"
+set fmri(custom1) "/data/projects/srndna/fsl/EVfiles/sub-104/trust/run-01_choice_computer.txt"
 
 # Orthogonalise EV 1 wrt EV 0
 set fmri(ortho1.0) 0
@@ -371,7 +371,7 @@ set fmri(tempfilt_yn2) 1
 set fmri(deriv_yn2) 0
 
 # Custom EV file (EV 2)
-set fmri(custom2) "/data/projects/srndna/fsl/EVfiles/sub-102/trust/run-01_choice_friend.txt"
+set fmri(custom2) "/data/projects/srndna/fsl/EVfiles/sub-104/trust/run-01_choice_friend.txt"
 
 # Orthogonalise EV 2 wrt EV 0
 set fmri(ortho2.0) 0
@@ -438,7 +438,7 @@ set fmri(tempfilt_yn3) 1
 set fmri(deriv_yn3) 0
 
 # Custom EV file (EV 3)
-set fmri(custom3) "/data/projects/srndna/fsl/EVfiles/sub-102/trust/run-01_choice_stranger.txt"
+set fmri(custom3) "/data/projects/srndna/fsl/EVfiles/sub-104/trust/run-01_choice_stranger.txt"
 
 # Orthogonalise EV 3 wrt EV 0
 set fmri(ortho3.0) 0
@@ -505,7 +505,7 @@ set fmri(tempfilt_yn4) 1
 set fmri(deriv_yn4) 0
 
 # Custom EV file (EV 4)
-set fmri(custom4) "/data/projects/srndna/fsl/EVfiles/sub-102/trust/run-01_outcome_computer_defect.txt"
+set fmri(custom4) "/data/projects/srndna/fsl/EVfiles/sub-104/trust/run-01_outcome_computer_defect.txt"
 
 # Orthogonalise EV 4 wrt EV 0
 set fmri(ortho4.0) 0
@@ -572,7 +572,7 @@ set fmri(tempfilt_yn5) 1
 set fmri(deriv_yn5) 0
 
 # Custom EV file (EV 5)
-set fmri(custom5) "/data/projects/srndna/fsl/EVfiles/sub-102/trust/run-01_outcome_computer_recip.txt"
+set fmri(custom5) "/data/projects/srndna/fsl/EVfiles/sub-104/trust/run-01_outcome_computer_recip.txt"
 
 # Orthogonalise EV 5 wrt EV 0
 set fmri(ortho5.0) 0
@@ -639,7 +639,7 @@ set fmri(tempfilt_yn6) 1
 set fmri(deriv_yn6) 0
 
 # Custom EV file (EV 6)
-set fmri(custom6) "/data/projects/srndna/fsl/EVfiles/sub-102/trust/run-01_outcome_friend_defect.txt"
+set fmri(custom6) "/data/projects/srndna/fsl/EVfiles/sub-104/trust/run-01_outcome_friend_defect.txt"
 
 # Orthogonalise EV 6 wrt EV 0
 set fmri(ortho6.0) 0
@@ -706,7 +706,7 @@ set fmri(tempfilt_yn7) 1
 set fmri(deriv_yn7) 0
 
 # Custom EV file (EV 7)
-set fmri(custom7) "/data/projects/srndna/fsl/EVfiles/sub-102/trust/run-01_outcome_friend_recip.txt"
+set fmri(custom7) "/data/projects/srndna/fsl/EVfiles/sub-104/trust/run-01_outcome_friend_recip.txt"
 
 # Orthogonalise EV 7 wrt EV 0
 set fmri(ortho7.0) 0
@@ -773,7 +773,7 @@ set fmri(tempfilt_yn8) 1
 set fmri(deriv_yn8) 0
 
 # Custom EV file (EV 8)
-set fmri(custom8) "/data/projects/srndna/fsl/EVfiles/sub-102/trust/run-01_outcome_stranger_defect.txt"
+set fmri(custom8) "/data/projects/srndna/fsl/EVfiles/sub-104/trust/run-01_outcome_stranger_defect.txt"
 
 # Orthogonalise EV 8 wrt EV 0
 set fmri(ortho8.0) 0
@@ -840,7 +840,7 @@ set fmri(tempfilt_yn9) 1
 set fmri(deriv_yn9) 0
 
 # Custom EV file (EV 9)
-set fmri(custom9) "/data/projects/srndna/fsl/EVfiles/sub-102/trust/run-01_outcome_stranger_recip.txt"
+set fmri(custom9) "/data/projects/srndna/fsl/EVfiles/sub-104/trust/run-01_outcome_stranger_recip.txt"
 
 # Orthogonalise EV 9 wrt EV 0
 set fmri(ortho9.0) 0
@@ -907,7 +907,7 @@ set fmri(tempfilt_yn10) 1
 set fmri(deriv_yn10) 0
 
 # Custom EV file (EV 10)
-set fmri(custom10) "/data/projects/srndna/fsl/EVfiles/sub-102/trust/run-01_missed_trial.txt"
+set fmri(custom10) "/data/projects/srndna/fsl/EVfiles/sub-104/trust/run-01_missed_trial.txt"
 
 # Orthogonalise EV 10 wrt EV 0
 set fmri(ortho10.0) 0
@@ -1366,16 +1366,16 @@ set fmri(con_real12.4) 0
 set fmri(con_real12.5) 0
 
 # Real contrast_real vector 12 element 6
-set fmri(con_real12.6) 1.0
+set fmri(con_real12.6) -1.0
 
 # Real contrast_real vector 12 element 7
-set fmri(con_real12.7) -1.0
+set fmri(con_real12.7) 1.0
 
 # Real contrast_real vector 12 element 8
-set fmri(con_real12.8) -1.0
+set fmri(con_real12.8) 1.0
 
 # Real contrast_real vector 12 element 9
-set fmri(con_real12.9) 1.0
+set fmri(con_real12.9) -1.0
 
 # Real contrast_real vector 12 element 10
 set fmri(con_real12.10) 0
@@ -1387,13 +1387,13 @@ set fmri(conpic_real.13) 1
 set fmri(conname_real.13) "F > S"
 
 # Real contrast_real vector 13 element 1
-set fmri(con_real13.1) -1.0
+set fmri(con_real13.1) 0.0
 
 # Real contrast_real vector 13 element 2
 set fmri(con_real13.2) 1.0
 
 # Real contrast_real vector 13 element 3
-set fmri(con_real13.3) 0
+set fmri(con_real13.3) -1.0
 
 # Real contrast_real vector 13 element 4
 set fmri(con_real13.4) 0
@@ -1540,19 +1540,19 @@ set fmri(con_real17.2) 0
 set fmri(con_real17.3) 0
 
 # Real contrast_real vector 17 element 4
-set fmri(con_real17.4) 0
+set fmri(con_real17.4) -1.0
 
 # Real contrast_real vector 17 element 5
 set fmri(con_real17.5) 0
 
 # Real contrast_real vector 17 element 6
-set fmri(con_real17.6) -1.0
+set fmri(con_real17.6) 1.0
 
 # Real contrast_real vector 17 element 7
 set fmri(con_real17.7) 0
 
 # Real contrast_real vector 17 element 8
-set fmri(con_real17.8) 1.0
+set fmri(con_real17.8) 0.0
 
 # Real contrast_real vector 17 element 9
 set fmri(con_real17.9) 0
@@ -1576,19 +1576,19 @@ set fmri(con_real18.2) 0
 set fmri(con_real18.3) 0
 
 # Real contrast_real vector 18 element 4
-set fmri(con_real18.4) 0
+set fmri(con_real18.4) 1.0
 
 # Real contrast_real vector 18 element 5
 set fmri(con_real18.5) -1.0
 
 # Real contrast_real vector 18 element 6
-set fmri(con_real18.6) 1.0
+set fmri(con_real18.6) -1.0
 
 # Real contrast_real vector 18 element 7
 set fmri(con_real18.7) 1.0
 
 # Real contrast_real vector 18 element 8
-set fmri(con_real18.8) -1.0
+set fmri(con_real18.8) 0.0
 
 # Real contrast_real vector 18 element 9
 set fmri(con_real18.9) 0
@@ -2014,16 +2014,16 @@ set fmri(con_orig12.4) 0
 set fmri(con_orig12.5) 0
 
 # Real contrast_orig vector 12 element 6
-set fmri(con_orig12.6) 1.0
+set fmri(con_orig12.6) -1.0
 
 # Real contrast_orig vector 12 element 7
-set fmri(con_orig12.7) -1.0
+set fmri(con_orig12.7) 1.0
 
 # Real contrast_orig vector 12 element 8
-set fmri(con_orig12.8) -1.0
+set fmri(con_orig12.8) 1.0
 
 # Real contrast_orig vector 12 element 9
-set fmri(con_orig12.9) 1.0
+set fmri(con_orig12.9) -1.0
 
 # Real contrast_orig vector 12 element 10
 set fmri(con_orig12.10) 0
@@ -2035,13 +2035,13 @@ set fmri(conpic_orig.13) 1
 set fmri(conname_orig.13) "F > S"
 
 # Real contrast_orig vector 13 element 1
-set fmri(con_orig13.1) -1.0
+set fmri(con_orig13.1) 0.0
 
 # Real contrast_orig vector 13 element 2
 set fmri(con_orig13.2) 1.0
 
 # Real contrast_orig vector 13 element 3
-set fmri(con_orig13.3) 0
+set fmri(con_orig13.3) -1.0
 
 # Real contrast_orig vector 13 element 4
 set fmri(con_orig13.4) 0
@@ -2188,19 +2188,19 @@ set fmri(con_orig17.2) 0
 set fmri(con_orig17.3) 0
 
 # Real contrast_orig vector 17 element 4
-set fmri(con_orig17.4) 0
+set fmri(con_orig17.4) -1.0
 
 # Real contrast_orig vector 17 element 5
 set fmri(con_orig17.5) 0
 
 # Real contrast_orig vector 17 element 6
-set fmri(con_orig17.6) -1.0
+set fmri(con_orig17.6) 1.0
 
 # Real contrast_orig vector 17 element 7
 set fmri(con_orig17.7) 0
 
 # Real contrast_orig vector 17 element 8
-set fmri(con_orig17.8) 1.0
+set fmri(con_orig17.8) 0.0
 
 # Real contrast_orig vector 17 element 9
 set fmri(con_orig17.9) 0
@@ -2224,19 +2224,19 @@ set fmri(con_orig18.2) 0
 set fmri(con_orig18.3) 0
 
 # Real contrast_orig vector 18 element 4
-set fmri(con_orig18.4) 0
+set fmri(con_orig18.4) 1.0
 
 # Real contrast_orig vector 18 element 5
 set fmri(con_orig18.5) -1.0
 
 # Real contrast_orig vector 18 element 6
-set fmri(con_orig18.6) 1.0
+set fmri(con_orig18.6) -1.0
 
 # Real contrast_orig vector 18 element 7
 set fmri(con_orig18.7) 1.0
 
 # Real contrast_orig vector 18 element 8
-set fmri(con_orig18.8) -1.0
+set fmri(con_orig18.8) 0.0
 
 # Real contrast_orig vector 18 element 9
 set fmri(con_orig18.9) 0
