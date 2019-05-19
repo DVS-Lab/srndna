@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#echo "sleeping for 3 hours at `date`"
+#sleep 3h
+
 # Note that Contrast N for PPI is always PHYS in these models.
 # Remove for type-act or add if-statement to ignore/skip
 
@@ -18,6 +21,8 @@ for other in "type-nppi-dmn_sm-6" "type-nppi-ecn_sm-6" "type-ppi_seed-FFA_sm-6" 
 	
 	done
 done
+
+sleep 20m
 	
 for other in "type-ppi_seed-FFA_sm-6" "type-ppi_seed-Amyg_sm-6" "type-ppi_seed-VS_sm-6" "type-act_sm-6"; do
 	
@@ -48,4 +53,6 @@ for other in "type-ppi_seed-FFA_sm-6" "type-ppi_seed-Amyg_sm-6" "type-ppi_seed-V
 		bash L3_task-all_model-01.sh trust $copenum $copename $other &
 		sleep 5
 	done
+	
+	sleep 20
 done
