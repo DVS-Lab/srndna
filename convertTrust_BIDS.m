@@ -6,6 +6,8 @@ maindir = pwd;
 % cLeft is the left option
 % cRight is the right option
 % high/low value option will randomly flip between left/right
+% 
+% subj = subject number
 
 try
     
@@ -32,15 +34,14 @@ try
         cRight = C{8};
         options = [cLeft cRight];
         
-        
         fname = sprintf('sub-%03d_task-trust_run-%02d_events.tsv',subj,r+1);
         output = fullfile(maindir,'bids',['sub-' num2str(subj)],'func');
         if ~exist(output,'dir')
             mkdir(output)
         end
         fid = fopen(fullfile(output,fname),'w');
-        fprintf(fid,'onset\tduration\ttrial_type\tresponse_time\ttrust_value\tchoice\n');
-        for t = 1:length(choiceonset);
+        fprintf(fid,'onset\tduration\ttrial_type\tresponse_time\ttrust_value\tchoice\tcLow\tcHigh\n');
+        for t = 1:length(choiceonset)
             
             % output check
             if trust_val(t) == 999
@@ -63,17 +64,17 @@ try
             
             %fprintf(fid,'onset\tduration\ttrial_type\tresponse_time\ttrust_value\tchoice\n');
             if trust_val(t) == 999
-                fprintf(fid,'%f\t%f\t%s\t%f\t%s\t%s\n',choiceonset(t),3,'missed_trial',3,'n/a','n/a');
+                fprintf(fid,'%f\t%f\t%s\t%f\t%s\t%s\t%d\t%d\n',choiceonset(t),3,'missed_trial',3,'n/a','n/a',min(options(t,:)),max(options(t,:)));
             else
                 if trust_val(t) == 0
-                    fprintf(fid,'%f\t%f\t%s\t%f\t%d\t%s\n',choiceonset(t),RT(t),['choice_' trial_type ],RT(t),0,response{t}); %should always be 'low'
+                    fprintf(fid,'%f\t%f\t%s\t%f\t%d\t%s\t%d\t%d\n',choiceonset(t),RT(t),['choice_' trial_type ],RT(t),0,response{t},min(options(t,:)),max(options(t,:))); %should always be 'low'
                 else
                     if reciprocate(t) == 1
-                        fprintf(fid,'%f\t%f\t%s\t%f\t%d\t%s\n',choiceonset(t),RT(t),['choice_' trial_type],RT(t),trust_val(t),response{t});
-                        fprintf(fid,'%f\t%f\t%s\t%f\t%d\t%s\n',outcomeonset(t),1,['outcome_' trial_type '_recip'],RT(t),trust_val(t),response{t});
+                        fprintf(fid,'%f\t%f\t%s\t%f\t%d\t%s\t%d\t%d\n',choiceonset(t),RT(t),['choice_' trial_type],RT(t),trust_val(t),response{t},min(options(t,:)),max(options(t,:)));
+                        fprintf(fid,'%f\t%f\t%s\t%f\t%d\t%s\t%d\t%d\n',outcomeonset(t),1,['outcome_' trial_type '_recip'],RT(t),trust_val(t),response{t},min(options(t,:)),max(options(t,:)));
                     else
-                        fprintf(fid,'%f\t%f\t%s\t%f\t%d\t%s\n',choiceonset(t),RT(t),['choice_' trial_type],RT(t),trust_val(t),response{t});
-                        fprintf(fid,'%f\t%f\t%s\t%f\t%d\t%s\n',outcomeonset(t),1,['outcome_' trial_type '_defect'],RT(t),trust_val(t),response{t});
+                        fprintf(fid,'%f\t%f\t%s\t%f\t%d\t%s\t%d\t%d\n',choiceonset(t),RT(t),['choice_' trial_type],RT(t),trust_val(t),response{t},min(options(t,:)),max(options(t,:)));
+                        fprintf(fid,'%f\t%f\t%s\t%f\t%d\t%s\t%d\t%d\n',outcomeonset(t),1,['outcome_' trial_type '_defect'],RT(t),trust_val(t),response{t},min(options(t,:)),max(options(t,:)));
                     end
                 end
             end
