@@ -16,7 +16,7 @@ try
         if exist(fname,'file')
             fid = fopen(fname,'r');
         else
-            fprintf('Investment Game, Run %d: No data found.\n', r+1)
+            fprintf('sub-%d -- Investment Game, Run %d: No data found.\n', subj, r+1)
             continue;
         end
         
@@ -83,7 +83,7 @@ try
         fclose(fid);
         rand_trial = randsample(1:36,1);
         if trust_val(rand_trial) == 999
-            fprintf('Investment Game, Run %d: On trial %d, Participant did not respond.\n', r+1, rand_trial);
+            fprintf('sub-%d -- Investment Game, Run %d: On trial %d, Participant did not respond.\n',subj, r+1, rand_trial);
         else
             if reciprocate(rand_trial)
                 participant = (8 - trust_val(rand_trial)) + ((trust_val(rand_trial) * 3)/2);
@@ -99,7 +99,7 @@ try
             elseif (Partner(rand_trial) == 3)
                 trial_type = 'Friend';
             end
-            fprintf('Investment Game, Run %d: On trial %d, Participant WINS $%.2f and %s WINS $%.2f.\n', r+1, rand_trial, participant, trial_type, friend);
+            fprintf('sub-%d -- Investment Game, Run %d: On trial %d, Participant WINS $%.2f and %s WINS $%.2f.\n', subj, r+1, rand_trial, participant, trial_type, friend);
         end
     end
     

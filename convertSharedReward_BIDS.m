@@ -9,7 +9,7 @@ try
         if exist(fname,'file')
             fid = fopen(fname,'r');
         else
-            fprintf('Gambling Game, Run %d: No data found.\n', r+1)
+            fprintf('sub-%d -- Gambling Game, Run %d: No data found.\n', subj, r+1)
             continue;
         end
         C = textscan(fid,repmat('%f',1,19),'Delimiter',',','HeaderLines',1,'EmptyValue', NaN);
@@ -93,11 +93,11 @@ try
             trial_type = 'Friend';
         end
         if feedback(rand_trial) == 1 %punish
-            fprintf('Gambling Game, Run %d: On trial %d, Participant LOSES $5 and %s LOSES $5.\n', r+1, rand_trial, trial_type);
+            fprintf('sub-%d -- Gambling Game, Run %d: On trial %d, Participant LOSES $5 and %s LOSES $5.\n', subj, r+1, rand_trial, trial_type);
         elseif feedback(rand_trial) == 2 %neutral
-            fprintf('Gambling Game, Run %d: On trial %d, Participant sees a card with a 5 on it.\n', r+1, rand_trial);
+            fprintf('sub-%d -- Gambling Game, Run %d: On trial %d, Participant sees a card with a 5 on it.\n', subj, r+1, rand_trial);
         elseif feedback(rand_trial) == 3 %reward
-            fprintf('Gambling Game, Run %d: On trial %d, Participant WINS $5 and %s WINS $5.\n', r+1, rand_trial, trial_type);
+            fprintf('sub-%d -- Gambling Game, Run %d: On trial %d, Participant WINS $5 and %s WINS $5.\n', subj, r+1, rand_trial, trial_type);
         end
         
     end
