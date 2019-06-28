@@ -4,7 +4,7 @@ sublist = [104 105 106 107 108 109 110 112 113 111 115 116 ...
 % no 139?
 for s = 1:length(sublist)
     convertTrust_BIDS(sublist(s)); % scanner participant
-    if sublist(s) == 129 || 138
+    if sublist(s) == 129 || sublist(s) == 138
         continue
     else
         convertTrust_BIDS(sublist(s) + 100); % friend outside
