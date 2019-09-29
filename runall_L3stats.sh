@@ -21,11 +21,11 @@ for other in "type-nppi-dmn_sm-6" "type-nppi-ecn_sm-6" "type-ppi_seed-FFA_sm-6" 
 		sleep 5
 	
 	done
-	sleep 5m
+	#sleep 5m
 done
 
-echo "sleeping for 25 minutes at `date`"
-sleep 25m
+echo "sleeping for 5 minutes at `date`"
+sleep 5m
 	
 for other in "type-ppi_seed-FFA_sm-6" "type-ppi_seed-Amyg_sm-6" "type-ppi_seed-VS_sm-6" "type-act_sm-6"; do
 	
@@ -59,7 +59,7 @@ for other in "type-ppi_seed-FFA_sm-6" "type-ppi_seed-Amyg_sm-6" "type-ppi_seed-V
 		sleep 5
 	done
 	
-	echo "sleeping for 25 minutes at `date`"
-	sleep 25m
+	echo "sleeping for 15 minutes at `date`"
+	sleep 15m
 
 done
