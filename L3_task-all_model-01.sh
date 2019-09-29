@@ -12,7 +12,7 @@ mkdir -p $MAINOUTPUT
 REPLACEME=task-${task}_model-01_${other}
 
 cnum_pad=`zeropad ${copenum} 2`
-OUTPUT=${MAINOUTPUT}/L3_task-${task}_${other}_cnum-${cnum_pad}_cname-${copename}_twogroup
+OUTPUT=${MAINOUTPUT}/L3_task-${task}_${other}_cnum-${cnum_pad}_cname-${copename}_twogroup_contrasts
 if [ -e ${OUTPUT}.gfeat/cope1.feat/cluster_mask_zstat1.nii.gz ]; then
 	echo "skipping existing output"
 else
@@ -35,7 +35,7 @@ else
 fi
 
 cnum_pad=`zeropad ${copenum} 2`
-OUTPUT=${MAINOUTPUT}/L3_task-${task}_${other}_cnum-${cnum_pad}_cname-${copename}_onegroup
+OUTPUT=${MAINOUTPUT}/L3_task-${task}_${other}_cnum-${cnum_pad}_cname-${copename}_onegroup_contrasts
 if [ -e ${OUTPUT}.gfeat/cope1.feat/cluster_mask_zstat1.nii.gz ]; then
 	echo "skipping existing output"
 else
