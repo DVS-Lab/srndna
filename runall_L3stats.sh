@@ -21,9 +21,11 @@ for other in "type-nppi-dmn_sm-6" "type-nppi-ecn_sm-6" "type-ppi_seed-FFA_sm-6" 
 		sleep 5
 	
 	done
+	sleep 5m
 done
 
-sleep 20m
+echo "sleeping for 25 minutes at `date`"
+sleep 25m
 	
 for other in "type-ppi_seed-FFA_sm-6" "type-ppi_seed-Amyg_sm-6" "type-ppi_seed-VS_sm-6" "type-act_sm-6"; do
 	
@@ -41,7 +43,8 @@ for other in "type-ppi_seed-FFA_sm-6" "type-ppi_seed-Amyg_sm-6" "type-ppi_seed-V
 		bash L3_task-all_model-01.sh sharedreward $copenum $copename $other &
 		sleep 5
 	done
-	
+
+
 	#for subrun in "1 c_C" "2 c_F" "3 c_S" "4 C_def" "5 C_rec" "6 F_def" "7 F_rec" "8 S_def" "9 S_rec"; do
 	for subrun in "10 rec-def" "11 face" "12 rec-def_F-S" "13 F-S" "14 F-C" "15 S-C" "16 rec_SocClose" "17 def_SocClose" "18 rec-def_SocClose" "19 phys"; do
 		if [ "${other}" == "type-act_sm-6" ] && [ "${subrun}" == "19 phys" ]; then
@@ -56,5 +59,7 @@ for other in "type-ppi_seed-FFA_sm-6" "type-ppi_seed-Amyg_sm-6" "type-ppi_seed-V
 		sleep 5
 	done
 	
-	sleep 20
+	echo "sleeping for 25 minutes at `date`"
+	sleep 25m
+
 done
