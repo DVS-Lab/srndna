@@ -9,6 +9,9 @@ run=$2
 ppi=$3 # 0 for activation, otherwise name of the roi
 sm=$4
 
+
+
+
 MAINOUTPUT=${maindir}/fsl/sub-${sub}
 mkdir -p $MAINOUTPUT
 
@@ -42,6 +45,11 @@ else
 	OUTPUT=${MAINOUTPUT}/L1_task-${TASK}_model-01_type-${TYPE}_seed-${ppi}_run-0${run}_sm-${sm}
 fi
 
+#missing evs. subject might have dozed off at the beginning of the scan. check logs from Victoria
+if [ $sub -eq 150 ] && [ $run -eq 2 ]; then
+	echo "skipping: $OUTPUT " >> ${maindir}/skipping_L1.log
+	exit
+fi
 
 if [ -e ${OUTPUT}.feat/cluster_mask_zstat1.nii.gz ]; then
 	exit

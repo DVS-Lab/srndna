@@ -10,16 +10,25 @@ MAINOUTPUT=${maindir}/fsl/sub-${sub}
 
 # Trust Task
 NCOPES=18
-INPUT1=${MAINOUTPUT}/L1_task-trust_model-01_type-act_run-01_sm-${sm}.feat
-INPUT2=${MAINOUTPUT}/L1_task-trust_model-01_type-act_run-02_sm-${sm}.feat
-INPUT3=${MAINOUTPUT}/L1_task-trust_model-01_type-act_run-03_sm-${sm}.feat
-INPUT4=${MAINOUTPUT}/L1_task-trust_model-01_type-act_run-04_sm-${sm}.feat
-INPUT5=${MAINOUTPUT}/L1_task-trust_model-01_type-act_run-05_sm-${sm}.feat
+if [ $sub -eq 150 ]; then
+	nruns=4
+	INPUT1=${MAINOUTPUT}/L1_task-trust_model-01_type-act_run-01_sm-${sm}.feat
+	INPUT2=${MAINOUTPUT}/L1_task-trust_model-01_type-act_run-03_sm-${sm}.feat
+	INPUT3=${MAINOUTPUT}/L1_task-trust_model-01_type-act_run-04_sm-${sm}.feat
+	INPUT4=${MAINOUTPUT}/L1_task-trust_model-01_type-act_run-05_sm-${sm}.feat
+else
+	INPUT1=${MAINOUTPUT}/L1_task-trust_model-01_type-act_run-01_sm-${sm}.feat
+	INPUT2=${MAINOUTPUT}/L1_task-trust_model-01_type-act_run-02_sm-${sm}.feat
+	INPUT3=${MAINOUTPUT}/L1_task-trust_model-01_type-act_run-03_sm-${sm}.feat
+	INPUT4=${MAINOUTPUT}/L1_task-trust_model-01_type-act_run-04_sm-${sm}.feat
+	INPUT5=${MAINOUTPUT}/L1_task-trust_model-01_type-act_run-05_sm-${sm}.feat
+fi
 
 OUTPUT=${MAINOUTPUT}/L2_task-trust_model-01_type-act_sm-${sm}
 if [ -e ${OUTPUT}.gfeat/cope${NCOPES}.feat/cluster_mask_zstat1.nii.gz ]; then
 	echo "skipping existing output"
 else
+	echo "re-doing: ${OUTPUT}" >> re-runL2.log
 	rm -rf ${OUTPUT}.gfeat
 
 	ITEMPLATE=${maindir}/templates/L2_task-trust_model-01_type-act_nruns-${nruns}.fsf
