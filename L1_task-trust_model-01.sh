@@ -9,16 +9,28 @@ run=$2
 ppi=$3 # 0 for activation, otherwise name of the roi
 sm=$4
 
+
+
+
 MAINOUTPUT=${maindir}/fsl/sub-${sub}
 mkdir -p $MAINOUTPUT
 
-# denoise data, if it doesn't exist
+# denoise data, if it doesn't exist -- ugh, changed outputs for latest fmriprep (v1.5.0) (this is limited to sub-149 for testing now)
 cd ${maindir}/fmriprep/fmriprep/sub-${sub}/func
-if [ ! -e sub-${sub}_task-${TASK}_run-0${run}_bold_space-MNI152NLin2009cAsym_variant-unsmoothedAROMAnonaggr_preproc.nii.gz ]; then
-	fsl_regfilt -i sub-${sub}_task-${TASK}_run-0${run}_bold_space-MNI152NLin2009cAsym_preproc.nii.gz \
-	    -f $(cat sub-${sub}_task-${TASK}_run-0${run}_bold_AROMAnoiseICs.csv) \
-	    -d sub-${sub}_task-${TASK}_run-0${run}_bold_MELODICmix.tsv \
-	    -o sub-${sub}_task-${TASK}_run-0${run}_bold_space-MNI152NLin2009cAsym_variant-unsmoothedAROMAnonaggr_preproc.nii.gz
+if [ $sub -eq 149 ]; then
+	if [ ! -e sub-${sub}_task-${TASK}_run-0${run}_bold_space-MNI152NLin2009cAsym_variant-unsmoothedAROMAnonaggr_preproc.nii.gz ]; then
+		fsl_regfilt -i sub-${sub}_task-${TASK}_run-0${run}_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz \
+		    -f $(cat sub-${sub}_task-${TASK}_run-0${run}_AROMAnoiseICs.csv) \
+		    -d sub-${sub}_task-${TASK}_run-0${run}_desc-MELODIC_mixing.tsv \
+		    -o sub-${sub}_task-${TASK}_run-0${run}_bold_space-MNI152NLin2009cAsym_variant-unsmoothedAROMAnonaggr_preproc.nii.gz
+	fi
+else
+	if [ ! -e sub-${sub}_task-${TASK}_run-0${run}_bold_space-MNI152NLin2009cAsym_variant-unsmoothedAROMAnonaggr_preproc.nii.gz ]; then
+		fsl_regfilt -i sub-${sub}_task-${TASK}_run-0${run}_bold_space-MNI152NLin2009cAsym_preproc.nii.gz \
+		    -f $(cat sub-${sub}_task-${TASK}_run-0${run}_bold_AROMAnoiseICs.csv) \
+		    -d sub-${sub}_task-${TASK}_run-0${run}_bold_MELODICmix.tsv \
+		    -o sub-${sub}_task-${TASK}_run-0${run}_bold_space-MNI152NLin2009cAsym_variant-unsmoothedAROMAnonaggr_preproc.nii.gz
+	fi
 fi
 
 EVDIR=${maindir}/fsl/EVfiles/sub-${sub}/${TASK}/run-0${run}
@@ -33,6 +45,11 @@ else
 	OUTPUT=${MAINOUTPUT}/L1_task-${TASK}_model-01_type-${TYPE}_seed-${ppi}_run-0${run}_sm-${sm}
 fi
 
+#missing evs. subject might have dozed off at the beginning of the scan. check logs from Victoria
+if [ $sub -eq 150 ] && [ $run -eq 2 ]; then
+	echo "skipping: $OUTPUT " >> ${maindir}/skipping_L1.log
+	exit
+fi
 
 if [ -e ${OUTPUT}.feat/cluster_mask_zstat1.nii.gz ]; then
 	exit

@@ -109,6 +109,7 @@ OUTPUT=${MAINOUTPUT}/L2_task-ultimatum_model-01_type-nppi-${ppi}_sm-${sm}
 if [ -e ${OUTPUT}.gfeat/cope${NCOPES}.feat/cluster_mask_zstat1.nii.gz ]; then
 	echo "skipping existing output"
 else
+	echo "re-doing: ${OUTPUT}" >> re-runL2.log
 	rm -rf ${OUTPUT}.gfeat
 
 	ITEMPLATE=${maindir}/templates/L2_task-ultimatum_model-01_type-ppi.fsf
