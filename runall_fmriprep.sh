@@ -11,8 +11,10 @@ docker run -it --rm \
 -v /data/projects/srndna/scratch:/scratch \
 -u $(id -u):$(id -g) \
 -w /scratch \
-poldracklab/fmriprep:1.1.4 \
+poldracklab/fmriprep:1.5.1rc2 \
 /data /out \
-participant --participant_label 149 150 \
+participant \
 --use-aroma --fs-no-reconall --fs-license-file /opt/freesurfer/fs_license.txt \
 -w /scratch
+
+# --participant_label 149 150
