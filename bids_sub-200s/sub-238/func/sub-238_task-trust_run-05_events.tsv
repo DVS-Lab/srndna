@@ -1,0 +1,14 @@
+onset	duration	trial_type	response_time	trust_value	choice	cLow	cHigh
+4.253980	1.226250	choice_stranger	1.226250	8	high	0	8
+11.007900	1.000000	outcome_stranger_recip	1.226250	8	high	0	8
+17.270800	2.247680	choice_stranger	2.247680	0	low	0	4
+35.770300	3.000000	missed_trial	3.000000	n/a	n/a	4	8
+47.229800	1.531390	choice_stranger	1.531390	4	low	4	8
+53.998700	1.000000	outcome_stranger_defect	1.531390	4	low	4	8
+58.197800	1.471110	choice_stranger	1.471110	8	high	2	8
+66.469300	1.000000	outcome_stranger_recip	1.471110	8	high	2	8
+70.660700	2.147440	choice_stranger	2.147440	0	low	0	8
+81.448200	2.350820	choice_computer	2.350820	2	low	2	8
+86.722400	1.000000	outcome_computer_recip	2.350820	2	low	2	8
+95.119600	1.885310	choice_friend	1.885310	8	high	0	8
+101.878000	1.000000	outcome_friend_defect	1.885310	8	high	0	8
