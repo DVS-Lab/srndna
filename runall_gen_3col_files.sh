@@ -8,7 +8,9 @@
 #for subrun in "138 4"; do	
 
 # unsure about sub-143 right now
-for subrun in "138 4" "140 5" "141 4" "142 5" "144 3" "145 2" "147 5" "149 4" "150 5" "151 5"; do		
+# for subrun in "138 4" "140 5" "141 4" "142 5" "144 3" "145 2" "147 5" "149 4" "150 5" "151 5"; do		
+for subrun in "143 3" "152 2" "153 5" "154 2"; do		
+ 
   set -- $subrun
   sub=$1
   run=$2
