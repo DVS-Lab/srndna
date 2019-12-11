@@ -3,6 +3,8 @@
 # usage: bash run_fmriprep.sh sub
 # example: bash run_fmriprep.sh 102
 
+echo "sleeping for 2 hours..."
+sleep 2h
 
 docker run -it --rm \
 -v /data/projects/srndna/bids:/data:ro \
@@ -13,7 +15,7 @@ docker run -it --rm \
 -w /scratch \
 poldracklab/fmriprep:1.5.1rc2 \
 /data /out \
-participant \
+participant --participant_label 155 156 157 \
 --use-aroma --fs-no-reconall --fs-license-file /opt/freesurfer/fs_license.txt \
 -w /scratch
 
