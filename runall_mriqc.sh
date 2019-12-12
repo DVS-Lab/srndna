@@ -12,7 +12,7 @@ docker run -it --rm \
 -v /data/projects/srndna/scratch:/scratch \
 -u $(id -u):$(id -g) \
 -w /scratch \
-poldracklab/mriqc:0.15.2rc1 \
+poldracklab/mriqc:0.15.1 \
 /data /out \
 participant --fft-spikes-detector --ica -w /scratch
 
