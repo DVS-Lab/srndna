@@ -8,12 +8,13 @@
 #for subrun in "138 4" "140 5" "141 4" "142 5" "143 3" "144 2" "145 2" "147 5" "149 4" "150 5" "151 5"; do
 #for subrun in "152 2" "153 5" "154 2"; do
 #for subrun in "155 5" "156 2" "157 5"; do
-for subrun in "158 5" "159 5"; do
+# for subrun in "158 5" "159 5"; do
+for subrun in "159 5"; do
   set -- $subrun
   sub=$1
   nruns=$2
   bash run_heudiconv.sh $sub $nruns
-  bash run_pydeface.sh $sub
+  #bash run_pydeface.sh $sub
   #bash run_fmriprep.sh $sub
   #bash run_mriqc.sh $sub
 

@@ -8,26 +8,26 @@
 sub=$1
 nruns=$2
 
-bidsroot=/data/projects/srndna/bids
-rm -rf ${bidsroot}/sub-${sub}
+# singularity pull docker://nipy/heudiconv:0.5.4
+# singularity run -B /data:/base /usr/pubsw/packages/heudiconv/heudiconv.simg \ 
+# -d /base/dicom/sub-{subject}/ses-{session}/scans/ */* .dcm -o /base/nifti/ -f convertall -s 01 -ss 001 -c none --overwrite
+
+
 
 if [ $sub -gt 121 ]; then
-  docker run --rm -it -v /data/projects/srndna:/data:ro \
-  -v ${bidsroot}:/output \
-  -u $(id -u):$(id -g) \
-  nipy/heudiconv:latest \
-  -d /data/dicoms/SMITH-AgingDM-{subject}/*/DICOM/*.dcm -s $sub \
-  -f /data/heuristics.py -c dcm2niix -b --minmeta -o /output
+  singularity run -B /data/projects:/base \
+  /data/tools/heudiconv-0.5.4.simg -d /base/srndna/dicoms/SMITH-AgingDM-{subject}/*/DICOM/*.dcm -s $sub \
+  -f /base/srndna/heuristics.py -c dcm2niix -b --datalad --minmeta -o /base/srndna/ds.bids
 else
  docker run --rm -it -v /data/projects/srndna:/data:ro \
   -v ${bidsroot}:/output \
   -u $(id -u):$(id -g) \
-  nipy/heudiconv:latest \
+  nipy/heudiconv:0.5.4 \
   -d /data/dicoms/SMITH-AgingDM-{subject}/scans/*/DICOM/*.dcm -s $sub \
-  -f /data/heuristics.py -c dcm2niix -b --minmeta -o /output
+  -f /data/heuristics.py -c dcm2niix -b --datalad --minmeta -o /output
 fi
 
-# need to check anonymization (e.g., dcm2niix -ba -y)???
+
 
 rm -rf missing-BIDS_sub-${sub}.log
 if [ $nruns -eq 5 ]; then
@@ -165,6 +165,6 @@ elif [ $nruns -eq 2 ]; then
 
 
 fi
-clear
+#clear
 tree ${bidsroot}/sub-${sub}
 
