@@ -2,31 +2,25 @@
 
 # example code for heudiconv
 # runs heudiconv on input subject
-# usage: bash run_heudiconv.sh sub
-# example: bash run_heudiconv.sh 102 1
+# usage: bash run_heudiconv.sh sub nruns
+# example: bash run_heudiconv.sh 104 3
 
 sub=$1
 nruns=$2
 
-# singularity pull docker://nipy/heudiconv:0.5.4
-# singularity run -B /data:/base /usr/pubsw/packages/heudiconv/heudiconv.simg \ 
-# -d /base/dicom/sub-{subject}/ses-{session}/scans/ */* .dcm -o /base/nifti/ -f convertall -s 01 -ss 001 -c none --overwrite
-
-
+# already created a dataset
+# datalad create --description "creating SRNDNA dataset" -c text2git ds.srndna
+bidsroot=/data/projects/ds.srndna
 
 if [ $sub -gt 121 ]; then
   singularity run -B /data/projects:/base \
   /data/tools/heudiconv-0.5.4.simg -d /base/srndna/dicoms/SMITH-AgingDM-{subject}/*/DICOM/*.dcm -s $sub \
-  -f /base/srndna/heuristics.py -c dcm2niix -b --datalad --minmeta -o /base/srndna/ds.bids
+  -f /base/srndna/heuristics.py -c dcm2niix -b --datalad --minmeta -o /base/ds.srndna
 else
- docker run --rm -it -v /data/projects/srndna:/data:ro \
-  -v ${bidsroot}:/output \
-  -u $(id -u):$(id -g) \
-  nipy/heudiconv:0.5.4 \
-  -d /data/dicoms/SMITH-AgingDM-{subject}/scans/*/DICOM/*.dcm -s $sub \
-  -f /data/heuristics.py -c dcm2niix -b --datalad --minmeta -o /output
+  singularity run -B /data/projects:/base \
+  /data/tools/heudiconv-0.5.4.simg -d /base/srndna/dicoms/SMITH-AgingDM-{subject}/scans/*/DICOM/*.dcm -s $sub \
+  -f /base/srndna/heuristics.py -c dcm2niix -b --datalad --minmeta -o /base/ds.srndna
 fi
-
 
 
 rm -rf missing-BIDS_sub-${sub}.log
@@ -166,5 +160,8 @@ elif [ $nruns -eq 2 ]; then
 
 fi
 #clear
-tree ${bidsroot}/sub-${sub}
+#tree ${bidsroot}/sub-${sub}
+
+cd /data/projects/ds.srndna
+datalad save -m "add IntendedFor field"
 

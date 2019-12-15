@@ -7,7 +7,7 @@
 
 sub=$1
 
-bidsroot=/data/projects/srndna/bids
+bidsroot=/data/projects/ds.srndna
 
 #sudo chmod -R aug+rwx ${bidsroot}/sub-${sub}
 
@@ -16,3 +16,6 @@ pydeface.py ${bidsroot}/sub-${sub}/anat/sub-${sub}_T1w.nii.gz
 mv -f ${bidsroot}/sub-${sub}/anat/sub-${sub}_T1w_defaced.nii.gz ${bidsroot}/sub-${sub}/anat/sub-${sub}_T1w.nii.gz
 pydeface.py ${bidsroot}/sub-${sub}/anat/sub-${sub}_T2w.nii.gz
 mv -f ${bidsroot}/sub-${sub}/anat/sub-${sub}_T2w_defaced.nii.gz ${bidsroot}/sub-${sub}/anat/sub-${sub}_T2w.nii.gz
+
+cd /data/projects/ds.srndna
+datalad save -m "deface anatomicals"
