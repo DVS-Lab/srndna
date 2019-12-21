@@ -221,8 +221,8 @@ oafem_yes <- c()
 oafem_no <- c()
 oafem_suscpected <- c()
 oafem_maybe <- c()
-for (column in seq(1, ncol(oafem_tpose))) {
-  holder1 <- oafem_tpose[column]
+for (column in seq(1, ncol(oafem))) {
+  holder1 <- oafem[column]
   colnames(holder1) <- 'col'
   yes <- holder1 %>% filter(col == 1) %>% nrow() * 2
   no <- holder1 %>% filter(col == 2) %>% nrow() * 0
