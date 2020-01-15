@@ -1,0 +1,73 @@
+column identifier	column contains	scoring	additional scoring information
+id - participant id	participant id	n/a	n/a
+ios_friend 	Inclusion of the Other in Self Scale (for the participant's friend)	7-Jan	lower - higher 
+ios_stranger 	Inclusion of the Other in Self Scale (for the confederate)	7-Jan	lower - higher 
+age_group 	participants grouped into younger/older	"1,2"	"1= younger, 2=older"
+scanned 	scanned or unscanned participants	"0,1"	"0=not scanned, 1=scanned"
+bdi	Beck Depression Inventory score	sum	n/a
+bas_reward 	"Behavioral Avoidance/Inhibition Scale, reward subscale score"	as citation suggests	n/a
+bas_drive 	"Behavioral Avoidance/Inhibition Scale, drive-seeking subscale score"	as citation suggests	n/a
+bas_fun 	"Behavioral Avoidance/Inhibition Scale, fun-seeking subscale score"	as citation suggests	n/a
+bis_score 	"Behavioral Avoidance/Inhibition Scale, inhibition subscale score"	as citation suggests	n/a
+spsrq_reward 	"Sensitivity to Reward/Punishment, reward subscale score"	as citation suggests	n/a
+spsrq_punishment 	"Sensitivity to Reward/Punishment, punishment subscale score"	as citation suggests	n/a
+extrinsic_affect_improved	"Emotional Regulation of Others and Self,  extrinsic affect-improved factors"	as citation suggests	n/a
+extrinsic_affect_worsened	"Emotional Regulation of Others and Self, extrinsic affect-worsened factors"	as citation suggests	n/a
+intrinsic_affect_improved	"Emotional Regulation of Others and Self, intrinsic affect-improved factors"	as citation suggests	n/a
+instrinsic_affect_worsened 	"Emotional Regulation of Others and Self, intrinsic affect-worsened factors"	as citation suggests	n/a
+erq _appraisal 	"Emotional Regulation Questionnaire, appraisal subscale"	as citation suggests	n/a
+erq_suppresion 	"Emotional Regulation Questionnaire, suppression subscale"	as citation suggests	n/a
+fin_lit_1	"Financial Literacy Scale, Question 1"		categorical
+fin_lit_2	"Financial Literacy Scale, Question 2"		categorical
+fin_lit_3	"Financial Literacy Scale, Question 3"		categorical
+total_ss_avg	"Social Support, total scale"		
+sig_other_ss_avg	"Social Support, significant other subscale"		
+family_ss_avg	"Social Support, family subscale"		
+friend_ss_avg	"Social Support, friend subscale"		
+svo_score	Social Valuation of Others Scale		
+svo_factors	n/a		
+media_1	"Questions about Media Use, 1"	n/a	
+media_2	"Questions about Media Use, 2"	n/a	
+media_3	"Questions about Media Use, 3"	n/a	
+media_4	"Questions about Media Use, 4"	n/a	
+media_5	"Questions about Media Use, 5"	n/a	
+media_6	"Questions about Media Use, 6"	n/a	
+media_7	"Questions about Media Use, 7"	n/a	
+media_8	"Questions about Media Use, 8"	n/a	
+media_9	"Questions about Media Use, 9"	n/a	
+media_10	"Questions about Media Use, 10"	n/a	
+media_11	"Questions about Media Use, 11"	n/a	
+aging_attitudes_1	"Attitudes about aging, Question 1"		
+aging_attitudes_2	"Attitudes about aging, Question 2"		
+aging_attitudes_3	"Attitudes about aging, Question 3"		
+aging_attitudes_4	"Attitudes about aging, Question 4"		
+age_1	Age	low to high	
+race_1	Race	categorical	
+gender_1	Gender	categorical	
+religious_mult_1	Religion identification	categorical	
+religious_text_1	other religion	open-text	
+religiousity_1	Religiosity	low to high	
+education_1	Education	low to high	
+income_1	Income	low to high	
+years_known_1	Years Known Friend	n/a	
+closeness_1	"Closeness to friend, Question 1"	n/a	
+closeness_2	"Closeness to friend, Question 1"	n/a	
+closeness_3	"Closeness to friend, Question 1"	n/a	
+closeness_4	"Closeness to friend, Question 1"	n/a	
+relationship_1	"Closeness to friend, Question 1"	n/a	
+generosity_1	Generosity of friend	n/a	
+likeliness_to_share_1	Likeliness to share	n/a	
+sharing_1	Likeliness of friend to share	n/a	
+news_seeking_1	"News Seeking Scale, Question 1"		
+news_seeking_2	"News Seeking Scale, Question 2"		
+news_seeking_3	"News Seeking Scale, Question 3"		
+news_seeking_4	"News Seeking Scale, Question 4"		
+news_seeking_5	"News Seeking Scale, Question 5"		
+news_seeking_6	"News Seeking Scale, Question 6"		
+news_seeking_7	"News Seeking Scale, Question 7"		
+credulity	Credulity Scale	sum	
+general_trust	General Trust Scale (Credulity)	average	
+Lfdss_1 - 22	The Lichtenberg Financial Decision Screening Scale	Not scoring as items are categorical and should be administered in person	
+Oafem_1	Older Adult Financial Exploitation Measure		
+oafem_2	Older Adult Financial Exploitation Measure		
+fas	Bergen's Facebook Addiction Scale	sum	
