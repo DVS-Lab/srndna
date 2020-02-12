@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r libraries, include = FALSE}
+```{r libraries, echo=FALSE, message=FALSE, include=FALSE}
 library(ppcor)
 library(readxl)
 library(tidyr)
@@ -17,34 +17,40 @@ library(ggplot2)
 library(corrplot)
 library(dplyr)
 library(pls)
-getwd()
-setwd('C:/Users/tui14429/Downloads/srndna_survey_codes/')
+setwd('~skatta/Desktop/R/srndna/')
 unclean <- read.csv('final_data_srndna.csv')
+lfdss_oafem <- read.csv('srndna_lfdss_oafem.csv')
 participants <- read.table('participants_internalonly.tsv', sep = '\t', header = T)
 columns <- read_xlsx('column_names_conversion.xlsx') %>%
   unite('column', c(name, index),  sep = '_')
 ```
 
-```{r participants, include = FALSE}
+```{r participants, echo=FALSE, message=FALSE, include=FALSE}
 colnames(unclean) <- columns$column
 unclean <- unclean[-c(1, 2), -c(1, 2)]
 colnames(unclean)[1] <- 'id'
 factor_columns <- c(grep('religious_text_1', colnames(unclean)), 
                     grep('years_known_1', colnames(unclean)), 
-                            grep('lfdss_2', colnames(unclean)))
+                    grep('lfdss_2', colnames(unclean)),
+                    grep('lfdss_text', colnames(unclean)))
 # convert columns from factor to numeric to analyze
 unclean[-factor_columns] <- 
   unclean[-factor_columns] %>%
   lapply(., as.character) %>%
-  lapply(., as.numeric) %>%
-  as.data.frame()
+  lapply(., as.numeric)
+# convert columns from factor to character
+unclean[factor_columns] <- unclean[factor_columns] %>%
+  lapply(., as.character)
+# convert columns from character to numeric for lfdss_oafem
+lfdss_oafem[grep('text', colnames(lfdss_oafem))] <- lfdss_oafem[grep('text', colnames(lfdss_oafem))] %>%
+  lapply(., as.character)
 ```
 
-```{r aarp, include = FALSE}
+```{r aarp, echo=FALSE, message=FALSE, include=FALSE}
 aarp <- unclean[grep('aarp', colnames(unclean))]
 ```
 
-```{r beck, include = FALSE}
+```{r beck, echo=FALSE, message=FALSE, include=FALSE}
 # NOTE: NOT THE NORMAL BECK DEPRESSION INVENTORY. ONLY HAS 12 INSTEAD OF NORMAL 21 Q's
 # scoring guidelines: https://www.ismanet.org/doctoryourspirit/pdfs/Beck-Depression-Inventory-BDI.pdf
 beck <- unclean[grep('beck', colnames(unclean))] %>%
@@ -53,165 +59,158 @@ beck <- unclean[grep('beck', colnames(unclean))] %>%
 bdi <- rowSums(beck)
 ```
 
-```{r bis_bas, include = FALSE}
+```{r bis_bas, echo=FALSE, message=FALSE, include=FALSE}
 # NOTE: CODING IN QUALTRICS DIFFERS FROM CODING IN SCALE INSTRUCTIONS: https://www.midss.org/sites/default/files/bis.pdf
 bis_bas <- unclean[grep('bis_bas', colnames(unclean))] 
-
 # reverse scoring
 bis_bas[-c(5, 7)] <- lapply(bis_bas[-c(5, 7)], function(x) 8 - x) %>% as.data.frame()
-
 # sum or mean unspecified in scoring instructions: 
 bas_reward <- bis_bas[paste('bis_bas', 8:12, sep = '_')] %>% rowSums()
 bas_drive <- bis_bas[paste('bis_bas', 13:16, sep = '_')] %>% rowSums()
 bas_fun <- bis_bas[paste('bis_bas', 17:20, sep = '_')] %>% rowSums()
 bis_score <- bis_bas[paste('bis_bas', 1:7, sep = '_')] %>% rowSums()
-
 bis_bas_final <- data.frame(bas_reward,
                             bas_drive,
                             bas_fun,
                             bis_score)
 ```
 
-```{r spsrq, include = FALSE}
+```{r spsrq, echo=FALSE, message=FALSE, include=FALSE}
 # scoring guidlines: https://www.phenxtoolkit.org/toolkit_content/PDF/PX540603.pdf
 spsrq <- unclean[grep('spsrq', colnames(unclean))]
-
-# 1 = yes, 2 = no
+# 1 = yes, 2 = no (so make no = 0)
 spsrq[spsrq == 2] <- 0
 reward_cols <- paste('spsrq_', seq(2, 48, 2), sep = '')
 punishment_cols <- !(colnames(spsrq) %in% reward_cols)
-
 spsrq_reward <- rowMeans(spsrq[reward_cols])
 spsrq_punishment <- rowMeans(spsrq[punishment_cols])
-
 spsrq_final <- data.frame(spsrq_reward,
                           spsrq_punishment)
 ```
 
-```{r eros, include = FALSE}
+```{r eros, echo=FALSE, message=FALSE, include=FALSE}
 # scoring guidelines: http://eros.group.shef.ac.uk/uploads/docs/EROS_Questionnaire_Assessment_protocol.docx
 eros1 <- unclean[grep('eros1', colnames(unclean))]
 eros2 <- unclean[grep('eros2', colnames(unclean))]
-
 ea_improved_cols <- paste('eros1', c(1, 3, 6, 7, 8, 9), sep = '_')
 extrinsic_affect_improved <- rowMeans(eros1[ea_improved_cols])
+# takes mean of columns not in improved cols
 extrinsic_affect_worsened <- rowMeans(eros1[!(names(eros1) %in% ea_improved_cols)])
-
 ia_improved_cols <- paste('eros2', c(2, 3, 6, 7, 9, 10), sep = '_')
+# takes mean of columns not in improved cols
 intrinsic_affect_worsened <- rowMeans(eros2[ia_improved_cols])
 intrinsic_affect_improved <- rowMeans(eros2[!(names(eros2) %in% ia_improved_cols)])
-
 eros_final <- data.frame(extrinsic_affect_improved,
                          extrinsic_affect_worsened,
                          intrinsic_affect_improved,
                          intrinsic_affect_worsened)
 ```
 
-```{r erq, include = FALSE}
+```{r erq, echo=FALSE, message=FALSE, include=FALSE}
 # scoring guidelines: https://fetzer.org/sites/default/files/images/stories/pdf/selfmeasures/Self_Measures_for_Personal_Growth_and_Positive_Emotions_EMOTION_REGULATION.pdf
 erq <- unclean[grep('erq', colnames(unclean))]
-
 appraisal_cols <- paste('erq', c(1, 3, 5, 7, 8, 10), sep = '_')
-
 erq_appraisal <- rowSums(erq[appraisal_cols])
 erq_suppression <- rowSums(erq[!(names(erq) %in% appraisal_cols)])
-
 erq_final <- data.frame(erq_appraisal,
                         erq_suppression)
 ```
 
-
-```{r fin_lit, include = FALSE}
+```{r fin_lit, echo=FALSE, message=FALSE, include=FALSE}
 fin_lit <- unclean[grep('fin_lit', colnames(unclean))]
-
 ```
 
-```{r mspss, include = FALSE}
+```{r mspss, echo=FALSE, message=FALSE, include=FALSE}
 # scoring guidelines: https://www.rip.org.uk/download/265/SMG_change_projectMSPSS-Scoring_guidance.pdf
 mspss <- unclean[grep('mspss', colnames(unclean))]
-
 total_ss_avg <- rowSums(mspss)/12
 sig_other_ss_avg <- rowSums(mspss[c(1, 2, 5, 10)])/4
 family_ss_avg <- rowSums(mspss[c(3, 4, 8, 11)])/4
 friend_ss_avg <- rowSums(mspss[c(6, 7, 9, 12)])/4
-
 mspss_final <- data.frame(total_ss_avg,
                           sig_other_ss_avg,
                           family_ss_avg,
                           friend_ss_avg)
 ```
 
-```{r ios, include = FALSE}
+```{r ios, echo=FALSE, message=FALSE, include=FALSE}
 ios <- unclean[grep('ios', colnames(unclean))]
 ```
 
-```{r svo, include = FALSE}
+```{r svo, echo=FALSE, message=FALSE, include=FALSE}
+# http://journal.sjdm.org/11/m25/m25.pdf
 svo <- unclean[grep('svo', colnames(unclean))]
-
 # columns involved with each svo subgroup: svo you and svo other
 svo_you_cols <- paste('svo_', seq(1, 11, 2), sep = '')
 svo_other_cols <- paste('svo_', seq(2, 12, 2), sep = '')
-
 # take the row means and calculate score: svo = arctan((A_hat_other - 50)/(A_hat_you - 50))
 svo_you_mean <- rowMeans(svo[svo_you_cols])
 svo_other_mean <- rowMeans(svo[svo_other_cols])
 svo_score <- atan2((svo_you_mean - 50), (svo_other_mean - 50))
-
 # get everything in a categorical format
 svo_factors <- svo_score
 svo_factors[svo_factors >= 52.15] <- 'altruism'
 svo_factors[22.45 <= svo_factors & svo_factors < 52.15] <- 'prosocialty'
 svo_factors[-12.04 <= svo_factors & svo_factors < 22.45] <- 'individualism'
 svo_factors[svo_factors < 12.04] <- 'competitiveness'
-
 svo_final <- data.frame(svo_score,
                         svo_factors)
 ```
 
-```{r media, include = FALSE}
+```{r media, echo=FALSE, message=FALSE, include=FALSE}
 media <- unclean[grep('media', colnames(unclean))]
-
-# facebook addiction scale
+# facebook addiction scale: sum
 fas <- media[paste('media', 5:10, sep = '_')] %>% rowSums()
-
 # social media sharing
 social_media_share <- media$media_11
 ```
 
-```{r aging_attitudes, include = FALSE}
+```{r aging_attitudes, echo=FALSE, message=FALSE, include=FALSE}
 # keep as is
 aging_attitudes <- unclean[grep('aging_attitudes', colnames(unclean))]
 ```
 
-```{r demographics, include = FALSE}
+```{r demographics, echo=FALSE, message=FALSE, include=FALSE}
 # keep as is
 demographics <- unclean[173:189]
-
 ```
 
-```{r general_trust, include = FALSE}
-# scoring guidelines: https://fetzer.org/sites/default/files/images/stories/pdf/selfmeasures/Self_Measures_for_Love_and_Compassion_Research_TRUST.pdf
+```{r general_trust, echo=FALSE, message=FALSE, include=FALSE}
+# INCORRECT
+# scoring guidelines: https://link.springer.com/article/10.1007/BF02249397
 general_trust <- unclean[grep('general_trust', colnames(unclean))]
-
 g_trust <- rowMeans(general_trust)
 ```
 
-```{r credulity, include = FALSE}
-credulity <- unclean[grep('credulity', colnames(unclean))]
-
+```{r credulity, echo=FALSE, message=FALSE, include=FALSE}
+# http://dx.doi.org/10.1080%2F08946566.2011.584049
+credulity <- unclean[grep('credulity', colnames(unclean))] %>%
+  lapply(., function(x) x - 1) %>%
+  as.data.frame()
 credulity_score <- rowSums(credulity)
 ```
 
-```{r news_seeking, include = FALSE}
+```{r news_seeking, echo=FALSE, message=FALSE, include=FALSE}
+# keep as is
 news_seeking <- unclean[grep('news_seeking', colnames(unclean))]
 ```
 
-```{r lfdss, include = FALSE}
-lfdss <- unclean[grep('lfdss', colnames(unclean))]
+```{r lfdss, echo=FALSE, message=FALSE, include=FALSE}
+# individual items: 
+# https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4938730/?report=classic
+# https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4938730/?report=classic
+lfdss <- unclean[c(1, grep('lfdss', colnames(unclean)))]
+lfdss[which(lfdss$id %in% lfdss_oafem$srndna_id), 2:ncol(lfdss)] <- lfdss_oafem[grep('lfdss', colnames(lfdss_oafem))]
 ```
 
-```{r oafem, include = FALSE}
+```{r oafem, echo=FALSE, message=FALSE, include=FALSE}
+# https://www.safeguardingireland.org/wp-content/uploads/2018/10/NCPOP-Older-Adult-Financial-Exploitation-Measure-2014.pdf
 oafem <- unclean[grep('oafem', colnames(unclean))] %>%
+  as.matrix() %>%
+  t() %>%
+  as.data.frame()
+
+oafem2 <- lfdss_oafem[grep('oafem', colnames(lfdss_oafem))] %>%
   as.matrix() %>%
   t() %>%
   as.data.frame()
@@ -221,28 +220,63 @@ oafem_yes <- c()
 oafem_no <- c()
 oafem_suscpected <- c()
 oafem_maybe <- c()
-for (column in seq(1, ncol(oafem_tpose))) {
-  holder1 <- oafem_tpose[column]
+for (column in seq(1, ncol(oafem))) {
+  holder1 <- oafem[column]
   colnames(holder1) <- 'col'
-  yes <- holder1 %>% filter(col == 1) %>% nrow() * 2
-  no <- holder1 %>% filter(col == 2) %>% nrow() * 0
-  suspected <- holder1 %>% filter(col == 3) %>% nrow() * 1
-  maybe <- holder1 %>% filter(col == 4) %>% nrow()
+  if(length(holder1[!is.na(holder1)]) != 0)  {
+    yes <- holder1 %>% filter(col == 1) %>% nrow() * 2
+    no <- holder1 %>% filter(col == 2) %>% nrow() * 0
+    suspected <- holder1 %>% filter(col == 3) %>% nrow() * 1/3
+    maybe <- holder1 %>% filter(col == 4) %>% nrow()
+  } else {
+    yes <- NA
+    no <- NA
+    suspected <- NA
+    maybe <- NA
+  }
   oafem_yes <- c(oafem_yes, yes)
   oafem_no <- c(oafem_no, no)
   oafem_suscpected <- c(oafem_suscpected, suspected)
   oafem_maybe <- c(oafem_maybe, maybe)
 }
-oafem_sum <- oafem_yes + oafem_suscpected + oafem_no
+oafem1_sum <- (oafem_yes + oafem_suscpected + oafem_no)/25
+
+oafem_yes <- c()
+oafem_no <- c()
+oafem_suscpected <- c()
+oafem_maybe <- c()
+for (column in seq(1, ncol(oafem2))) {
+  holder1 <- oafem2[column]
+  colnames(holder1) <- 'col'
+  if(length(holder1[!is.na(holder1)]) != 0)  {
+    yes <- holder1 %>% filter(col == 1) %>% nrow() * 2
+    no <- holder1 %>% filter(col == 2) %>% nrow() * 0
+    suspected <- holder1 %>% filter(col == 3) %>% nrow() * 1/3
+    maybe <- holder1 %>% filter(col == 4) %>% nrow()
+  } else {
+    yes <- NA
+    no <- NA
+    suspected <- NA
+    maybe <- NA
+  }
+  oafem_yes <- c(oafem_yes, yes)
+  oafem_no <- c(oafem_no, no)
+  oafem_suscpected <- c(oafem_suscpected, suspected)
+  oafem_maybe <- c(oafem_maybe, maybe)
+}
+
+oafem2_sum <- data.frame(id = lfdss_oafem$srndna_id,
+                         oafem2_sum = (oafem_yes + oafem_suscpected + oafem_no)/30)
+
 ```
 
-```{r data_set_construction, include = FALSE}
+```{r data_set_construction, message=FALSE, include=FALSE}
 srndna_surveys <- data.frame(id = unclean$id,
                              bdi = bdi,
                              general_trust = g_trust,
-                             credulity = credulity_score ,
-                             oafem = oafem_sum)
-
+                             credulity = credulity_score,
+                             oafem = oafem1_sum,
+                             oafem1 = oafem1_sum)
 srndna_surveys <- cbind(srndna_surveys, bis_bas_final) %>%
   cbind(., spsrq_final) %>%
   cbind(., eros_final) %>%
@@ -252,9 +286,21 @@ srndna_surveys <- cbind(srndna_surveys, bis_bas_final) %>%
   cbind(., svo_final) %>%
   cbind(., media) %>%
   cbind(., aging_attitudes) %>%
-  cbind(., demographics) %>%
   cbind(., news_seeking) %>%
-  cbind(., lfdss)
+  cbind(., ios) %>%
+  lapply(., as.character) %>%
+  lapply(., as.numeric) %>%
+  as.data.frame() %>%
+  cbind(., demographics) %>%
+  cbind(., lfdss) %>%
+  as.data.frame()
 
-write.csv(srndna_surveys, 'participants.csv')
+srndna_surveys$oafem2 <- NA
+srndna_surveys[which(srndna_surveys$id %in% oafem2_sum$id), 'oafem2'] <- oafem2_sum$oafem2_sum
+srndna_surveys[which(srndna_surveys$id %in% oafem2_sum$id), 'oafem'] <- oafem2_sum$oafem2_sum
+srndna_write_out <- srndna_surveys
+srndna_write_out[is.na(srndna_write_out)] <- 'n/a'
+
+write.csv(srndna_write_out, 'participants.csv', row.names = FALSE)
+write.table(srndna_write_out, 'participants.tsv', sep = '\t', row.names = FALSE)
 ```
