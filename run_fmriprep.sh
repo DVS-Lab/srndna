@@ -4,15 +4,9 @@
 # example: bash run_fmriprep.sh 102
 
 sub=$1
-
-docker run -it --rm \
--v /data/projects/srndna/bids:/data:ro \
--v /data/projects/srndna/fmriprep:/out \
--v /data/projects/srndna/fs_license.txt:/opt/freesurfer/fs_license.txt \
--v /data/projects/srndna/scratch:/scratch \
--u $(id -u):$(id -g) \
--w /scratch \
-poldracklab/fmriprep:1.5.3 \
-/data /out \
+    
+singularity run -B /data/projects:/base \
+/data/tools/fmriprep-1.5.3.simg \
+/base/ds.srndna /base/ds.srndna/derivatives \
 participant --participant_label $sub \
---use-aroma --fs-no-reconall --fs-license-file /opt/freesurfer/fs_license.txt -w /scratch
+--use-aroma --fs-no-reconall --fs-license-file /base/srndna/fs_license.txt
