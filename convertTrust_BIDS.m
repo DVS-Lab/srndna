@@ -6,12 +6,16 @@ maindir = pwd;
 % cLeft is the left option
 % cRight is the right option
 % high/low value option will randomly flip between left/right
-% 
+%
 % subj = subject number
+
+fname = sprintf('summary_misses_task-trust.csv');
+fid2 = fopen(fname,'a');
 
 try
     
     for r = 0:4
+        run_misses = 0;
         fname = fullfile(maindir,'psychopy','logs',num2str(subj),sprintf('sub-%03d_task-trust_run-%d_raw.csv',subj,r));
         if exist(fname,'file')
             fid = fopen(fname,'r');
@@ -65,6 +69,7 @@ try
             %fprintf(fid,'onset\tduration\ttrial_type\tresponse_time\ttrust_value\tchoice\n');
             if trust_val(t) == 999
                 fprintf(fid,'%f\t%f\t%s\t%f\t%s\t%s\t%d\t%d\n',choiceonset(t),3,'missed_trial',3,'n/a','n/a',min(options(t,:)),max(options(t,:)));
+                run_misses = run_misses + 1;
             else
                 if trust_val(t) == 0
                     fprintf(fid,'%f\t%f\t%s\t%f\t%d\t%s\t%d\t%d\n',choiceonset(t),RT(t),['choice_' trial_type ],RT(t),0,response{t},min(options(t,:)),max(options(t,:))); %should always be 'low'
@@ -83,7 +88,7 @@ try
         fclose(fid);
         rand_trial = randsample(1:36,1);
         if trust_val(rand_trial) == 999
-            fprintf('sub-%d -- Investment Game, Run %d: On trial %d, Participant did not respond.\n',subj, r+1, rand_trial);
+            %fprintf('sub-%d -- Investment Game, Run %d: On trial %d, Participant did not respond.\n',subj, r+1, rand_trial);
         else
             if reciprocate(rand_trial)
                 participant = (8 - trust_val(rand_trial)) + ((trust_val(rand_trial) * 3)/2);
@@ -99,10 +104,12 @@ try
             elseif (Partner(rand_trial) == 3)
                 trial_type = 'Friend';
             end
-            fprintf('sub-%d -- Investment Game, Run %d: On trial %d, Participant WINS $%.2f and %s WINS $%.2f.\n', subj, r+1, rand_trial, participant, trial_type, friend);
+            %fprintf('sub-%d -- Investment Game, Run %d: On trial %d, Participant WINS $%.2f and %s WINS $%.2f.\n', subj, r+1, rand_trial, participant, trial_type, friend);
         end
+        fprintf(fid2,'sub-%d,run-%d,%d\n', subj, r+1, run_misses);
+        
     end
-    
+    fclose(fid2);
 catch ME
     disp(ME.message)
     msg = sprintf('check line %d', ME.stack.line);

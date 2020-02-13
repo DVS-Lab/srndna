@@ -3,8 +3,12 @@ maindir = pwd;
 
 try
     
+    fname = sprintf('summary_misses_task-sharedreward.csv');
+    fid2 = fopen(fname,'a');
     
     for r = 0:1
+        run_misses = 0;
+        
         fname = fullfile(maindir,'psychopy','logs',num2str(subj),sprintf('sub-%03d_task-sharedreward_run-%d_raw.csv',subj,r));
         if exist(fname,'file')
             fid = fopen(fname,'r');
@@ -71,6 +75,7 @@ try
             
             if RT(t) == 999 %missed response
                 fprintf(fid,'%f\t%f\t%s\t%s\n',onset(t),duration(t),'missed_trial','n/a');
+                run_misses = run_misses + 1;
             else
                 fprintf(fid,'%f\t%f\t%s\t%f\n',onset(t),duration(t),['event_' trial_type],RT(t));
             end
@@ -99,6 +104,8 @@ try
         elseif feedback(rand_trial) == 3 %reward
             fprintf('sub-%d -- Gambling Game, Run %d: On trial %d, Participant WINS $5 and %s WINS $5.\n', subj, r+1, rand_trial, trial_type);
         end
+        
+        fprintf(fid2,'sub-%d,run-%d,%d\n', subj, r+1, run_misses);
         
     end
     

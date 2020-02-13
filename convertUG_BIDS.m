@@ -3,9 +3,12 @@ maindir = pwd;
 
 try
     
-
+    fname = sprintf('summary_misses_task-ultimatum.csv');
+    fid2 = fopen(fname,'a');
+    
     for r = 0:1
-
+        run_misses = 0;
+        
         % sub-101_task-ultimatum_run-0_raw.csv sub-102_task-ultimatum_run-1_raw.csv
         fname = fullfile(maindir,'psychopy','logs',num2str(subj),sprintf('sub-%03d_task-ultimatum_run-%d_raw.csv',subj,r));
         if exist(fname,'file')
@@ -16,7 +19,7 @@ try
         end
         C = textscan(fid,repmat('%f',1,17),'Delimiter',',','HeaderLines',1,'EmptyValue', NaN);
         fclose(fid);
-
+        
         
         % "Feedback" is the offer value (out of $20)
         
@@ -38,7 +41,7 @@ try
         fprintf(fid,'onset\tduration\ttrial_type\tresponse_time\tOffer\n');
         
         for t = 1:length(onset);
-
+            
             %{
 
   if subj_gen==0 and subj_eth==0 and subj_age > 35:
@@ -77,6 +80,7 @@ try
                 fprintf(fid,'%f\t%f\t%s\t%f\t%d\n',onset(t),duration(t),['event_accept_' trial_type],RT(t),Offer(t));
             elseif response(t) == 999
                 fprintf(fid,'%f\t%f\t%s\t%s\t%d\n',onset(t),duration(t),'missed_trial','n/a', Offer(t));
+                run_misses = run_misses + 1;
             end
             
             block_starts = [1 9 17 25 33 41 49 57 65];
@@ -88,14 +92,16 @@ try
         fclose(fid);
         
         %display payment information
-        rand_trial = randsample(1:72,1);
-        if response(rand_trial) == 2
-            fprintf('sub-%d -- Let''s Make a Deal Game, Run %d: On trial %d, Participant REJECTED the deal and walks away with $0.\n', subj, r+1, rand_trial);
-        elseif response(rand_trial) == 3
-            fprintf('sub-%d -- Let''s Make a Deal Game, Run %d: On trial %d, Participant ACCEPTED the deal and walks away with $%.2f.\n', subj, r+1, rand_trial, Offer(rand_trial));
-        elseif response(rand_trial) == 999
-            fprintf('sub-%d -- Let''s Make a Deal Game, Run %d: On trial %d, Participant did not respond and walks away with $0.\n', subj, r+1, rand_trial);
-        end
+        %         rand_trial = randsample(1:72,1);
+        %         if response(rand_trial) == 2
+        %             fprintf('sub-%d -- Let''s Make a Deal Game, Run %d: On trial %d, Participant REJECTED the deal and walks away with $0.\n', subj, r+1, rand_trial);
+        %         elseif response(rand_trial) == 3
+        %             fprintf('sub-%d -- Let''s Make a Deal Game, Run %d: On trial %d, Participant ACCEPTED the deal and walks away with $%.2f.\n', subj, r+1, rand_trial, Offer(rand_trial));
+        %         elseif response(rand_trial) == 999
+        %             fprintf('sub-%d -- Let''s Make a Deal Game, Run %d: On trial %d, Participant did not respond and walks away with $0.\n', subj, r+1, rand_trial);
+        %         end
+        
+        fprintf(fid2,'sub-%d,run-%d,%d\n', subj, r+1, run_misses);
     end
     
     
