@@ -10,16 +10,18 @@ run=$2
 ppi=$3 # network -- ecn or dmn
 dtype=dctAROMAnonaggr
 
-# TODO: 
+# TODO:
 # 2) add logging option if running through a second time
 # 4) execute with datalad run -m "message" --input "derivatives/fmriprep/*" --output "derivatives/fsl/*" "bash run_L1stats.sh"
 # 5) change input data to fmriprep and update templatee to smooth?
+# switch to ER design and exclude misses
+# subject folders should be subdatasets
 
 MAINOUTPUT=${maindir}/derivatives/fsl/sub-${sub}
 mkdir -p $MAINOUTPUT
 
 EVDIR=${maindir}/derivatives/fsl/EVfiles/sub-${sub}/${TASK}/run-0${run}
-DATA=${maindir}/derivatives/fsl/sub-${sub}/L1_task-ultimatum_model-01_type-act_run-01_sm-6_variant-dctAROMAnonaggr.feat/filtered_func_data.nii.gz 
+DATA=${maindir}/derivatives/fsl/sub-${sub}/L1_task-ultimatum_model-01_type-act_run-01_sm-6_variant-dctAROMAnonaggr.feat/filtered_func_data.nii.gz
 CONFOUNDEVS=${maindir}/derivatives/fsl/confounds/sub-${sub}_task-${TASK}_run-0${run}_desc-confounds_run-0${run}_desc-confounds_desc-fslConfounds.tsv
 
 OUTPUT=${MAINOUTPUT}/L1_task-${TASK}_model-01_nppi-${ppi}_run-0${run}_sm-${sm}_variant-${dtype}
