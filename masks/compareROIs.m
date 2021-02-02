@@ -17,3 +17,12 @@ corr([ciftiVS_run2' niftiVS_run2])
 
 vs_data = [ciftiVS_run1' niftiVS_run1 ciftiVS_run2' niftiVS_run2];
 corr(vs_data(8:end,:)) % ignore first 7 time points since they have the spike
+
+% are there 30 vertices in this file?
+figure,imagesc(corr(gifti_ofc'))
+
+
+mean_gifti_ofc = mean(gifti_ofc,1)';
+figure,imagesc(corr([mean_gifti_ofc niftiOFC_run1 niftiOFC_run2]));
+
+
